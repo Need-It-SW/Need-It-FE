@@ -1,0 +1,6 @@
+
+.signup-region-row{display:flex;gap:10px;align-items:stretch;width:100%;min-width:0}
+.signup-region-row input{flex:1;min-width:0;background:#f8faf8;cursor:pointer}
+.signup-region-row button{flex:0 0 auto;white-space:nowrap;padding:0 13px;min-height:48px;font-size:14px}
+@media(max-width:780px){.signup-region-row{flex-wrap:wrap}.signup-region-row input{flex-basis:100%}.signup-region-row button{flex:1}}
+@media(max-width:540px){.signup-region-row{flex-direction:column}.signup-region-row button{min-height:44px}}

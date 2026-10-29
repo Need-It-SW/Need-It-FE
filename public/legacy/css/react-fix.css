@@ -1,0 +1,69 @@
+/* React 환경에서 기존 NEED IT 화면 구조 보정 */
+
+/* 기본 레이아웃 */
+html,
+body,
+#root,
+#legacy-app {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+}
+
+#legacy-app {
+    min-height: 100vh;
+}
+
+/* 시작 화면에서 일반 화면 숨기기 */
+body.landing-state #legacy-app > .header,
+body.landing-state #legacy-app > main,
+body.landing-state #legacy-app > #userArea,
+body.landing-state #legacy-app > #adminArea,
+body.landing-state #legacy-app > .footer {
+    display: none !important;
+}
+
+/* 시작 화면 */
+body.landing-state #welcomeLanding {
+    display: flex !important;
+    min-height: 100dvh;
+}
+
+/* 시작 화면 종료 후 숨기기 */
+body:not(.landing-state) #welcomeLanding {
+    display: none !important;
+}
+
+/* 물건 요청 화면 */
+body.request-mode #legacy-app {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+body.request-mode #legacy-app > .header {
+    flex: 0 0 auto;
+}
+
+body.request-mode #legacy-app > #top {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+body.request-mode #legacy-app > .footer {
+    flex: 0 0 auto;
+    margin-top: auto;
+}
+
+/* 요청 글이 없는 경우 중앙 정렬 */
+body.request-mode:has(#requestWorkspace.hidden) #legacy-app > #top {
+    justify-content: center;
+}
+
+/* 일반 화면 너비 */
+#legacy-app .shell {
+    width: min(100% - 40px, 1080px);
+    margin-inline: auto;
+    box-sizing: border-box;
+}

@@ -1,0 +1,15 @@
+
+/* 요청 화면: 첫 행동인 글 작성에 시선을 집중 */
+body.request-mode .banner{padding-top:58px!important}
+body.request-mode #modePanel{display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;gap:26px!important;padding:0 0 35px!important;border-bottom:1px solid #edf1ee!important}
+body.request-mode #modePanel h2{font-size:clamp(31px,4.3vw,44px)!important;letter-spacing:-1.7px!important;margin-bottom:10px!important}
+body.request-mode #modePanel p{font-size:16px!important}
+body.request-mode #modePanel .mode-actions{display:block!important;width:min(100%,470px)!important;margin-inline:auto!important;text-align:center!important}
+body.request-mode #modePanel .mode-actions::before{content:'지금 바로 시작해 보세요';display:block;color:#66776c;font-size:13px;font-weight:700;margin-bottom:12px}
+body.request-mode #heroCreateBtn{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;min-height:68px!important;padding:19px 24px!important;background:#16885c!important;color:white!important;border:0!important;border-radius:16px!important;font-size:19px!important;font-weight:800!important;letter-spacing:-.5px!important;box-shadow:0 8px 22px rgba(22,136,92,.14)!important;cursor:pointer}
+body.request-mode #heroCreateBtn:hover{background:#10724b!important;transform:translateY(-1px)}
+body.request-mode #heroCreateBtn:focus-visible{outline:3px solid #9cdec0!important;outline-offset:3px!important}
+body.request-mode #requestWorkspace{margin-top:34px!important}
+body.request-mode .request-workspace-head{padding-bottom:8px!important}
+body.request-mode .request-workspace-head h2{font-size:23px!important}
+@media(max-width:560px){body.request-mode .banner{padding-top:34px!important}body.request-mode #modePanel{gap:22px!important}body.request-mode #heroCreateBtn{min-height:62px!important;font-size:17px!important}}

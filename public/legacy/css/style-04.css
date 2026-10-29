@@ -1,0 +1,19 @@
+
+/* NEED IT 프로필 관리 */
+.need-profile{max-width:900px;margin:0 auto;background:#fff;border:1px solid #e8eeea;border-radius:22px;padding:34px 38px;box-shadow:0 10px 32px rgba(25,65,43,.035)}
+.need-profile-top{display:flex;gap:22px;align-items:center;padding-bottom:28px;border-bottom:1px solid #edf0ed}
+.need-avatar{width:94px;height:94px;flex:none;border-radius:50%;background:#eff6f1;display:grid;place-items:center;font-size:38px;overflow:hidden;color:#327453}
+.need-avatar img{width:100%;height:100%;object-fit:cover}
+.need-profile-top h3{font-size:23px;margin:0 0 6px;color:#1f2b25}.need-profile-top p{margin:0 0 13px;color:#7d8b81;font-size:14px}
+.need-photo-btn,.need-photo-remove{display:inline-block;font-size:13px;font-weight:700;border:1px solid #cbded0;background:#fff;color:#275a3c;border-radius:9px;padding:8px 13px;cursor:pointer;margin-right:7px}
+.need-photo-remove{color:#77857b;border-color:#e5ebe6}
+.need-profile-section{font-size:17px;margin:28px 0 16px;color:#23392b}
+.need-profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.need-profile .field{margin:0}.need-profile .field label{display:block;margin-bottom:9px;font-size:14px;font-weight:700}
+.need-profile .field input{width:100%;height:49px;padding:12px 14px;border:1px solid #dce6df;border-radius:11px;font-size:15px;box-sizing:border-box;background:#fff}
+.need-profile .field input:focus{outline:2px solid #b3d9c0;border-color:#378c62}
+.need-profile small{display:block;color:#8b988e;font-size:12px;margin-top:7px}
+.need-region-line{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px;background:#f7faf8;border-radius:13px}
+.need-region-line strong{font-size:15px}.need-profile-bottom{display:flex;align-items:center;justify-content:space-between;gap:18px;border-top:1px solid #edf0ed;margin-top:30px;padding-top:24px}
+.need-profile-bottom span{font-size:12px;color:#929e95}.need-profile-bottom button{min-width:160px}
+@media(max-width:650px){.need-profile{padding:22px 18px;border-radius:15px}.need-profile-grid{grid-template-columns:1fr}.need-profile-bottom,.need-region-line{align-items:stretch;flex-direction:column}.need-profile-top{gap:14px}.need-avatar{width:75px;height:75px}}

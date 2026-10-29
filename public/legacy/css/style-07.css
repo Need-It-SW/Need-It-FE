@@ -1,0 +1,43 @@
+
+/* 2026-10-29 — NEED IT spacing / responsiveness consistency pass */
+:root{--ui-gap:12px;--ui-radius:14px}
+/* Prevent unexpected width expansion caused by long titles or chat messages. */
+.shell,.dialog,.user-card,.post,.need-chat-list-item{min-width:0}
+.dialog{width:min(100%,640px);padding:24px 26px;border-radius:20px}
+.dialog-head{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid #edf1ee}
+.dialog-head h2{line-height:1.35}
+.field{margin-bottom:16px}
+.field label{margin-bottom:7px}
+.field textarea{min-height:112px}
+.detail-actions,.form-actions{gap:10px}
+.detail-actions button,.form-actions button{min-height:44px}
+.user-card{padding:20px 22px;margin:10px 0;border-radius:16px}
+.user-card-actions{margin-top:12px;gap:9px}
+.user-heading{gap:16px}
+.need-chat-list-item{padding:18px 20px!important}
+.need-chat-messages{height:clamp(250px,38vh,430px);max-height:48vh;padding:16px;border-radius:16px}
+.need-chat-messages .bubble{max-width:min(82%,540px);overflow-wrap:anywhere;margin:7px 0;padding:10px 14px}
+.need-chat-messages .bubble.mine{margin-left:auto}
+.chat-compose{display:flex;flex-direction:row;align-items:stretch;gap:8px;margin-top:12px}
+.chat-compose input{min-width:0;flex:1}
+.chat-compose button{flex:none;min-height:44px}
+.need-chat-bottom{margin-top:12px;gap:8px}
+.need-chat-info{align-items:center;margin-bottom:12px}
+.post{padding:20px 22px;min-height:180px}
+.post-top{margin-bottom:10px}
+.post-foot{margin-top:auto}
+@media(max-width:680px){
+ .dialog{padding:18px 18px 20px;border-radius:16px;max-height:calc(100dvh - 24px)}
+ .dialog-head{margin-bottom:14px;padding-bottom:12px}
+ .user-heading{padding-top:28px!important;align-items:flex-start;flex-wrap:wrap}
+ .user-card{padding:16px;margin:9px 0}
+ .need-chat-list-item{padding:14px!important}
+ .need-chat-messages{height:clamp(230px,42dvh,390px);max-height:45dvh;padding:12px}
+ .chat-compose{flex-direction:row;gap:6px}
+ .chat-compose input{padding:10px;min-width:0}
+ .chat-compose button{padding-left:12px;padding-right:12px}
+ .post{min-height:0;padding:18px}
+ .detail-actions{gap:8px}
+ .detail-actions button{max-width:100%}
+}
+@media(max-width:380px){.dialog{padding:14px}.chat-compose{gap:5px}.need-chat-messages .bubble{max-width:92%}}

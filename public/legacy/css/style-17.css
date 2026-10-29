@@ -1,0 +1,43 @@
+
+/* 주요 탐색은 두 역할에 집중하고 개인 메뉴는 우측으로 분리 */
+.header-actions{display:flex;align-items:center;gap:8px}
+.header-pop-wrap{position:relative;display:flex;align-items:center}
+.bell-button,.account-button{height:40px;border:1px solid transparent;background:transparent;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:#343e43}
+.bell-button{width:42px;position:relative}
+.bell-button:hover,.account-button:hover{background:#f2f6f3}
+.account-button{padding:0 12px;font-size:13px;font-weight:700;gap:8px;white-space:nowrap}
+.account-chevron{font-size:17px;color:#83918a}
+.bell-dot{position:absolute;right:9px;top:7px;width:8px;height:8px;border-radius:50%;background:#e75c4a;border:2px solid #fff;box-sizing:content-box}
+.header-pop{position:absolute;top:calc(100% + 12px);right:0;width:min(350px,calc(100vw - 28px));background:#fff;border:1px solid #e8eeea;box-shadow:0 14px 45px rgba(24,50,38,.12);border-radius:16px;z-index:1000;padding:12px;color:#24332c}
+.header-pop.hidden,.bell-dot.hidden{display:none!important}
+.account-pop{width:190px;padding:7px;max-height:calc(100vh - 100px);overflow-y:auto}
+.account-pop button{display:block;width:100%;border:0;border-radius:9px;background:none;text-align:left;padding:13px 12px;cursor:pointer;color:#26372e;font-size:14px;font-weight:600}
+.account-pop button:hover{background:#f1f7f3}
+.pop-heading{display:flex;align-items:center;justify-content:space-between;padding:5px 6px 12px;border-bottom:1px solid #f0f3f1}
+.pop-heading strong{font-size:16px}
+.pop-text-btn{border:0;background:none;color:#13845a;font-size:12px;cursor:pointer}
+.bell-items{max-height:340px;overflow:auto}
+.bell-item{padding:14px 7px;border-bottom:1px solid #f2f4f2}
+.bell-item:last-child{border-bottom:0}
+.bell-item p{font-size:13px;line-height:1.6;margin:0 0 4px;color:#273c30}
+.bell-item small{font-size:11px;color:#8b9990}
+.bell-item.unread{background:#f6fbf7;border-radius:8px}
+.bell-empty{padding:36px 10px;text-align:center;color:#8b9690;font-size:13px}
+@media(max-width:720px){.header-actions{gap:2px}.account-button{padding:0 6px;font-size:12px}.bell-button{width:35px}.header-pop{right:-30px}.account-pop{right:0}}
+
+/* 간결한 내 메뉴: 관련 항목을 묶고 대화 단독 메뉴 제거 */
+.account-pop{width:240px!important;padding:13px!important;border-radius:18px!important;box-shadow:0 16px 44px rgba(24,48,35,.12)!important}
+.account-group-title{padding:11px 12px 7px;font-size:11px;letter-spacing:.05em;font-weight:800;color:#8b9a90}
+.account-pop button{display:flex!important;align-items:center;justify-content:space-between;min-height:46px;padding:12px 13px!important;border-radius:10px!important;font-size:14px!important;font-weight:700!important;color:#26392e!important}
+.account-pop button:hover,.account-pop button:focus-visible{background:#f1f8f4!important;color:#13784f!important}
+.menu-arrow{font-size:20px;font-weight:400;line-height:1;color:#a6b5ab}
+.account-menu-divider{height:1px;background:#edf1ee;margin:10px 5px 5px}
+@media(max-width:600px){.account-pop{width:220px!important}}
+
+/* 탐색 화면: 키워드 버튼 대신 명확한 카테고리 선택 */
+.category-shortcuts{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:22px 0 25px;padding:0!important;background:transparent!important;border:0!important}
+.category-shortcuts-title{font-size:14px;font-weight:800;color:#6a7b70;margin-right:4px;white-space:nowrap}
+.category-shortcuts .category-chip{display:inline-flex;align-items:center;justify-content:center;gap:5px;border:1px solid #d9e4dc;background:#fff;color:#43584a;border-radius:999px;min-height:43px;padding:9px 16px;font-size:14px;font-weight:700;transition:background .15s,border-color .15s}
+.category-shortcuts .category-chip:hover{background:#f1f7f3;border-color:#91bca0}
+.category-shortcuts .category-chip.selected{background:#183f2c;color:#fff;border-color:#183f2c}
+@media(max-width:680px){.category-shortcuts{gap:7px;margin:17px 0 22px}.category-shortcuts-title{flex-basis:100%;margin-bottom:2px}.category-shortcuts .category-chip{font-size:13px;min-height:40px;padding:8px 12px}}

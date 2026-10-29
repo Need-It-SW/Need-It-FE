@@ -1,0 +1,15 @@
+
+/* 로그인 상태에서는 우측 닉네임을 클릭 가능한 버튼이 아닌 텍스트로 표시 */
+.header-actions #signupBtn.member-name-label{
+  appearance:none!important;background:transparent!important;border:0!important;
+  box-shadow:none!important;outline:0!important;padding:8px 2px!important;
+  min-width:0!important;min-height:48px!important;height:48px!important;
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  line-height:1.2!important;white-space:nowrap!important;vertical-align:middle!important;
+  color:#213b2d!important;font-weight:700!important;cursor:default!important;
+  opacity:1!important;pointer-events:none!important;
+}
+.header-actions #signupBtn.member-name-label:hover,
+.header-actions #signupBtn.member-name-label:focus{
+  background:transparent!important;border:0!important;box-shadow:none!important;
+}

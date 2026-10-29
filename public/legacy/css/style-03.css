@@ -1,0 +1,31 @@
+
+
+/* 모달의 헤더는 고정된 영역, 내용만 독립 스크롤: 스크롤 시 입력 항목이 헤더 위로 비치지 않음 */
+#overlay.overlay { overflow:hidden!important; padding:20px 16px!important; align-items:center!important; }
+#overlay .dialog,
+#overlay:has(#requestForm) .dialog {
+  display:flex!important; flex-direction:column!important;
+  overflow:hidden!important; padding:0!important;
+  width:min(100%,650px)!important;
+  max-height:calc(100dvh - 40px)!important;
+  margin:auto!important; border-radius:20px!important;
+  background:#fff!important;
+}
+#overlay .dialog-head {
+  position:relative!important; top:auto!important; flex:0 0 auto!important;
+  margin:0!important; padding:26px 30px 17px!important;
+  border-bottom:1px solid #edf1ee!important;
+  background:#fff!important; z-index:1!important;
+}
+#overlay #dialogBody {
+  flex:1 1 auto!important; min-height:0!important;
+  overflow-y:auto!important; overscroll-behavior:contain!important;
+  padding:22px 30px 30px!important;
+  scrollbar-gutter:stable;
+}
+@media(max-width:600px){
+  #overlay.overlay {padding:12px!important;}
+  #overlay .dialog,#overlay:has(#requestForm) .dialog{max-height:calc(100dvh - 24px)!important;}
+  #overlay .dialog-head{padding:20px 20px 14px!important;}
+  #overlay #dialogBody{padding:18px 20px 24px!important;}
+}

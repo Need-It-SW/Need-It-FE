@@ -1,0 +1,23 @@
+
+/* 검색창을 클릭하면 인기 검색어를 보여주는 가벼운 드롭다운 */
+.search-row{position:relative;z-index:15}
+.popular-search-panel{position:absolute;top:calc(100% + 8px);left:0;right:0;background:#fff;border:1px solid #e6ece8;border-radius:18px;box-shadow:0 16px 42px rgba(17,44,31,.12);padding:18px 18px 12px;max-height:min(420px,65vh);overflow:auto;z-index:30}
+.popular-search-panel.hidden{display:none!important}
+.popular-search-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:12px}
+.popular-search-heading strong{font-size:15px;color:#203c2d}
+.popular-search-heading span{font-size:12px;color:#89978c}
+.popular-search-list{display:grid;grid-template-columns:1fr 1fr;gap:3px 16px}
+.popular-search-list button{display:flex;align-items:center;gap:12px;width:100%;min-height:44px;padding:8px 10px;border:0;border-radius:9px;background:#fff;color:#24372b;text-align:left;font-size:14px;cursor:pointer}
+.popular-search-list button:hover,.popular-search-list button:focus-visible{background:#f1f7f3;outline:none}
+.popular-search-rank{font-weight:800;color:#148052;min-width:18px;font-size:14px}
+.popular-search-empty{color:#8a968c;padding:12px;font-size:13px}
+@media(max-width:600px){.popular-search-panel{padding:14px 10px 10px}.popular-search-list{grid-template-columns:1fr}.popular-search-heading{padding:0 8px}}
+
+/* 요청 목록: 설명은 상세 화면에서만 표시 */
+.feed .post{min-height:0!important;padding:19px 21px!important;gap:0}
+.feed .post h3{margin:0 0 14px!important;font-size:18px;line-height:1.5}
+.feed .post .post-thumb{max-height:135px;margin:0 0 14px}
+.feed .post .post-foot{margin-top:auto;padding-top:12px}
+@media(max-width:680px){.feed .post{padding:17px!important}}
+/* 신고 관리 / 읽음 표시 */
+.report-controls{display:flex;align-items:center;gap:12px;margin:20px 0}.report-controls select{width:180px;min-height:42px}.report-list{display:grid;gap:12px}.report-item{border:1px solid #e3ebe5;border-radius:14px;padding:18px;background:#fff;min-width:0}.report-item-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.report-status{background:#eaf5ed;color:#24784e;border-radius:8px;padding:5px 10px;font-size:12px;font-weight:700}.report-post-title{font-weight:700;overflow-wrap:anywhere}.report-detail{padding:12px;background:#f6f9f7;border-radius:8px;white-space:pre-wrap;overflow-wrap:anywhere}.report-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.report-actions label{display:flex;align-items:center;gap:10px}.report-actions select{min-height:40px}.chat-read-label{font-weight:600;color:#7d8c82}.chat-read-label.is-read{color:#18895d}.chat-read-demo{display:flex;justify-content:space-between;align-items:center;gap:12px;color:#829187;font-size:12px;margin:4px 0 8px}.chat-read-demo button{font-size:12px;padding:7px 10px;min-height:32px}

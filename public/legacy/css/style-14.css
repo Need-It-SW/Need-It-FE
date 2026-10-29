@@ -1,0 +1,27 @@
+
+/* The landing page is a separate, deliberate entry screen. */
+body.landing-state{background:#fff;overflow-x:hidden}
+body.landing-state>.header,body.landing-state>main,body.landing-state>#userArea,body.landing-state>#adminArea{display:none!important}
+body:not(.landing-state) #welcomeLanding{display:none!important}
+#welcomeLanding{min-height:100svh;background:#fff;display:flex;align-items:center;justify-content:center;padding:36px 22px;color:#172820}
+.welcome-inner{width:min(100%,660px);text-align:center}
+.welcome-logo{display:inline-block;font-size:25px;font-weight:900;letter-spacing:-1.5px;color:#20744d;margin-bottom:55px}
+.welcome-logo span{color:#a3c87e}
+.welcome-inner h1{font-size:clamp(30px,5vw,45px);letter-spacing:-1.8px;line-height:1.38;margin:0 0 13px;font-weight:800}
+.welcome-lead{font-size:16px;color:#75827a;margin:0 0 45px;line-height:1.7}
+.welcome-actions{display:grid;grid-template-columns:1fr 1fr;gap:14px;text-align:left}
+.welcome-action{display:flex;flex-direction:column;justify-content:space-between;min-height:190px;padding:28px 26px;background:#f6f8f7;border:1px solid #edf0ee;border-radius:22px;text-align:left;transition:background .15s,transform .15s,border-color .15s;color:#1b2c22}
+.welcome-action:hover{background:#eff7f1;border-color:#b5d8c2;transform:translateY(-2px)}
+/* 이웃 도와주기: 한 단계 강조된 초록색 선택 카드 */
+#landingHelp{background:#207c56;border-color:#207c56;color:#fff;box-shadow:0 8px 22px rgba(28,112,76,.10)}
+#landingHelp small{color:#e2f3e9}
+#landingHelp .welcome-arrow{color:#fff}
+#landingHelp:hover{background:#176744;border-color:#176744;transform:translateY(-2px)}
+#landingHelp:active{background:#115637;transform:translateY(0)}
+
+.welcome-action:focus-visible{outline:3px solid #25845c;outline-offset:3px}
+.welcome-action strong{font-size:23px;font-weight:800;letter-spacing:-.9px}
+.welcome-action small{font-size:14px;line-height:1.6;color:#6c7a71;margin-top:11px}
+.welcome-arrow{align-self:flex-end;font-size:23px;color:#27845f;margin-top:20px}
+.welcome-footer{margin-top:32px;color:#98a49b;font-size:12px}
+@media(max-width:540px){.welcome-logo{margin-bottom:40px}.welcome-lead{margin-bottom:32px}.welcome-actions{grid-template-columns:1fr;gap:12px}.welcome-action{min-height:145px;padding:22px 23px}.welcome-action strong{font-size:21px}.welcome-arrow{margin-top:5px}}

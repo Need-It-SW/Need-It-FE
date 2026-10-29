@@ -1,0 +1,15 @@
+
+/* 관리자 광고·캠페인 UI 균형 조정 */
+.campaign-controls{display:grid;grid-template-columns:minmax(220px,1fr) 190px auto;gap:12px;align-items:end;margin:22px 0 20px}
+.campaign-controls label{display:block;margin-bottom:7px;color:#607367;font-size:13px;font-weight:700}
+.campaign-controls input,.campaign-controls select,.campaign-controls button{width:100%;height:48px;min-height:48px;box-sizing:border-box;border-radius:10px;font-size:14px}
+.campaign-controls input,.campaign-controls select{padding:0 14px;border:1px solid #d3e0d7;background:white}
+.campaign-controls button{white-space:nowrap;padding:0 22px}
+#campaignForm #cCategory,#campaignForm #cAction{min-height:52px;height:52px;padding:0 14px;border-radius:10px;background:#fff}
+.placement-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.campaign-placement{display:grid;grid-template-columns:1fr 1fr auto;gap:9px;align-items:center;margin:10px 0}
+.campaign-placement select{height:48px;min-width:0;padding:0 10px;border:1px solid #d3e0d7;border-radius:9px;background:white}
+.banner-preview{margin-top:12px;min-height:130px;display:flex;align-items:center;justify-content:center;background:#f5f9f6;border:1px dashed #c5dacb;border-radius:12px;overflow:hidden;color:#718477;font-size:13px}
+.banner-preview img{width:100%;max-height:250px;object-fit:contain;display:block}
+.admin-btn:disabled{opacity:.45;cursor:not-allowed;background:#f1f3f1}
+@media(max-width:700px){.campaign-controls{grid-template-columns:1fr 1fr}.campaign-search{grid-column:1/-1}.campaign-controls button{grid-column:1/-1}.campaign-placement{grid-template-columns:1fr 1fr}.campaign-placement button{grid-column:1/-1}.admin-section-title{align-items:flex-start}}

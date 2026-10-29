@@ -1,0 +1,6 @@
+
+/* 받은/보낸 제안: 제목으로 게시글 상세 이동 */
+.offer-title-link{background:none;border:0;padding:0;color:inherit;font:inherit;font-weight:inherit;text-align:left;cursor:pointer;display:inline-flex;align-items:center;gap:6px;max-width:100%;white-space:normal}
+.offer-title-link:hover{color:#17845c}
+.offer-title-link:focus-visible{outline:2px solid #17845c;outline-offset:4px;border-radius:3px}
+.offer-title-link span{color:#6f8c7d;font-size:.9em}

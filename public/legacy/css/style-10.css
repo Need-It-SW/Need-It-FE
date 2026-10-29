@@ -1,0 +1,16 @@
+
+/* 배너 관리 표: 긴 이름·캠페인·영역 텍스트가 옆 열을 침범하지 않도록 */
+.banner-management-wrap{width:100%;max-width:100%;overflow-x:auto;overflow-y:visible}
+.banner-management-table{width:100%;min-width:760px;table-layout:fixed;border-collapse:collapse}
+.banner-management-table th,.banner-management-table td{box-sizing:border-box;min-width:0;padding:13px 10px;vertical-align:top;overflow-wrap:anywhere;word-break:break-word;white-space:normal;line-height:1.55}
+.banner-management-table th:nth-child(1){width:13%}
+.banner-management-table th:nth-child(2){width:17%}
+.banner-management-table th:nth-child(3){width:19%}
+.banner-management-table th:nth-child(4){width:26%}
+.banner-management-table th:nth-child(5){width:9%}
+.banner-management-table th:nth-child(6){width:16%}
+.banner-management-table .banner-thumb{display:block;width:100%;max-width:110px;height:58px;object-fit:cover}
+.banner-management-table td .mini{overflow-wrap:anywhere;word-break:break-word;line-height:1.45}
+.banner-management-table td:last-child .admin-btn{display:inline-flex;align-items:center;justify-content:center;min-height:36px;margin:0 4px 6px 0;padding:7px 10px}
+.banner-management-table td:last-child .mini{font-size:11px}
+@media(max-width:900px){.banner-management-table{min-width:760px}.banner-management-wrap{scrollbar-width:thin}}
