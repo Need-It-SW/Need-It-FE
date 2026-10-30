@@ -1,0 +1,22 @@
+
+/* 신고 대상 사용자 카드: 내용과 관계없이 모든 행을 동일 위치에 고정 */
+.report-user-list { display:grid!important; grid-template-columns:minmax(0,1fr)!important; gap:18px!important; }
+.report-user-list .report-user-card {
+  box-sizing:border-box!important; width:100%!important;
+  height:310px!important; min-height:310px!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-template-rows:34px 40px 30px 30px minmax(0,1fr) 48px!important;
+  row-gap:7px!important; align-items:center!important;
+  padding:22px 24px!important; overflow:hidden;
+}
+.report-user-card .report-user-head{grid-row:1;min-height:0!important;margin:0!important}
+.report-user-card .sanction-state{grid-row:2;justify-self:start;align-self:center!important;margin:0!important;min-height:30px!important}
+.report-user-card > p:nth-of-type(1){grid-row:3;margin:0!important;line-height:1.4!important}
+.report-user-card > p:nth-of-type(2){grid-row:4;margin:0!important;line-height:1.4!important}
+.report-user-card .report-user-actions{grid-row:6;align-self:end!important;margin:0!important;padding:0!important;display:flex!important;gap:10px!important}
+.report-user-card .report-user-actions button{height:48px!important;min-height:48px!important;width:160px!important;min-width:160px!important;padding:0 14px!important}
+@media(max-width:520px){
+ .report-user-list .report-user-card{height:310px!important;min-height:310px!important;padding:18px!important}
+ .report-user-card .report-user-actions button{width:auto!important;min-width:0!important;flex:1!important;font-size:12px!important}
+}

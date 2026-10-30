@@ -23,7 +23,7 @@ $('#closeDialog').addEventListener('click',closeModal);$('#overlay').addEventLis
 function renderCats(){$('#categoryGrid').innerHTML=categories.map(([name,icon])=>`<button class="category ${activeCategory===name?'active':''}" data-cat="${name}" aria-pressed="${activeCategory===name}"><span class="icon" aria-hidden="true">${icon}</span><span>${name}</span></button>`).join('');document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{activeCategory=b.dataset.cat;visible=6;renderCats();renderFeed();renderAdPlacement('SEARCH_001','#searchAdSlot',activeCategory);$('#feedArea').scrollIntoView({behavior:'smooth',block:'start'})})}
 function renderFeed(){const q=$('#searchInput').value.trim().toLowerCase();let list=posts.filter(p=>!stageSafety.blocked.includes(p.author)&&(activeCategory==='전체'||p.category===activeCategory)&&(activeState==='all'||p.state===activeState)&&(!q||[p.title,p.body,p.category,p.region].some(v=>v.toLowerCase().includes(q))));if($('#sortSelect').value==='oldest')list=[...list].reverse();$('#resultCount').textContent=list.length;$('#feed').innerHTML=list.length?list.slice(0,visible).map(p=>`<button class="post" data-post="${p.id}" aria-label="${esc(p.title)}, 상세 보기"><div class="post-top"><span class="tag">${p.category}</span><span class="state ${p.state==='done'?'done':''}">${p.state==='open'?'요청 중':p.state==='closed'?'요청 마감':'나눔 완료'}</span></div><h3>${esc(p.title)}</h3>${p.photos?.length?`<img class="post-thumb" src="${p.photos[0]}" alt="첨부된 요청 물품 참고 사진">`:''}<div class="post-foot"><span>📍 ${esc(p.region)} · ${esc(p.time)} · 👤 ${postViewCount(p.id)}</span><span>자세히 보기 →</span></div></button>`).map((card,i)=>i===Math.min(3,Math.max(0,Math.min(visible,list.length)-1))?card+(activeBanner('FEED_001',activeCategory)?'<div id="feedAdSlot" class="feed-ad-wrap"></div>':''):card).join(''):`<div class="empty"><div class="icon">🔎</div><h3>해당하는 요청 글이 없어요.</h3><p>다른 검색어나 카테고리로 찾아보세요.</p><button class="outline" id="resetBtn">전체 요청 보기</button></div>`;$('#moreBtn').classList.toggle('hidden',list.length<=visible);renderAdPlacement('FEED_001','#feedAdSlot',activeCategory);document.querySelectorAll('[data-post]').forEach(b=>b.onclick=()=>detail(+b.dataset.post));$('#resetBtn')?.addEventListener('click',()=>{activeCategory='전체';activeState='all';visible=6;$('#searchInput').value='';document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x.dataset.state==='all'));renderCats();renderFeed()})}
 $('#searchInput').addEventListener('input',()=>{visible=6;renderFeed()});$('#sortSelect').addEventListener('change',renderFeed);document.querySelectorAll('.filter').forEach(b=>b.onclick=()=>{activeState=b.dataset.state;visible=6;document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x===b));renderFeed()});$('#moreBtn').onclick=()=>{visible+=6;renderFeed()};
-function detail(id){const p=posts.find(x=>x.id===id);if(!p)return;showModal(p.title,`<p class="detail-meta"><span class="tag">${p.category}</span> &nbsp; ${esc(p.region)} · ${esc(p.time)} · <button type="button" class="neighbor-name-link" id="detailAuthorProfile">${esc(p.author)}</button> · 👤 조회 ${postViewCount(p.id)}</p><div class="detail-text">${esc(p.body)}</div>${p.photos?.length?`<div class="detail-images">${p.photos.map(src=>`<img src="${src}" alt="요청 물품 참고 사진">`).join('')}</div>`:''}<div id="detailAdSlot" class="detail-ad-wrap hidden"></div><div class="detail-actions">${p.state==='open'?'<button class="primary" id="offerBtn">이 요청에 나눔 제안하기</button>':'<button class="outline" disabled>완료된 나눔이에요</button>'}<button class="outline" id="detailBack">닫기</button></div><p class="help" style="color:var(--muted);font-size:13px">현재 게시글은 화면 시연용 데이터입니다.</p>`);renderAdPlacement('DETAIL_001','#detailAdSlot',p.category);$('#detailBack').onclick=closeModal;$('#detailAuthorProfile')?.addEventListener('click',()=>openNeighborProfile(p.author));$('#offerBtn')?.addEventListener('click',()=>{showModal('나눔 제안하기',`<p class="demo-note">「${esc(p.title)}」 요청에 제안합니다.</p><form id="offerForm"><div class="field"><label for="offerItem">나눔할 물품 설명</label><input id="offerItem" required maxlength="80" placeholder="예: 24인치 모니터, 정상 작동"></div><div class="field"><label for="offerMsg">전달할 메시지</label><textarea id="offerMsg" required placeholder="물품 상태와 전달 가능한 방법을 알려주세요."></textarea></div><p class="demo-note">※ 시연용 화면입니다. 제안은 실제로 전송되지 않아요.</p><div class="form-actions"><button class="outline" type="button" id="cancelOffer">취소</button><button class="primary" type="submit">제안 보내기</button></div></form>`);$('#cancelOffer').onclick=closeModal;$('#offerForm').onsubmit=e=>{e.preventDefault();closeModal();notify('제안 작성 화면 시연이 완료되었어요. 실제로 전송되지는 않았습니다.')}})}
+function legacyDetail(id){const p=posts.find(x=>x.id===id);if(!p)return;showModal(p.title,`<p class="detail-meta"><span class="tag">${p.category}</span> &nbsp; ${esc(p.region)} · ${esc(p.time)} · <button type="button" class="neighbor-name-link" id="detailAuthorProfile">${esc(p.author)}</button> · 👤 조회 ${postViewCount(p.id)}</p><div class="detail-text">${esc(p.body)}</div>${p.photos?.length?`<div class="detail-images">${p.photos.map(src=>`<img src="${src}" alt="요청 물품 참고 사진">`).join('')}</div>`:''}<div id="detailAdSlot" class="detail-ad-wrap hidden"></div><div class="detail-actions">${p.state==='open'?'<button class="primary" id="offerBtn">이 요청에 나눔 제안하기</button>':'<button class="outline" disabled>완료된 나눔이에요</button>'}<button class="outline" id="detailBack">닫기</button></div><p class="help" style="color:var(--muted);font-size:13px">현재 게시글은 화면 시연용 데이터입니다.</p>`);renderAdPlacement('DETAIL_001','#detailAdSlot',p.category);$('#detailBack').onclick=closeModal;$('#detailAuthorProfile')?.addEventListener('click',()=>openNeighborProfile(p.author));$('#offerBtn')?.addEventListener('click',()=>{showModal('나눔 제안하기',`<p class="demo-note">「${esc(p.title)}」 요청에 제안합니다.</p><form id="offerForm"><div class="field"><label for="offerItem">나눔할 물품 설명</label><input id="offerItem" required maxlength="80" placeholder="예: 24인치 모니터, 정상 작동"></div><div class="field"><label for="offerMsg">전달할 메시지</label><textarea id="offerMsg" required placeholder="물품 상태와 전달 가능한 방법을 알려주세요."></textarea></div><p class="demo-note">※ 시연용 화면입니다. 제안은 실제로 전송되지 않아요.</p><div class="form-actions"><button class="outline" type="button" id="cancelOffer">취소</button><button class="primary" type="submit">제안 보내기</button></div></form>`);$('#cancelOffer').onclick=closeModal;$('#offerForm').onsubmit=e=>{e.preventDefault();closeModal();notify('제안 작성 화면 시연이 완료되었어요. 실제로 전송되지는 않았습니다.')}})}
 function categoryChoices(selectId, selected){
  const choices=categories.slice(1);
  return `<div class="category-choice-grid" role="radiogroup" aria-label="카테고리 선택">${choices.map(([name,icon],i)=>`<label class="category-choice"><input type="radio" name="${selectId}Choice" value="${esc(name)}" ${selected===name||(!selected&&i===0)?'checked':''}><span class="choice-face"><span class="choice-icon" aria-hidden="true">${icon}</span><span>${esc(name)}</span></span></label>`).join('')}</div><select id="${selectId}" required tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none">${choices.map(([name])=>`<option value="${esc(name)}" ${selected===name?'selected':''}>${esc(name)}</option>`).join('')}</select>`;
@@ -111,22 +111,24 @@ function memberRefreshHeader(){
  signup.disabled=!!me;
  signup.classList.toggle('member-name-label',!!me);
  signup.setAttribute('aria-label',me?'로그인 사용자: '+me.nickname:'회원가입');
+ const landingLogin=document.getElementById('landingLogin'),landingSignup=document.getElementById('landingSignup');
+ if(landingLogin)landingLogin.textContent=me?'로그아웃':'로그인';
+ if(landingSignup){landingSignup.textContent=me?(me.nickname+'님'):'회원가입';landingSignup.disabled=!!me;}
 }
 function memberLogin(){
  showModal('로그인',`<p class="demo-note">NEED IT 회원 계정으로 로그인하세요. <b>이 브라우저에서만 동작하는 시연용 로그인</b>입니다.</p>
  <form id="memberLoginForm" autocomplete="on"><div class="field"><label for="memberLoginId">아이디</label><input id="memberLoginId" autocomplete="username" required placeholder="아이디를 입력하세요"></div>
  <div class="field"><label for="memberLoginPw">비밀번호</label><input id="memberLoginPw" type="password" autocomplete="current-password" required placeholder="비밀번호를 입력하세요"></div>
  <p class="help" id="memberLoginError" role="alert"></p><div class="form-actions"><button type="button" class="outline" id="memberToSignup">회원가입</button><button type="submit" class="primary">로그인</button></div></form>
- <div class="need-auth-admin"><button type="button" class="need-auth-link" id="memberAdminChoice">관리자 로그인 →</button></div>`);
+`);
  $('#memberToSignup').onclick=memberSignup;
- $('#memberAdminChoice').onclick=adminLogin;
  $('#memberLoginForm').onsubmit=async e=>{e.preventDefault();const btn=e.submitter||$('#memberLoginForm button[type="submit"]');btn.disabled=true;try{
   const id=$('#memberLoginId').value.trim(),pw=$('#memberLoginPw').value;
   const account=memberAccounts().find(x=>x.id===id);
   if(!account||account.passwordHash!==await memberHash(pw)){ $('#memberLoginError').textContent='아이디 또는 비밀번호가 올바르지 않습니다.';return; }
   sessionStorage.setItem(MEMBER_SESSION_KEY,JSON.stringify({id:account.id,nickname:account.nickname}));
   if(typeof profileData!=='undefined'){profileData.id=account.id;profileData.nickname=account.nickname;if(typeof saveProfile==='function')saveProfile();}
-  closeModal();memberRefreshHeader();notify(account.nickname+'님, 환영합니다!');
+  closeModal();memberRefreshHeader();const blocked=needitActiveSanction();if(blocked)needitSuspensionDialog(blocked);else notify(account.nickname+'님, 환영합니다!');
  }catch(err){$('#memberLoginError').textContent=err.message||'로그인 중 오류가 발생했습니다.'}finally{btn.disabled=false}};
 }
 function memberSignup(){
@@ -196,7 +198,7 @@ function memberSignup(){
   closeModal();memberRefreshHeader();notify('회원가입이 완료되었습니다. 환영합니다!');
  }catch(err){$('#memberSignupError').textContent=err.message||'가입 중 오류가 발생했습니다.'}finally{btn.disabled=false}};
 }
-$('#loginBtn').onclick=()=>{if(memberSession()){if(confirm('로그아웃하시겠어요?')){sessionStorage.removeItem(MEMBER_SESSION_KEY);memberRefreshHeader();notify('로그아웃했습니다.')}return}memberLogin()};
+$('#loginBtn').onclick=()=>{if(memberSession()){if(confirm('로그아웃하시겠어요?')){sessionStorage.removeItem(MEMBER_SESSION_KEY);memberRefreshHeader();document.getElementById('homeNav')?.click();notify('로그아웃했습니다.')}return}memberLogin()};
 $('#signupBtn').onclick=()=>{if(memberSession()){if(typeof showUserTab==='function')showUserTab('profile');else notify('내 메뉴에서 내 정보를 선택해 주세요.')}else memberSignup()};
 $('#activityNav').onclick=()=>notify('내 활동 화면은 내 메뉴에서 확인하세요.');$('#myNav').onclick=()=>notify('내 메뉴에서 내 정보를 선택해 주세요.');
 memberRefreshHeader();
@@ -224,7 +226,7 @@ function adminLogin(){showModal('관리자 전용 로그인',`<p class="demo-not
  $('#cancelAdminLogin').onclick=closeModal;
  $('#adminLoginForm').onsubmit=e=>{e.preventDefault();if($('#adminId').value===ADMIN_DEMO_ID&&$('#adminPw').value===ADMIN_DEMO_PASSWORD){setAdminSession();closeModal();showAdmin('dashboard');notify('관리자 시연 계정으로 로그인했습니다.')}else notify('관리자 아이디 또는 비밀번호가 올바르지 않습니다.')};
 }
-function updateAdminNav(){const ok=isAdmin();$('#adminNav').classList.toggle('hidden',!ok);$('#adminLogout').classList.toggle('hidden',!ok);}
+function updateAdminNav(){const ok=isAdmin();$('#adminNav').classList.toggle('hidden',!ok);$('#adminLogout').classList.toggle('hidden',!ok);if(typeof needitSyncAuthUI==='function')needitSyncAuthUI();}
 function showAdmin(tab='dashboard'){
  if(!isAdmin())return adminLogin();document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));$('#adminNav').classList.add('active');adminMode=true;adminTab=tab;$('#top').classList.add('hidden');document.querySelector('main').classList.add('hidden');$('#adminArea').classList.remove('hidden');document.querySelectorAll('#adminTabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));updateAdminNav();renderAdmin();window.scrollTo(0,0);
 }
@@ -234,12 +236,40 @@ function campaignStatus(c){if(!c.enabled)return '중지';if(c.start>today())retu
 function campaignMatch(c,l){const keys=c.keywords.split(',').map(x=>x.trim().toLowerCase()).filter(Boolean);return c.enabled&&l.timestamp.slice(0,10)>=c.start&&l.timestamp.slice(0,10)<=c.end&&(c.category==='전체'||c.category===l.category)&&(c.action==='ALL'||c.action===l.action)&&(!keys.length||keys.some(k=>[l.keyword,l.category].join(' ').toLowerCase().includes(k)))}
 function renderAdmin(){if(adminTab==='dashboard')renderDashboard();if(adminTab==='campaigns')renderCampaigns();if(adminTab==='banners')renderBanners();if(adminTab==='logs')renderLogs();if(adminTab==='reports')renderReports();updateReportBadge()}
 function updateReportBadge(){const el=document.getElementById('reportPendingBadge');if(el){const n=stageSafety.reports.filter(r=>(r.status||'pending')==='pending').length;el.textContent=n?'('+n+')':'';}}
+// 관리자 계정 제재 시연: 브라우저 기록만 변경합니다. 서버 권한 검증 및 실제 활동 제한은 별도 구현이 필요합니다.
+const SANCTION_LOG_KEY='needit_sanction_history_demo_v1';
+function loadSanctionRecords(){try{const v=JSON.parse(localStorage.getItem(SANCTION_LOG_KEY)||'[]');return Array.isArray(v)?v:[]}catch{return []}}
+function sanctionActionLabel(action){return ({warning:'경고',day1:'1일 정지',day3:'3일 정지',day7:'7일 정지',day30:'30일 정지',permanent:'영구 정지',release:'제재 해제'})[action]||'미조치'}
+function getSanctionState(user){const logs=loadSanctionRecords().filter(r=>r.user===user);if(!logs.length)return {kind:'normal',label:'정상'};const r=logs[logs.length-1];if(r.action==='release')return {kind:'normal',label:'정상 (해제됨)'};if(r.action==='warning')return {kind:'warning',label:'경고'};if(r.action==='permanent')return {kind:'suspended',label:'영구 정지 (시연)'};if(r.until&&new Date(r.until)<=new Date())return {kind:'normal',label:'정지 기간 만료'};return {kind:'suspended',label:sanctionActionLabel(r.action)+' · '+new Date(r.until).toLocaleDateString('ko-KR')+'까지 (시연)'};}
+function openSanctionDialog(user,reports){
+ const state=getSanctionState(user);
+ showModal('계정 제재 관리',`<div class="sanction-modal"><div class="sanction-person"><strong>👤 ${esc(user)}</strong><span class="sanction-state ${state.kind}">${esc(state.label)}</span></div><p class="sanction-count">누적 신고 ${reports.length}건 · 신고 내용을 확인한 후 제재를 결정해 주세요.</p><form id="sanctionForm"><div class="field"><label for="sanctionAction">제재 유형</label><select id="sanctionAction" required><option value="">선택하세요</option><option value="warning">경고</option><option value="day1">1일 정지</option><option value="day3">3일 정지</option><option value="day7">7일 정지</option><option value="day30">30일 정지</option><option value="permanent">영구 정지</option><option value="release">제재 해제</option></select></div><div class="field"><label for="sanctionReason">제재 사유</label><textarea id="sanctionReason" minlength="5" maxlength="500" required placeholder="확인한 위반 내용과 제재 사유를 입력하세요 (5자 이상)"></textarea></div><p class="demo-note">현재는 UI 시연용입니다. 제재 기록은 이 브라우저에만 저장되며 실제 계정 사용을 막지 않습니다.</p><div class="form-actions"><button type="button" class="outline" id="cancelSanction">취소</button><button type="submit" class="primary">제재 적용</button></div></form></div>`);
+ document.getElementById('cancelSanction').onclick=closeModal;
+ document.getElementById('sanctionForm').onsubmit=e=>{e.preventDefault();const action=document.getElementById('sanctionAction').value;const reason=document.getElementById('sanctionReason').value.trim();if(!action||reason.length<5)return notify('제재 유형과 사유(5자 이상)를 입력해 주세요.');if(!confirm(user+' 사용자에게 '+sanctionActionLabel(action)+' 조치를 기록할까요?'))return;const days=({day1:1,day3:3,day7:7,day30:30})[action];const until=days?new Date(Date.now()+days*86400000).toISOString():null;const rows=loadSanctionRecords();rows.push({id:uid(),user,action,reason,createdAt:new Date().toISOString(),until});try{localStorage.setItem(SANCTION_LOG_KEY,JSON.stringify(rows))}catch{return notify('저장 공간이 부족합니다.')}closeModal();renderReports();notify('제재 조치가 시연 기록에 저장되었습니다.')};
+}
 function renderReports(){
  const all=stageSafety.reports.slice().reverse();const filter=window.adminReportFilter||'all';
  const rows=all.filter(r=>filter==='all'||(r.status||'pending')===filter);
  const statusName={pending:'접수',reviewing:'검토 중',resolved:'처리 완료',dismissed:'반려'};
  const box=document.getElementById('adminContent');if(!box)return;
- box.innerHTML=`<div class="admin-panel report-panel"><div class="admin-section-title"><div><h2>신고 관리</h2><p>접수된 게시글 신고를 확인하고 처리합니다.</p></div><span class="report-summary">미처리 ${all.filter(r=>(r.status||'pending')==='pending').length}건 · 전체 ${all.length}건</span></div><div class="admin-notice">시연용 신고 내역입니다. 처리 상태만 이 브라우저에 저장되며 실제 게시글 숨김이나 계정 제한은 수행하지 않습니다.</div><div class="report-toolbar"><label for="reportFilter">처리 상태별 보기</label><select id="reportFilter"><option value="all">전체</option>${Object.entries(statusName).map(([k,v])=>`<option value="${k}" ${filter===k?'selected':''}>${v}</option>`).join('')}</select></div><div class="report-list">${rows.map(r=>{const post=posts.find(p=>String(p.id)===String(r.postId));return `<article class="report-card"><div class="report-card-top"><strong class="report-reason">${esc(r.reason||'사유 없음')}</strong><span class="report-status">${statusName[r.status||'pending']||'접수'}</span></div><h3 class="report-post-title">${esc(post?.title||'삭제되었거나 찾을 수 없는 게시글')}</h3><div class="report-meta">작성자 ${esc(r.author||'알 수 없음')} · ${esc(r.createdAt?new Date(r.createdAt).toLocaleString('ko-KR'):'날짜 없음')} · 신고 ID ${esc(r.id)}</div>${r.detail?`<div class="report-detail">${esc(r.detail)}</div>`:''}<div class="report-card-bottom"><label>처리 상태 <select data-report-status="${esc(r.id)}">${Object.entries(statusName).map(([k,v])=>`<option value="${k}" ${(r.status||'pending')===k?'selected':''}>${v}</option>`).join('')}</select></label><button type="button" class="outline" data-report-view="${esc(r.postId)}" ${post?'':'disabled'}>게시글 확인</button></div></article>`}).join('')||'<p class="admin-empty">해당 상태의 신고가 없습니다.</p>'}</div></div>`;
+ if(window.adminReportView==='users'||window.adminReportView==='history'){
+  const grouped=new Map();
+  all.forEach(r=>{const name=String(r.author||'알 수 없음').trim();if(!grouped.has(name))grouped.set(name,[]);grouped.get(name).push(r)});
+  const view=window.adminReportView;
+  const records=loadSanctionRecords();
+  const tabs=`<div class="report-subtabs"><button type="button" data-report-tab="reports">신고 내역</button><button type="button" data-report-tab="users" class="${view==='users'?'active':''}">신고 대상 사용자 (${grouped.size})</button><button type="button" data-report-tab="history" class="${view==='history'?'active':''}">제재 이력 (${records.length})</button></div>`;
+  const content=view==='users'?`<div class="report-user-list">${[...grouped.entries()].sort((a,b)=>b[1].length-a[1].length).map(([name,reports])=>{const state=getSanctionState(name);return `<article class="report-user-card"><div class="report-user-head"><strong>👤 ${esc(name)}</strong><span class="pill wait">신고 ${reports.length}건</span></div><div class="sanction-state ${state.kind}">${esc(state.label)}</div><p>미처리 ${reports.filter(r=>(r.status||'pending')==='pending').length}건 · 최근 신고 ${esc(new Date(Math.max(...reports.map(r=>new Date(r.createdAt||0).getTime()))).toLocaleDateString('ko-KR'))}</p><p>신고 사유: ${esc([...new Set(reports.map(r=>r.reason||'기타'))].join(', '))}</p><div class="report-user-actions"><button type="button" class="primary" data-sanction-user="${esc(name)}">제재 관리</button><button type="button" class="outline" data-user-reports="${esc(name)}">신고 내역 확인</button></div></article>`}).join('')||'<p class="admin-empty">신고된 사용자가 없습니다.</p>'}</div>`:`<div class="sanction-history">${records.slice().reverse().map(r=>`<article class="sanction-history-item"><div><strong>${esc(r.user)}</strong><span class="sanction-state">${esc(sanctionActionLabel(r.action))}</span></div><p>${esc(r.reason)}</p><small>처리일 ${esc(new Date(r.createdAt).toLocaleString('ko-KR'))}${r.until?' · 해제 예정 '+esc(new Date(r.until).toLocaleString('ko-KR')):''} · 관리자 시연</small></article>`).join('')||'<p class="admin-empty">제재 이력이 없습니다.</p>'}</div>`;
+  box.innerHTML=`<div class="admin-panel report-panel"><div class="admin-section-title"><div><h2>신고 관리</h2><p>신고 대상 확인부터 계정 제재 이력까지 관리합니다.</p></div><span class="report-summary">신고 대상 ${grouped.size}명</span></div><div class="admin-notice">프론트엔드 시연용 제재 관리입니다. 실제 로그인 제한 및 활동 차단은 아직 적용되지 않으며, 추후 Spring Boot 서버에서 처리해야 합니다.</div>${tabs}${content}</div>`;
+  box.querySelectorAll('[data-sanction-user]').forEach(el=>el.onclick=()=>openSanctionDialog(el.dataset.sanctionUser,grouped.get(el.dataset.sanctionUser)||[]));
+  box.querySelectorAll('[data-user-reports]').forEach(el=>el.onclick=()=>{window.adminReportView='reports';window.adminReportAuthor=el.dataset.userReports;renderReports()});
+  box.querySelectorAll('[data-report-tab]').forEach(el=>el.onclick=()=>{window.adminReportView=el.dataset.reportTab;window.adminReportAuthor=null;renderReports()});
+  return;
+ }
+ const authorFilter=window.adminReportAuthor||null;
+ const visibleRows=authorFilter?rows.filter(r=>String(r.author||'알 수 없음').trim()===authorFilter):rows;
+ box.innerHTML=`<div class="admin-panel report-panel"><div class="admin-section-title"><div><h2>신고 관리</h2><p>접수된 게시글 신고를 확인하고 처리합니다.</p></div><span class="report-summary">미처리 ${all.filter(r=>(r.status||'pending')==='pending').length}건 · 전체 ${all.length}건</span></div><div class="admin-notice">시연용 신고 내역입니다. 처리 상태만 이 브라우저에 저장되며 실제 게시글 숨김이나 계정 제한은 수행하지 않습니다.</div><div class="report-subtabs"><button type="button" class="active" data-report-tab="reports">신고 내역</button><button type="button" data-report-tab="users">신고 대상 사용자</button><button type="button" data-report-tab="history">제재 이력</button></div>${authorFilter?`<div class="admin-notice">${esc(authorFilter)}님의 신고 내역 <button type="button" class="admin-btn" id="clearReportAuthor">전체 보기</button></div>`:''}<div class="report-toolbar"><label for="reportFilter">처리 상태별 보기</label><select id="reportFilter"><option value="all">전체</option>${Object.entries(statusName).map(([k,v])=>`<option value="${k}" ${filter===k?'selected':''}>${v}</option>`).join('')}</select></div><div class="report-list">${visibleRows.map(r=>{const post=posts.find(p=>String(p.id)===String(r.postId));return `<article class="report-card"><div class="report-card-top"><strong class="report-reason">${esc(r.reason||'사유 없음')}</strong><span class="report-status">${statusName[r.status||'pending']||'접수'}</span></div><h3 class="report-post-title">${esc(post?.title||'삭제되었거나 찾을 수 없는 게시글')}</h3><div class="report-meta">작성자 ${esc(r.author||'알 수 없음')} · ${esc(r.createdAt?new Date(r.createdAt).toLocaleString('ko-KR'):'날짜 없음')} · 신고 ID ${esc(r.id)}</div>${r.detail?`<div class="report-detail">${esc(r.detail)}</div>`:''}<div class="report-card-bottom"><label>처리 상태 <select data-report-status="${esc(r.id)}">${Object.entries(statusName).map(([k,v])=>`<option value="${k}" ${(r.status||'pending')===k?'selected':''}>${v}</option>`).join('')}</select></label><button type="button" class="outline" data-report-view="${esc(r.postId)}" ${post?'':'disabled'}>게시글 확인</button></div></article>`}).join('')||'<p class="admin-empty">해당 상태의 신고가 없습니다.</p>'}</div></div>`;
+ box.querySelectorAll('[data-report-tab]').forEach(el=>el.onclick=()=>{window.adminReportView=el.dataset.reportTab;window.adminReportAuthor=null;renderReports()});
+ box.querySelector('#clearReportAuthor')?.addEventListener('click',()=>{window.adminReportAuthor=null;renderReports()});
  document.getElementById('reportFilter').onchange=e=>{window.adminReportFilter=e.target.value;renderReports()};
  box.querySelectorAll('[data-report-status]').forEach(el=>el.onchange=()=>{const r=stageSafety.reports.find(x=>String(x.id)===el.dataset.reportStatus);if(!r)return;r.status=el.value;r.handledAt=new Date().toISOString();saveStageSafety();renderReports();updateReportBadge();notify('신고 처리 상태를 변경했어요.')});
  box.querySelectorAll('[data-report-view]').forEach(el=>el.onclick=()=>{const post=posts.find(x=>String(x.id)===el.dataset.reportView);if(post)detail(post.id)});
@@ -250,26 +280,31 @@ const AD_SLOTS=[['MAIN_001','메인 최상단'],['SEARCH_001','검색창 아래'
 function migrateAdAssignments(){let changed=false;campaigns.forEach(c=>{if(!Array.isArray(c.bannerPlacements)){c.bannerPlacements=banners.filter(b=>b.campaignId===c.id).map(b=>({bannerId:b.id,slot:b.slot||'MAIN_001'}));changed=true}});if(changed)saveAdmin()}
 function campaignUsesBanner(c,id){return (c.bannerPlacements||[]).some(p=>p.bannerId===id)}
 function bannerLocks(id){return campaigns.filter(c=>campaignUsesBanner(c,id)&&c.end>=today())}
-function renderCampaigns(){migrateAdAssignments();const q=(window.adminCampaignQuery||'').toLowerCase(),status=window.adminCampaignStatus||'all';const rows=campaigns.filter(c=>(c.name+' '+c.category+' '+c.keywords).toLowerCase().includes(q)&&(status==='all'||campaignStatus(c)===status));$('#adminContent').innerHTML=`<div class="admin-panel"><div class="admin-section-title"><div><h2>캠페인 관리</h2><p>캠페인 기간·타깃 조건·사용할 광고 배너와 노출 영역을 관리합니다.</p></div></div><div class="campaign-controls"><div class="campaign-search"><label for="campaignQuery">캠페인 검색</label><input id="campaignQuery" placeholder="캠페인명 또는 키워드 검색" value="${esc(window.adminCampaignQuery||'')}"></div><div class="campaign-filter"><label for="campaignStatus">진행 상태</label><select id="campaignStatus"><option value="all">전체 상태</option>${['진행 중','예정','중지','종료'].map(v=>`<option value="${v}" ${status===v?'selected':''}>${v}</option>`).join('')}</select></div><button class="primary" id="addCampaign">＋ 캠페인 등록</button></div><div class="admin-table-wrap campaign-table-wrap"><table class="admin-table campaign-table"><thead><tr><th>캠페인 ID / 이름</th><th>카테고리 · 행동</th><th>키워드</th><th>연결 배너 / 영역</th><th>수행 기간</th><th>상태</th><th>조건 일치</th><th>관리</th></tr></thead><tbody>${rows.map(c=>`<tr><td><b>${esc(c.name)}</b><div class="mini">${esc(c.id)}</div></td><td>${esc(c.category)}<div class="mini">${esc(c.action)}</div></td><td>${esc(c.keywords||'전체')}</td><td>${(c.bannerPlacements||[]).map(p=>{const b=banners.find(x=>x.id===p.bannerId);return b?`<div class="mini">${esc(b.name)} · ${esc(AD_SLOTS.find(x=>x[0]===p.slot)?.[1]||p.slot)}</div>`:''}).join('')||'<span class="mini">미지정</span>'}</td><td class="campaign-date"><span>${esc(c.start)}</span><span class="date-separator">~</span><span>${esc(c.end)}</span></td><td>${badge(campaignStatus(c))}</td><td>${behaviorLogs.filter(l=>campaignMatch(c,l)).length}건</td><td class="campaign-actions"><button class="admin-btn" data-edit-c="${esc(c.id)}">수정</button> <button class="admin-btn danger" data-del-c="${esc(c.id)}">삭제</button></td></tr>`).join('')||'<tr><td colspan="8" class="admin-empty">등록된 캠페인이 없습니다.</td></tr>'}</tbody></table></div></div>`;
+function renderCampaigns(){migrateAdAssignments();const q=(window.adminCampaignQuery||'').toLowerCase(),status=window.adminCampaignStatus||'all';const rows=campaigns.filter(c=>(c.name+' '+c.category+' '+c.keywords+' '+(c.adType==='personalized'?'맞춤형':'일반')).toLowerCase().includes(q)&&(status==='all'||campaignStatus(c)===status));$('#adminContent').innerHTML=`<div class="admin-panel"><div class="admin-section-title"><div><h2>캠페인 관리</h2><p>캠페인 기간·타깃 조건·사용할 광고 배너와 노출 영역을 관리합니다.</p></div></div><div class="campaign-controls"><div class="campaign-search"><label for="campaignQuery">캠페인 검색</label><input id="campaignQuery" placeholder="캠페인명 또는 키워드 검색" value="${esc(window.adminCampaignQuery||'')}"></div><div class="campaign-filter"><label for="campaignStatus">진행 상태</label><select id="campaignStatus"><option value="all">전체 상태</option>${['진행 중','예정','중지','종료'].map(v=>`<option value="${v}" ${status===v?'selected':''}>${v}</option>`).join('')}</select></div><button class="primary" id="addCampaign">＋ 캠페인 등록</button></div><div class="admin-table-wrap campaign-table-wrap"><table class="admin-table campaign-table"><thead><tr><th>캠페인 ID / 이름</th><th>광고 유형</th><th>타깃 카테고리 · 행동</th><th>키워드</th><th>연결 배너 / 영역</th><th>수행 기간</th><th>상태</th><th>조건 일치</th><th>관리</th></tr></thead><tbody>${rows.map(c=>`<tr><td><b>${esc(c.name)}</b><div class="mini">${esc(c.id)}</div></td><td><span class="ad-kind ${c.adType==='personalized'?'personalized':''}">${c.adType==='personalized'?'맞춤형':'일반'}</span></td><td>${esc(c.adType==='personalized'?c.category:'전체')}<div class="mini">${esc(c.action)}</div></td><td>${esc(c.keywords||'전체')}</td><td>${(c.bannerPlacements||[]).map(p=>{const b=banners.find(x=>x.id===p.bannerId);return b?`<div class="mini">${esc(b.name)} · ${esc(AD_SLOTS.find(x=>x[0]===p.slot)?.[1]||p.slot)}</div>`:''}).join('')||'<span class="mini">미지정</span>'}</td><td class="campaign-date"><span>${esc(c.start)}</span><span class="date-separator">~</span><span>${esc(c.end)}</span></td><td>${badge(campaignStatus(c))}</td><td>${behaviorLogs.filter(l=>campaignMatch(c,l)).length}건</td><td class="campaign-actions"><button class="admin-btn" data-edit-c="${esc(c.id)}">수정</button> <button class="admin-btn danger" data-del-c="${esc(c.id)}">삭제</button></td></tr>`).join('')||'<tr><td colspan="9" class="admin-empty">등록된 캠페인이 없습니다.</td></tr>'}</tbody></table></div></div>`;
 $('#addCampaign').onclick=()=>campaignDialog();$('#campaignQuery').oninput=e=>{window.adminCampaignQuery=e.target.value;renderCampaigns();$('#campaignQuery').focus();$('#campaignQuery').setSelectionRange(e.target.value.length,e.target.value.length)};$('#campaignStatus').onchange=e=>{window.adminCampaignStatus=e.target.value;renderCampaigns()};document.querySelectorAll('[data-edit-c]').forEach(b=>b.onclick=()=>campaignDialog(b.dataset.editC));document.querySelectorAll('[data-del-c]').forEach(b=>b.onclick=()=>{if(confirm('이 캠페인을 삭제할까요?')){campaigns=campaigns.filter(c=>c.id!==b.dataset.delC);saveAdmin();renderAdmin();renderMainAd()}})}
-function campaignDialog(id){migrateAdAssignments();const c=campaigns.find(x=>x.id===id)||{name:'',category:'전체',action:'ALL',keywords:'',start:today(),end:new Date(Date.now()+14*86400000).toISOString().slice(0,10),description:'',enabled:true,bannerPlacements:[]};let placements=(c.bannerPlacements||[]).map(x=>({...x}));const placementRows=()=>placements.map((p,i)=>`<div class="campaign-placement"><select data-placement-banner="${i}" aria-label="배너 선택"><option value="">배너 선택</option>${banners.map(b=>`<option value="${esc(b.id)}" ${p.bannerId===b.id?'selected':''}>${esc(b.name)}</option>`).join('')}</select><select data-placement-slot="${i}" aria-label="노출 영역">${AD_SLOTS.map(([key,name])=>`<option value="${key}" ${p.slot===key?'selected':''}>${name}</option>`).join('')}</select><button type="button" class="admin-btn danger" data-remove-placement="${i}">삭제</button></div>`).join('');showModal(id?'캠페인 수정':'새 캠페인 등록',`<form id="campaignForm"><div class="admin-form-grid"><div class="field full"><label>캠페인 이름 *</label><input id="cName" required maxlength="80" value="${esc(c.name)}" placeholder="예: 가구 관심 사용자 캠페인"></div><div class="field"><label>타깃 카테고리</label><select id="cCategory">${categories.map(x=>`<option ${c.category===x[0]?'selected':''}>${x[0]}</option>`).join('')}</select></div><div class="field"><label>수집 행동 유형</label><select id="cAction">${[['ALL','전체 행동'],['SEARCH','검색'],['CATEGORY_CLICK','카테고리 클릭'],['POST_VIEW','게시글 조회'],['REQUEST_CREATE','요청 등록']].map(([v,t])=>`<option value="${v}" ${c.action===v?'selected':''}>${t}</option>`).join('')}</select></div><div class="field full"><label>타깃 키워드 (쉼표로 구분)</label><input id="cKeywords" value="${esc(c.keywords)}" placeholder="예: 책상, 의자, 소파"><p class="help">키워드를 비우면 카테고리·행동 조건만 적용됩니다.</p></div><div class="field"><label>시작일 *</label><input type="date" id="cStart" required value="${esc(c.start)}"></div><div class="field"><label>종료일 *</label><input type="date" id="cEnd" required value="${esc(c.end)}"></div><div class="field full"><label>캠페인 설명</label><textarea id="cDescription" placeholder="캠페인 목적을 입력하세요">${esc(c.description||'')}</textarea></div><div class="field full"><div class="placement-heading"><label>광고 배너 및 노출 영역</label><button type="button" class="outline" id="addPlacement">＋ 배너 배치 추가</button></div><p class="help">등록된 배너를 선택하세요. 동일한 배너를 여러 캠페인이나 여러 영역에서 재사용할 수 있습니다.</p><div id="campaignPlacements"></div>${banners.length?'':'<p class="help">배너가 없습니다. 먼저 광고 배너 메뉴에서 배너를 등록하세요.</p>'}</div><div class="field full"><label><input id="cEnabled" type="checkbox" ${c.enabled?'checked':''} style="width:auto;min-height:0;margin-right:8px">캠페인 활성화</label></div></div><p class="demo-note" style="margin-top:18px">시연용 데이터입니다. 실제 광고 송출 및 Kafka 연결은 백엔드에서 구현해야 합니다.</p><div class="form-actions"><button type="button" class="outline" id="cancelCampaign">취소</button><button class="primary" type="submit">${id?'변경 저장':'캠페인 등록'}</button></div></form>`);const draw=()=>{const box=$('#campaignPlacements');box.innerHTML=placementRows();box.querySelectorAll('[data-placement-banner]').forEach(el=>el.onchange=()=>placements[+el.dataset.placementBanner].bannerId=el.value);box.querySelectorAll('[data-placement-slot]').forEach(el=>el.onchange=()=>placements[+el.dataset.placementSlot].slot=el.value);box.querySelectorAll('[data-remove-placement]').forEach(el=>el.onclick=()=>{placements.splice(+el.dataset.removePlacement,1);draw()})};draw();$('#addPlacement').onclick=()=>{if(!banners.length)return notify('먼저 광고 배너를 등록해 주세요.');placements.push({bannerId:banners[0].id,slot:'MAIN_001'});draw()};$('#cancelCampaign').onclick=closeModal;$('#campaignForm').onsubmit=e=>{e.preventDefault();if($('#cEnd').value<$('#cStart').value)return notify('종료일은 시작일보다 빠를 수 없습니다.');if(placements.some(p=>!p.bannerId||!banners.some(b=>b.id===p.bannerId)))return notify('연결할 배너를 선택해 주세요.');const pairs=placements.map(p=>p.bannerId+'|'+p.slot);if(new Set(pairs).size!==pairs.length)return notify('같은 배너와 같은 영역이 중복되었습니다.');const obj={id:id||'CMP-'+uid().toUpperCase(),name:$('#cName').value.trim(),category:$('#cCategory').value,action:$('#cAction').value,keywords:$('#cKeywords').value.trim(),start:$('#cStart').value,end:$('#cEnd').value,description:$('#cDescription').value.trim(),enabled:$('#cEnabled').checked,bannerPlacements:placements};if(id)campaigns=campaigns.map(x=>x.id===id?obj:x);else campaigns.unshift(obj);saveAdmin();closeModal();renderAdmin();renderMainAd();notify('캠페인이 저장되었습니다.')}}
+function campaignDialog(id){migrateAdAssignments();const c=campaigns.find(x=>x.id===id)||{name:'',adType:'general',category:'전체',action:'ALL',keywords:'',start:today(),end:new Date(Date.now()+14*86400000).toISOString().slice(0,10),description:'',enabled:true,bannerPlacements:[]};let placements=(c.bannerPlacements||[]).map(x=>({...x}));const placementRows=()=>placements.map((p,i)=>`<div class="campaign-placement"><select data-placement-banner="${i}" aria-label="배너 선택"><option value="">배너 선택</option>${banners.map(b=>`<option value="${esc(b.id)}" ${p.bannerId===b.id?'selected':''}>${esc(b.name)}</option>`).join('')}</select><select data-placement-slot="${i}" aria-label="노출 영역">${AD_SLOTS.map(([key,name])=>`<option value="${key}" ${p.slot===key?'selected':''}>${name}</option>`).join('')}</select><button type="button" class="admin-btn danger" data-remove-placement="${i}">삭제</button></div>`).join('');showModal(id?'캠페인 수정':'새 캠페인 등록',`<form id="campaignForm"><div class="admin-form-grid"><div class="field full"><label>캠페인 이름 *</label><input id="cName" required maxlength="80" value="${esc(c.name)}" placeholder="예: 가구 관심 사용자 캠페인"></div><div class="field full"><label>광고 노출 방식</label><div class="ad-type-picker"><label><input type="radio" name="adType" value="general" ${c.adType!=='personalized'?'checked':''}><span><strong>일반 광고</strong><small>모든 사용자에게 노출</small></span></label><label><input type="radio" name="adType" value="personalized" ${c.adType==='personalized'?'checked':''}><span><strong>맞춤형 광고</strong><small>관심 카테고리 사용자에게 우선 노출</small></span></label></div><p class="help">현재는 프론트엔드 시연용 설정입니다. 사용자별 실제 추천은 백엔드 연결 후 적용됩니다.</p></div><div class="field" id="adTargetCategoryField"><label>타깃 카테고리</label><select id="cCategory">${categories.map(x=>`<option ${c.category===x[0]?'selected':''}>${x[0]}</option>`).join('')}</select></div><div class="field"><label>수집 행동 유형</label><select id="cAction">${[['ALL','전체 행동'],['SEARCH','검색'],['CATEGORY_CLICK','카테고리 클릭'],['POST_VIEW','게시글 조회'],['REQUEST_CREATE','요청 등록']].map(([v,t])=>`<option value="${v}" ${c.action===v?'selected':''}>${t}</option>`).join('')}</select></div><div class="field full"><label>타깃 키워드 (쉼표로 구분)</label><input id="cKeywords" value="${esc(c.keywords)}" placeholder="예: 책상, 의자, 소파"><p class="help">키워드를 비우면 카테고리·행동 조건만 적용됩니다.</p></div><div class="field"><label>시작일 *</label><input type="date" id="cStart" required value="${esc(c.start)}"></div><div class="field"><label>종료일 *</label><input type="date" id="cEnd" required value="${esc(c.end)}"></div><div class="field full"><label>캠페인 설명</label><textarea id="cDescription" placeholder="캠페인 목적을 입력하세요">${esc(c.description||'')}</textarea></div><div class="field full"><div class="placement-heading"><label>광고 배너 및 노출 영역</label><button type="button" class="outline" id="addPlacement">＋ 배너 배치 추가</button></div><p class="help">등록된 배너를 선택하세요. 동일한 배너를 여러 캠페인이나 여러 영역에서 재사용할 수 있습니다.</p><div id="campaignPlacements"></div>${banners.length?'':'<p class="help">배너가 없습니다. 먼저 광고 배너 메뉴에서 배너를 등록하세요.</p>'}</div><div class="field full"><label><input id="cEnabled" type="checkbox" ${c.enabled?'checked':''} style="width:auto;min-height:0;margin-right:8px">캠페인 활성화</label></div></div><p class="demo-note" style="margin-top:18px">시연용 데이터입니다. 실제 광고 송출 및 Kafka 연결은 백엔드에서 구현해야 합니다.</p><div class="form-actions"><button type="button" class="outline" id="cancelCampaign">취소</button><button class="primary" type="submit">${id?'변경 저장':'캠페인 등록'}</button></div></form>`);const syncAdType=()=>{const personalized=document.querySelector('input[name=adType]:checked')?.value==='personalized';$('#adTargetCategoryField').classList.toggle('ad-target-disabled',!personalized);$('#cCategory').disabled=!personalized;if(!personalized)$('#cCategory').value='전체'};document.querySelectorAll('input[name=adType]').forEach(r=>r.addEventListener('change',syncAdType));syncAdType();const draw=()=>{const box=$('#campaignPlacements');box.innerHTML=placementRows();box.querySelectorAll('[data-placement-banner]').forEach(el=>el.onchange=()=>placements[+el.dataset.placementBanner].bannerId=el.value);box.querySelectorAll('[data-placement-slot]').forEach(el=>el.onchange=()=>placements[+el.dataset.placementSlot].slot=el.value);box.querySelectorAll('[data-remove-placement]').forEach(el=>el.onclick=()=>{placements.splice(+el.dataset.removePlacement,1);draw()})};draw();$('#addPlacement').onclick=()=>{if(!banners.length)return notify('먼저 광고 배너를 등록해 주세요.');placements.push({bannerId:banners[0].id,slot:'MAIN_001'});draw()};$('#cancelCampaign').onclick=closeModal;$('#campaignForm').onsubmit=e=>{e.preventDefault();if($('#cEnd').value<$('#cStart').value)return notify('종료일은 시작일보다 빠를 수 없습니다.');if(placements.some(p=>!p.bannerId||!banners.some(b=>b.id===p.bannerId)))return notify('연결할 배너를 선택해 주세요.');const pairs=placements.map(p=>p.bannerId+'|'+p.slot);if(new Set(pairs).size!==pairs.length)return notify('같은 배너와 같은 영역이 중복되었습니다.');const obj={id:id||'CMP-'+uid().toUpperCase(),name:$('#cName').value.trim(),adType:document.querySelector('input[name=adType]:checked')?.value||'general',category:$('#cCategory').value,action:$('#cAction').value,keywords:$('#cKeywords').value.trim(),start:$('#cStart').value,end:$('#cEnd').value,description:$('#cDescription').value.trim(),enabled:$('#cEnabled').checked,bannerPlacements:placements};if(id)campaigns=campaigns.map(x=>x.id===id?obj:x);else campaigns.unshift(obj);saveAdmin();closeModal();renderAdmin();renderMainAd();notify('캠페인이 저장되었습니다.')}}
 function renderBanners(){migrateAdAssignments();$('#adminContent').innerHTML=`<div class="admin-panel"><div class="admin-section-title"><div><h2>광고 배너 관리</h2><p>배너 이미지를 등록하고 관리합니다. 배너의 사용 캠페인과 노출 영역은 캠페인 관리에서 설정하세요.</p></div><button class="primary" id="addBanner">＋ 배너 등록</button></div><div class="admin-notice" style="margin-top:18px">하나의 배너를 여러 캠페인·여러 영역에서 사용할 수 있습니다. 연결된 캠페인의 종료일이 모두 지나야 배너를 삭제할 수 있습니다.</div><div class="admin-table-wrap banner-management-wrap"><table class="admin-table banner-management-table"><thead><tr><th>미리보기</th><th>배너 정보</th><th>사용 캠페인</th><th>사용 영역</th><th>상태</th><th>관리</th></tr></thead><tbody>${banners.map(b=>{const linked=campaigns.filter(c=>campaignUsesBanner(c,b.id));const locks=bannerLocks(b.id);return `<tr><td>${b.image?`<img class="banner-thumb" src="${esc(b.image)}" alt="배너 미리보기">`:'🖼️'}</td><td><b>${esc(b.name)}</b><div class="mini">${esc(b.id)}</div></td><td>${linked.map(c=>`<div class="mini">${esc(c.name)} (${esc(campaignStatus(c))})</div>`).join('')||'연결 없음'}</td><td>${[...new Set(linked.flatMap(c=>(c.bannerPlacements||[]).filter(p=>p.bannerId===b.id).map(p=>AD_SLOTS.find(x=>x[0]===p.slot)?.[1]||p.slot)))].map(esc).join(', ')||'-'}</td><td>${badge(b.enabled?'활성':'중지')}</td><td><button class="admin-btn" data-edit-b="${esc(b.id)}">수정</button> <button class="admin-btn danger" data-del-b="${esc(b.id)}" ${locks.length?'disabled title="캠페인 종료 후 삭제할 수 있습니다"':''}>삭제</button>${locks.length?'<div class="mini">캠페인 종료 후 삭제 가능</div>':''}</td></tr>`}).join('')||'<tr><td colspan="6" class="admin-empty">등록된 배너가 없습니다.</td></tr>'}</tbody></table></div></div>`;$('#addBanner').onclick=()=>bannerDialog();document.querySelectorAll('[data-edit-b]').forEach(b=>b.onclick=()=>bannerDialog(b.dataset.editB));document.querySelectorAll('[data-del-b]').forEach(b=>b.onclick=()=>{const locks=bannerLocks(b.dataset.delB);if(locks.length)return notify('사용 중인 캠페인이 종료된 후 삭제할 수 있습니다.');if(confirm('배너를 삭제할까요?')){banners=banners.filter(x=>x.id!==b.dataset.delB);campaigns.forEach(c=>c.bannerPlacements=(c.bannerPlacements||[]).filter(p=>p.bannerId!==b.dataset.delB));saveAdmin();renderAdmin();renderMainAd()}})}
 function bannerDialog(id){const b=banners.find(x=>x.id===id)||{name:'',link:'',image:'',enabled:true};let imageData=b.image;showModal(id?'배너 수정':'새 배너 등록',`<form id="bannerForm"><div class="admin-form-grid"><div class="field full"><label>배너 이름 *</label><input id="bName" required value="${esc(b.name)}" placeholder="예: 가구 나눔 홍보 배너"></div><div class="field full"><label>광고 클릭 이동 주소 (선택)</label><input type="url" id="bLink" value="${esc(b.link||'')}" placeholder="https://example.com"></div><div class="field full"><label>광고 이미지 (JPG/PNG/WEBP, 최대 1MB)</label><input type="file" id="bImage" accept="image/jpeg,image/png,image/webp"><div id="bannerPreview" class="banner-preview">${imageData?`<img src="${esc(imageData)}" alt="배너 이미지 미리보기">`:'<span>이미지를 선택하면 이곳에서 미리 볼 수 있습니다.</span>'}</div></div><div class="field full"><label><input type="checkbox" id="bEnabled" ${b.enabled?'checked':''} style="width:auto;min-height:0;margin-right:8px">배너 활성화</label></div></div><p class="help">캠페인과 노출 영역은 캠페인 관리에서 선택합니다.</p><div class="form-actions"><button type="button" class="outline" id="cancelBanner">취소</button><button class="primary" type="submit">배너 저장</button></div></form>`);$('#cancelBanner').onclick=closeModal;$('#bImage').onchange=async e=>{const f=e.target.files[0];if(!f)return;if(!['image/jpeg','image/png','image/webp'].includes(f.type)||f.size>1024*1024){e.target.value='';return notify('JPG/PNG/WEBP 1MB 이하 파일을 선택하세요.')}imageData=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(f)});$('#bannerPreview').innerHTML=`<img src="${imageData}" alt="업로드한 배너 미리보기">`};$('#bannerForm').onsubmit=e=>{e.preventDefault();const link=$('#bLink').value.trim();if(link&&!/^https?:\/\//i.test(link))return notify('http 또는 https 주소만 입력하세요.');const obj={id:id||'BNR-'+uid().toUpperCase(),name:$('#bName').value.trim(),link,image:imageData,enabled:$('#bEnabled').checked};if(id)banners=banners.map(x=>x.id===id?obj:x);else banners.unshift(obj);saveAdmin();closeModal();renderAdmin();renderMainAd();notify('광고 배너가 저장되었습니다.')}}
 function renderLogs(){const q=(window.adminLogQuery||'').toLowerCase();const logs=behaviorLogs.filter(l=>(l.keyword+' '+l.category+' '+l.action).toLowerCase().includes(q)).slice().reverse();$('#adminContent').innerHTML=`<div class="admin-panel"><div class="admin-section-title"><div><h2>사용자 행동 로그</h2><p>NEED IT 화면에서 수집한 검색·카테고리·게시글 조회 이벤트</p></div><button class="outline" id="exportLogs">CSV 내보내기</button></div><div class="admin-toolbar"><input id="logQuery" placeholder="키워드, 카테고리, 행동 유형 검색" value="${esc(window.adminLogQuery||'')}"></div><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>발생 시각</th><th>행동 유형</th><th>검색 키워드</th><th>카테고리</th><th>활동 지역</th><th>매칭 캠페인</th></tr></thead><tbody>${logs.map(l=>`<tr><td>${esc(prettyTime(l.timestamp))}</td><td>${esc(l.action)}</td><td>${esc(l.keyword||'-')}</td><td>${esc(l.category||'-')}</td><td>${esc(l.region)}</td><td>${esc(campaigns.filter(c=>campaignMatch(c,l)).map(c=>c.name).join(', ')||'-')}</td></tr>`).join('')||'<tr><td colspan="6" class="admin-empty">수집된 행동 로그가 없습니다.</td></tr>'}</tbody></table></div></div>`;$('#logQuery').oninput=e=>{window.adminLogQuery=e.target.value;renderLogs();$('#logQuery').focus();$('#logQuery').setSelectionRange(e.target.value.length,e.target.value.length)};$('#exportLogs').onclick=()=>{const cols=['timestamp','action','keyword','category','postId','region'];const csv=[cols.join(','),...logs.map(l=>cols.map(k=>'"'+String(l[k]??'').replace(/"/g,'""')+'"').join(','))].join('\r\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='needit-behavior-logs.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}}
 function activeBanner(slot,category='전체'){
  migrateAdAssignments();const eligible=[];
  campaigns.filter(c=>campaignStatus(c)==='진행 중').forEach(c=>(c.bannerPlacements||[]).filter(p=>p.slot===slot).forEach(p=>{const b=banners.find(x=>x.id===p.bannerId&&x.enabled);if(b)eligible.push({b,c})}));
- const preferred=eligible.find(({c})=>category!=='전체'&&(c.category===category||c.category==='전체'));
- return (preferred||eligible[0])?.b||null;
+ const preferred=eligible.filter(({c})=>c.adType==='personalized'&&category!=='전체'&&(c.category===category||c.category==='전체'));
+ const general=eligible.filter(({c})=>c.adType!=='personalized');
+ const ordered=preferred.length?preferred:(general.length?general:eligible);const unique=[...new Map(ordered.map(x=>[x.b.id,x.b])).values()];
+ return unique.length?unique[Math.floor(Date.now()/6000)%unique.length]:null;
 }
 function renderAdPlacement(slot,selector,category='전체'){
  const el=$(selector);if(!el)return;
  const b=activeBanner(slot,category);
  if(!b){el.classList.add('hidden');el.innerHTML='';return;}
  el.classList.remove('hidden');
- el.innerHTML=`<div class="ad-compact"><div><span class="ad-kicker">광고 · SPONSORED</span><h3>${esc(b.name)}</h3><p>${slot==='SEARCH_001'?'지금 찾는 물건과 함께 살펴볼 만한 동네 정보':slot==='FEED_001'?'우리 동네 나눔에 도움이 되는 추천 정보':'나눔 이후에 도움이 될 수 있는 추천 정보'}</p>${b.link?`<button type="button" class="ad-go">광고 자세히 보기 ↗</button>`:''}</div>${b.image?`<img src="${esc(b.image)}" alt="${esc(b.name)} 광고 이미지">`:''}</div>`;
- el.querySelector('.ad-go')?.addEventListener('click',()=>{window.open(b.link,'_blank','noopener,noreferrer')});
+ const nextMarkup=`<div class="ad-compact ad-compact-polished"><div class="ad-compact-copy"><span class="ad-kicker">SPONSORED · 광고</span><h3>${esc(b.name)}</h3><p>${slot==='SEARCH_001'?'지금 찾는 물건과 함께 살펴볼 만한 정보':slot==='FEED_001'?'일상에 도움이 되는 추천 정보':'나눔 이후에 도움이 될 수 있는 추천 정보'}</p>${b.link?`<button type="button" class="ad-go">광고 자세히 보기 <span aria-hidden="true">↗</span></button>`:''}</div>${b.image?`<div class="ad-compact-media"><img src="${esc(b.image)}" alt="${esc(b.name)} 광고 이미지"></div>`:''}</div>`;
+ if(el.dataset.currentBanner===b.id&&el.querySelector('.ad-compact'))return;
+ const swap=()=>{el.innerHTML=nextMarkup;el.dataset.currentBanner=b.id;requestAnimationFrame(()=>el.querySelector('.ad-compact')?.classList.add('is-visible'));el.querySelector('.ad-go')?.addEventListener('click',()=>window.open(b.link,'_blank','noopener,noreferrer'))};
+ if(el.querySelector('.ad-compact')){el.querySelector('.ad-compact').classList.remove('is-visible');clearTimeout(el._adFadeTimer);el._adFadeTimer=setTimeout(swap,260)}else swap();
 }
+
 function renderMainAd(){
  const slot=$('#mainAdSlot');if(!slot)return;
  migrateAdAssignments();
@@ -288,14 +323,30 @@ function renderMainAd(){
    const go=()=>{if(b.link)window.open(b.link,'_blank','noopener,noreferrer')};
    const creative=slot.querySelector('.hero-ad-creative');creative.style.cursor=b.link?'pointer':'default';
    creative.addEventListener('click',go);creative.addEventListener('keydown',e=>{if(b.link&&(e.key==='Enter'||e.key===' ')){e.preventDefault();go()}});
-   slot.querySelector('.hero-ad-prev')?.addEventListener('click',()=>{index=(index-1+items.length)%items.length;draw()});
-   slot.querySelector('.hero-ad-next')?.addEventListener('click',()=>{index=(index+1)%items.length;draw()});
+   const changeSlide=(direction)=>{
+    if(slot.dataset.transitioning==='1')return;
+    const frame=slot.querySelector('.hero-ad-frame');
+    const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduced){index=(index+direction+items.length)%items.length;draw();return;}
+    slot.dataset.transitioning='1';
+    frame?.classList.add('ad-changing');
+    setTimeout(()=>{
+      index=(index+direction+items.length)%items.length;
+      draw();
+      const nextFrame=slot.querySelector('.hero-ad-frame');
+      nextFrame?.classList.add('ad-changing');
+      requestAnimationFrame(()=>requestAnimationFrame(()=>nextFrame?.classList.remove('ad-changing')));
+      setTimeout(()=>{slot.dataset.transitioning='0'},340);
+    },320);
+   };
+   slot.querySelector('.hero-ad-prev')?.addEventListener('click',()=>changeSlide(-1));
+   slot.querySelector('.hero-ad-next')?.addEventListener('click',()=>changeSlide(1));
   };draw();
  }
  renderAdPlacement('SEARCH_001','#searchAdSlot',activeCategory);
  renderAdPlacement('FEED_001','#feedAdSlot',activeCategory);
 }
-$('#adminNav').onclick=()=>showAdmin('dashboard');$('#adminBack').onclick=leaveAdmin;$('#adminLogout').onclick=()=>{clearAdminSession();updateAdminNav();leaveAdmin();notify('관리자 로그아웃되었습니다.')};document.querySelectorAll('#adminTabs button').forEach(b=>b.onclick=()=>showAdmin(b.dataset.tab));
+$('#adminNav').onclick=()=>showAdmin('dashboard');$('#adminBack').onclick=leaveAdmin;$('#adminLogout').onclick=()=>{clearAdminSession();updateAdminNav();leaveAdmin();document.getElementById('homeNav')?.click();notify('관리자 로그아웃되었습니다.')};document.querySelectorAll('#adminTabs button').forEach(b=>b.onclick=()=>showAdmin(b.dataset.tab));
 // 기존 서비스 화면의 이벤트에 비침투적으로 로그 수집 연결
 let searchTimer;$('#searchInput').addEventListener('input',()=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>{const keyword=$('#searchInput').value.trim();if(keyword)collectBehavior('SEARCH',{keyword,category:activeCategory==='전체'?'':activeCategory})},650)});
 $('#categoryGrid').addEventListener('click',e=>{const b=e.target.closest('[data-cat]');if(b)collectBehavior('CATEGORY_CLICK',{category:b.dataset.cat})});
@@ -802,6 +853,8 @@ updateChatUnread();
  function enter(navId){body.classList.remove('landing-state');document.getElementById(navId).click();window.scrollTo(0,0)}
  document.getElementById('landingRequest').addEventListener('click',()=>enter('requestsNav'));
  document.getElementById('landingHelp').addEventListener('click',()=>enter('helpNav'));
+ document.getElementById('landingLogin')?.addEventListener('click',()=>document.getElementById('loginBtn').click());
+ document.getElementById('landingSignup')?.addEventListener('click',()=>document.getElementById('signupBtn').click());
  const home=document.getElementById('homeNav');
  home.addEventListener('click',()=>{if(typeof adminMode!=='undefined'&&adminMode&&typeof leaveAdmin==='function')leaveAdmin();if(typeof leaveUser==='function'&&!document.getElementById('userArea').classList.contains('hidden'))leaveUser();body.classList.add('landing-state');window.scrollTo(0,0)});
  document.querySelector('.logo')?.addEventListener('click',e=>{e.preventDefault();home.click()});
@@ -887,3 +940,133 @@ updateChatUnread();
  document.addEventListener('pointerdown',e=>{if(!row.contains(e.target))hide()});
  input.addEventListener('blur',()=>setTimeout(()=>{if(!row.contains(document.activeElement))hide()},120));
 })();
+
+(function(){
+/* 광고 자동 전환: 같은 노출 영역에 배너가 여러 개면 6초 간격으로 순환 */
+setInterval(()=>{
+ if(document.hidden)return;
+ const main=document.querySelector('#mainAdSlot:not(.hidden) .hero-ad-next');
+ if(main)main.click();
+ if(typeof renderAdPlacement==='function'){
+  renderAdPlacement('SEARCH_001','#searchAdSlot',activeCategory);
+  renderAdPlacement('FEED_001','#feedAdSlot',activeCategory);
+  renderAdPlacement('DETAIL_001','#detailAdSlot',activeCategory);
+ }
+},6000);
+
+})();
+
+/* 관리자 페이지 전용 진입: 푸터 링크 -> /admin/login -> 관리자 화면 */
+(function(){
+ const page=document.getElementById('adminLoginPage');
+ if(!page) return;
+
+ const isFilePreview=location.protocol==='file:';
+ const isAdminRoute=()=>isFilePreview ? location.hash==='#admin/login' : location.pathname==='/admin/login';
+ function navigateAdmin(open){
+   if(isFilePreview){history.pushState({},'',open?'#admin/login':location.pathname+location.search)}
+   else history.pushState({},'',open?'/admin/login':'/');
+ }
+ function openAdminPage(push=true){
+   if(push)navigateAdmin(true);
+   document.body.classList.add('admin-login-route');
+   page.classList.remove('hidden');
+   document.getElementById('overlay')?.classList.add('hidden');
+   document.body.style.overflow='';
+   window.scrollTo(0,0);
+   document.getElementById('adminPageId')?.focus();
+ }
+ function closeAdminPage(push=true){
+   document.body.classList.remove('admin-login-route');
+   page.classList.add('hidden');
+   if(push)navigateAdmin(false);
+   window.scrollTo(0,0);
+ }
+ document.getElementById('footerAdminLink')?.addEventListener('click',()=>openAdminPage());
+ document.getElementById('landingAdminLink')?.addEventListener('click',()=>openAdminPage());
+ document.getElementById('adminLoginHome')?.addEventListener('click',()=>closeAdminPage());
+ document.getElementById('adminLoginReturn')?.addEventListener('click',()=>closeAdminPage());
+ document.getElementById('adminPageLoginForm')?.addEventListener('submit',e=>{
+   e.preventDefault();
+   const id=document.getElementById('adminPageId').value.trim();
+   const pw=document.getElementById('adminPagePassword').value;
+   if(id===ADMIN_DEMO_ID && pw===ADMIN_DEMO_PASSWORD){
+     setAdminSession();
+     closeAdminPage(false);
+     if(isFilePreview)history.replaceState({},'',location.pathname+location.search);
+     else history.replaceState({},'','/');
+     document.body.classList.remove('landing-state');
+     showAdmin('dashboard');
+     notify('관리자 시연 계정으로 로그인했습니다.');
+   }else{
+     document.getElementById('adminPageError').textContent='아이디 또는 비밀번호를 확인해 주세요.';
+   }
+ });
+ window.addEventListener('popstate',()=>{
+   if(isAdminRoute())openAdminPage(false);
+   else closeAdminPage(false);
+ });
+ if(isAdminRoute())openAdminPage(false);
+})();
+
+
+/* NEED IT: member access control + suspension notice (frontend demo). */
+function needitActiveSanction(){
+ const me=memberSession();if(!me)return null;
+ const records=loadSanctionRecords().filter(r=>[me.id,me.nickname].includes(r.user));
+ if(!records.length)return null;
+ const last=records[records.length-1];
+ if(last.action==='release'||last.action==='warning')return null;
+ if(last.action!=='permanent'&&(!last.until||new Date(last.until).getTime()<=Date.now()))return null;
+ return last;
+}
+function needitSuspensionDialog(record){
+ const until=record.action==='permanent'?'해제 기한 없음 (영구 정지)':new Date(record.until).toLocaleString('ko-KR');
+ showModal('계정 이용 제한',`<div class="needit-suspension"><div class="needit-suspension-icon">🔒</div><h3>현재 계정 이용이 제한되어 있어요.</h3><p>물건 요청·나눔 제안·채팅 기능을 이용할 수 없습니다.</p><dl><dt>제재 사유</dt><dd>${esc(record.reason||'운영 정책 위반')}</dd><dt>해제 예정일</dt><dd>${esc(until)}</dd></dl><button class="primary" type="button" id="needitSanctionOk">확인</button></div>`);
+ document.getElementById('needitSanctionOk').onclick=closeModal;
+}
+function needitRequireMember(){
+ if(!memberSession()){memberLogin();const note=document.querySelector('#dialogBody .demo-note');if(note)note.innerHTML='이 기능을 사용하려면 <b>로그인이 필요합니다.</b> 로그인 또는 회원가입을 진행해 주세요.';return false;}
+ const sanction=needitActiveSanction();if(sanction){needitSuspensionDialog(sanction);return false;}
+ return true;
+}
+function needitSyncAuthUI(){
+ const me=memberSession(),adminActive=isAdmin();
+ const login=document.getElementById('loginBtn'),signup=document.getElementById('signupBtn');
+ if(login){login.textContent=me?'로그아웃':'로그인';login.classList.toggle('hidden',adminActive);}
+ if(signup){signup.textContent='회원가입';signup.disabled=false;signup.classList.toggle('hidden',!!me||adminActive);signup.title='';}
+ const ll=document.getElementById('landingLogin'),ls=document.getElementById('landingSignup');
+ if(ll){ll.textContent=me?'로그아웃':'로그인';ll.classList.toggle('hidden',adminActive);}
+ if(ls){ls.textContent='회원가입';ls.disabled=false;ls.classList.toggle('hidden',!!me||adminActive);}
+ const menu=document.getElementById('accountMenuBtn');if(menu)menu.setAttribute('aria-label',me?'마이페이지 및 계정 메뉴':'로그인 및 계정 메뉴');
+}
+window.NEEDIT_API_CONFIG=Object.freeze({baseUrl:localStorage.getItem('needit_api_base_url')||'http://localhost:8080/api',mode:'demo'});
+window.NEEDIT_AUTH={session:memberSession,requireMember:needitRequireMember,activeSanction:needitActiveSanction,refresh:needitSyncAuthUI};
+// Login/logout events run after the original handlers. UI refresh also runs on signup success.
+const needitOriginalRefresh=memberRefreshHeader;
+memberRefreshHeader=function(){needitOriginalRefresh();needitSyncAuthUI();};
+const needitOriginalMemberLogin=memberLogin;
+memberLogin=function(){needitOriginalMemberLogin();};
+const needitOriginalCreateDialog=createDialog;
+createDialog=function(...args){if(!needitRequireMember())return;return needitOriginalCreateDialog(...args);};
+const needitOriginalOpenChat=openChat;
+openChat=function(...args){if(!needitRequireMember())return;return needitOriginalOpenChat(...args);};
+const needitOriginalShowUser=showUser;
+showUser=function(...args){if(!needitRequireMember())return;return needitOriginalShowUser(...args);};
+const needitOriginalDetail=detail;
+detail=function(...args){return needitOriginalDetail(...args);};
+// Capture offer clicks before their existing handler opens the offer form.
+document.addEventListener('click',e=>{
+ const offer=e.target.closest('#offerBtn');
+ if(offer&&!needitRequireMember()){e.preventDefault();e.stopImmediatePropagation();}
+},true);
+// Protected operations: even if a modal was opened before logout or suspension.
+document.addEventListener('submit',e=>{
+ if(e.target.matches('#requestForm,#offerForm,#chatForm')&&!needitRequireMember()){
+  e.preventDefault();e.stopImmediatePropagation();
+ }
+},true);
+// Keep landing buttons in sync after login/signup/logout.
+const needitAuthObserver=new MutationObserver(()=>{});
+setTimeout(needitSyncAuthUI,0);
+

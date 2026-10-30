@@ -1,0 +1,27 @@
+
+/* NEED IT 관리자 로그인 독립 화면 및 푸터 링크 */
+.footer-right{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.admin-footer-link,.landing-admin-footer button{border:0;background:transparent;color:#557667;font-size:13px;font-weight:700;cursor:pointer;padding:6px 2px}
+.admin-footer-link:hover,.landing-admin-footer button:hover{color:#16825a;text-decoration:underline}
+.landing-admin-footer{position:absolute;bottom:15px;left:0;right:0;display:flex;justify-content:center;gap:20px;align-items:center;color:#98a69c;font-size:12px;z-index:3}
+body.admin-login-route #legacy-app > :not(#adminLoginPage){display:none!important}
+body.admin-login-route #adminLoginPage{display:flex!important}
+#adminLoginPage.admin-login-page{min-height:100dvh;background:#f6f9f6;flex-direction:column;align-items:center;position:relative;padding:0 24px;box-sizing:border-box;color:#18372a}
+.admin-login-top{width:min(100%,1120px);height:86px;display:flex;align-items:center;justify-content:space-between;color:#8a9d92;font-size:13px}
+.admin-login-logo{border:0;background:transparent;color:#166444;font-size:22px;font-weight:900;cursor:pointer;padding:0}.admin-login-logo span{color:#a5cb86}
+.admin-login-card{width:min(100%,440px);background:#fff;border:1px solid #e3ebe5;border-radius:22px;box-shadow:0 18px 65px rgba(25,68,45,.07);padding:38px;box-sizing:border-box;margin:auto 0}
+.admin-login-symbol{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:#e8f5ed;color:#20815c;font-size:24px;margin-bottom:20px}
+.admin-login-eyebrow{font-size:11px;font-weight:900;letter-spacing:.12em;color:#28835f}
+.admin-login-card h1{font-size:27px;letter-spacing:-.04em;margin:9px 0 7px}
+.admin-login-description{color:#829188;font-size:14px;margin:0 0 30px}
+#adminPageLoginForm{display:flex;flex-direction:column;gap:10px}
+#adminPageLoginForm label{font-size:13px;font-weight:800;margin-top:6px}
+#adminPageLoginForm input{height:49px;width:100%;border:1px solid #dbe7de;border-radius:11px;box-sizing:border-box;padding:0 14px;font-size:14px;outline:0;background:#fff}
+#adminPageLoginForm input:focus{border-color:#20815c;box-shadow:0 0 0 3px #e6f5eb}
+.admin-page-error{color:#b03b3b;font-size:12px;min-height:17px;margin:0}
+.admin-page-submit{height:49px;background:#207d57;color:white;border:0;border-radius:11px;font-size:15px;font-weight:800;cursor:pointer}
+.admin-page-submit:hover{background:#166c4a}
+.admin-demo-hint{margin:20px 0 0;font-size:11px;line-height:1.8;color:#9aa79f;text-align:center}
+.admin-login-return{display:block;border:0;background:transparent;margin:20px auto 0;color:#47715c;font-size:13px;font-weight:700;cursor:pointer}
+.admin-login-bottom{height:68px;display:flex;align-items:center;color:#a1ada4;font-size:12px}
+@media(max-width:520px){.admin-login-card{padding:26px 22px}.admin-login-top{height:70px}.landing-admin-footer{bottom:8px}}

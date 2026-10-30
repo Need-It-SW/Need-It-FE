@@ -1,0 +1,19 @@
+/* Campaign targeting settings */
+.ad-type-picker{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+.ad-type-picker label{display:flex;align-items:center;gap:11px;padding:14px;border:1px solid #dfe8e2;border-radius:12px;cursor:pointer;background:#fff}
+.ad-type-picker label:has(input:checked){border-color:#26875b;background:#f0f8f2}
+.ad-type-picker input{width:17px!important;min-height:17px!important;accent-color:#208257}
+.ad-type-picker strong,.ad-type-picker small{display:block}.ad-type-picker strong{font-size:14px;color:#213c2c}.ad-type-picker small{font-size:12px;color:#718377;margin-top:3px}
+.ad-target-disabled{opacity:.55}.ad-kind{display:inline-flex;border-radius:7px;background:#f0f2f0;color:#66766b;padding:5px 9px;font-size:12px;font-weight:800;white-space:nowrap}.ad-kind.personalized{background:#e7f6ed;color:#17744a}
+/* Compact, restrained sponsored cards in feed and search */
+.ad-compact-polished{background:#f9fbf9!important;border:1px solid #e8eee9!important;border-radius:17px!important;padding:20px 24px!important;min-height:134px;gap:26px;opacity:0;transform:translateY(5px);transition:opacity .48s ease,transform .48s ease}
+.ad-compact-polished.is-visible{opacity:1;transform:translateY(0)}
+.ad-compact-copy{min-width:0;flex:1}.ad-compact-polished .ad-kicker{display:inline-flex;font-size:11px!important;color:#779184!important;letter-spacing:.06em}
+.ad-compact-polished h3{font-size:17px!important;font-weight:800!important;color:#253f30!important;margin:8px 0 5px!important;overflow-wrap:anywhere}
+.ad-compact-polished p{font-size:13px!important;color:#829087!important;line-height:1.6!important}
+.ad-compact-polished .ad-go{font-size:12px!important;color:#25835a!important;margin-top:12px!important;text-decoration:none!important}
+.ad-compact-polished .ad-go:hover{text-decoration:underline!important}
+.ad-compact-media{flex:0 0 170px;max-width:35%;height:102px;overflow:hidden;border-radius:12px;background:#f1f5f2}
+.ad-compact-media img{display:block;width:100%!important;height:100%!important;object-fit:cover!important;border-radius:0!important}
+@media(max-width:640px){.ad-type-picker{grid-template-columns:1fr}.ad-compact-polished{padding:15px!important;gap:12px;min-height:115px}.ad-compact-media{flex-basis:108px;height:88px}.ad-compact-polished h3{font-size:15px!important}}
+@media(prefers-reduced-motion:reduce){.ad-compact-polished{transition:none!important;transform:none!important}}

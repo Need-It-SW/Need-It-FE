@@ -67,3 +67,79 @@ body.request-mode:has(#requestWorkspace.hidden) #legacy-app > #top {
     margin-inline: auto;
     box-sizing: border-box;
 }
+/* 2026-10-30 UI updates */
+#welcomeLanding{position:relative}
+.landing-topbar{position:absolute;top:0;left:0;right:0;width:min(100% - 48px,1220px);margin:auto;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:28px 0;font-size:13px;color:#7a8980}
+.landing-topbar b{color:#1b4631}.landing-auth{display:flex;gap:9px}.landing-auth button{height:41px;min-width:86px;border:1px solid #dce7df;border-radius:11px;background:white;color:#234833;font-weight:800;padding:0 16px}.landing-auth button:last-child{border-color:#25835b;background:#25835b;color:white}.landing-auth button:hover{filter:brightness(.96)}
+@media(max-width:600px){.landing-topbar{width:calc(100% - 32px);padding:18px 0}.landing-topbar>span{font-size:11px;max-width:45%}.landing-auth button{min-width:68px;padding:0 10px;font-size:12px}}
+#overlay:has(#adminLoginForm) .dialog{width:min(100%,480px);padding:30px;border-radius:18px}
+#adminLoginForm .field input{width:100%;min-height:52px;border-radius:11px}
+#adminLoginForm .form-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#adminLoginForm .form-actions button{width:100%;min-height:50px;padding:0 10px;border-radius:11px}
+.report-subtabs{display:flex;gap:8px;margin:20px 0 15px;border-bottom:1px solid #e5ece7;padding-bottom:12px;flex-wrap:wrap}
+.report-subtabs button{border:1px solid #dce7df;background:white;color:#3c6550;border-radius:10px;padding:11px 17px;font-weight:800}
+.report-subtabs button.active{background:#217750;color:white;border-color:#217750}
+.report-user-list{display:grid;gap:12px}.report-user-card{border:1px solid #e1ebe4;border-radius:13px;padding:18px;background:#fff}
+.report-user-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.report-user-head strong{font-size:17px}
+.report-user-card p{margin:9px 0;color:#647568;font-size:13px;line-height:1.7}.report-user-actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:13px}.report-user-actions select{min-height:43px;border:1px solid #cbded1;border-radius:9px;padding:0 12px;background:white}
+
+
+/* 10/30 header controls: matching heights and consistent typography */
+.header-actions #loginBtn,
+.header-actions #signupBtn,
+.header-actions #adminLogout{
+  box-sizing:border-box!important;
+  display:inline-flex;align-items:center;justify-content:center;
+  height:48px!important;min-height:48px!important;
+  padding:0 19px!important;border-radius:11px!important;
+  font-size:14px!important;font-weight:800!important;line-height:1.2!important;
+  white-space:nowrap!important;
+}
+.header-actions #adminLogout{min-width:148px!important;border:1px solid #bdd6c5!important;background:#fff!important;color:#176445!important}
+.header-actions #adminLogout.hidden{display:none!important}
+@media(max-width:680px){.header-actions #loginBtn,.header-actions #signupBtn,.header-actions #adminLogout{height:42px!important;min-height:42px!important;padding:0 11px!important;font-size:12px!important}.header-actions #adminLogout{min-width:0!important}}
+/* banner cross-fade: outgoing slide fades out and incoming slide fades in */
+#mainAdSlot .hero-ad-frame{transition:opacity .32s ease-in-out;opacity:1;will-change:opacity}
+#mainAdSlot .hero-ad-frame.ad-changing{opacity:0}
+@media(prefers-reduced-motion:reduce){#mainAdSlot .hero-ad-frame{transition:none!important}}
+
+/* Landing: hide underlying app in both standalone HTML and React wrapper. */
+body.landing-state #legacy-app > .header,
+body.landing-state #legacy-app > main,
+body.landing-state #legacy-app > #userArea,
+body.landing-state #legacy-app > #adminArea,
+body.landing-state #legacy-app > .footer,
+body.landing-state > .header,
+body.landing-state > main,
+body.landing-state > #userArea,
+body.landing-state > #adminArea,
+body.landing-state > .footer {display:none!important}
+body.landing-state #welcomeLanding {display:flex!important;min-height:100dvh!important;position:relative!important}
+body:not(.landing-state) #welcomeLanding{display:none!important}
+body.landing-state #welcomeLanding .landing-topbar{position:absolute;top:0;left:0;right:0;z-index:2}
+
+/* 신고 대상 사용자 제재 관리 */
+.sanction-state{display:inline-flex;align-items:center;border-radius:9px;background:#eef5f0;color:#37664c;padding:6px 10px;font-size:12px;font-weight:800;margin:8px 0}
+.sanction-state.suspended{background:#fff0ee;color:#a33d36}.sanction-state.warning{background:#fff4df;color:#986318}
+.report-user-actions .primary,.report-user-actions .outline{min-height:42px;padding:0 16px;font-size:13px}
+.sanction-history{display:grid;gap:12px}.sanction-history-item{border:1px solid #e3ece5;border-radius:13px;padding:18px;background:white}
+.sanction-history-item>div{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.sanction-history-item p{margin:8px 0;color:#44594a;white-space:pre-wrap;overflow-wrap:anywhere}.sanction-history-item small{color:#7b8b80}
+.sanction-person{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#f6faf7;border-radius:12px;padding:16px}.sanction-count{font-size:13px;color:#687b6e;line-height:1.7;margin:14px 0 22px}
+.sanction-modal .field select{width:100%;min-height:52px;border:1px solid #cbded1;border-radius:10px;padding:10px;background:white}
+
+
+/* 신고 대상 사용자 카드 크기 및 버튼 정렬 통일 */
+.report-user-list{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:stretch}
+.report-user-card{box-sizing:border-box;width:100%;min-height:270px;display:flex;flex-direction:column;padding:22px 24px;border-radius:16px}
+.report-user-card .report-user-head{min-height:30px}
+.report-user-card .sanction-state{align-self:flex-start;box-sizing:border-box;min-height:32px;margin:10px 0 8px;display:inline-flex;align-items:center}
+.report-user-card p{margin:7px 0;line-height:1.6}
+.report-user-card .report-user-actions{margin-top:auto;padding-top:18px;display:flex;align-items:stretch;gap:10px}
+.report-user-card .report-user-actions button{box-sizing:border-box;min-width:128px;height:46px;min-height:46px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;padding:0 16px;line-height:1.2}
+@media(max-width:520px){.report-user-card{min-height:270px;padding:18px}.report-user-card .report-user-actions button{flex:1;min-width:0}}
+
+.needit-suspension{text-align:center;padding:10px 8px 4px}.needit-suspension-icon{font-size:38px}.needit-suspension h3{font-size:19px;margin:12px 0}.needit-suspension p{color:#607066}.needit-suspension dl{background:#f3f8f3;border:1px solid #dae8da;border-radius:12px;padding:18px;text-align:left;display:grid;grid-template-columns:100px 1fr;gap:14px;margin:20px 0}.needit-suspension dt{font-weight:700;color:#3b5c44}.needit-suspension dd{margin:0;overflow-wrap:anywhere}.needit-suspension .primary{width:100%}
+
+/* 회원가입은 로그인 모달에서만 제공: 상단 중복 버튼 숨김 */
+/* 회원가입 버튼은 로그인 상태일 때만 숨깁니다. */
+.header-actions #signupBtn.hidden { display: none !important; }

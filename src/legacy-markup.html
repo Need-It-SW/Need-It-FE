@@ -4,7 +4,7 @@
 <section class="banner"><div class="shell"><div aria-label="나눔 이용 목적" class="mode-switcher" role="tablist"><button aria-selected="false" id="viewRequest" role="tab" type="button">🙋 물건 요청하기</button><button aria-selected="true" id="viewHelp" role="tab" type="button">🎁 이웃 도와주기</button></div><div aria-live="polite" class="mode-panel" id="modePanel"><div><span class="mode-badge" id="modeBadge">🙋 물건 요청하기</span><h2 id="modeTitle">어떤 물건이 필요하세요?</h2><p id="modeDescription">요청 글을 작성하면 이웃이 나눔을 제안할 수 있어요. 사진은 없어도 괜찮아요.</p></div><div class="mode-actions"><button class="primary" id="heroCreateBtn" type="button">＋ 필요한 물건 요청하기</button><button class="outline" id="modeSecondary" type="button">내 요청 확인하기 →</button></div></div><div class="request-workspace hidden" id="requestWorkspace"><div class="request-guide"><strong>나눔은 이렇게 진행돼요</strong><p>필요한 물건 요청 → 이웃의 제안 확인 → 제안 수락 → 나눔 완료</p></div><div class="request-workspace-head"><div><h2>내가 요청한 물건</h2><p>작성한 요청과 받은 제안을 한곳에서 확인하세요.</p></div><button class="outline" id="requestReceivedBtn" type="button">받은 제안 확인 →</button></div><div class="request-my-posts" id="requestMyPosts"></div></div><div id="helpBrowseArea"><div class="top-tools"><div class="location"><span aria-hidden="true">📍</span><strong id="regionText">서울특별시 마포구 상암동</strong><span class="region-verified" id="regionStatus">● 동네 인증 필요</span><button class="small-btn" id="regionBtn">동네 인증·변경</button></div></div><div class="search-row"><label class="search-wrap"><svg aria-hidden="true" fill="none" height="22" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="22"><circle cx="10.8" cy="10.8" r="7"></circle><path d="m16 16 5 5"></path></svg><input aria-label="요청 게시글 검색" id="searchInput" placeholder="이웃이 요청한 물건 검색하기 · 예: 모니터, 책상"/></label></div><div class="inline-ad-wrap hidden" id="searchAdSlot"></div><p class="hint-strip" id="roleHint">요청 글을 작성하면 이웃이 나눔을 제안할 수 있어요. 필요한 물건을 직접 구매할 필요는 없어요.</p></div></div></section>
 <section class="content" id="browseContent"><div class="shell"><div class="section-head"><div><h2 id="categoryHeading">이웃들이 찾는 물건 살펴보기</h2><p>관심 있는 물품 종류를 선택해 보세요.</p></div></div><div class="categories" id="categoryGrid"></div><div id="feedArea"><div class="list-head"><div><h2 id="feedHeading">우리 동네 나눔 요청 <span id="resultCount" style="color:var(--green);font-size:17px"></span></h2><p id="feedDescription">필요한 물건을 찾는 이웃에게 나눔을 제안해 보세요.</p></div><select aria-label="정렬 방식" class="select" id="sortSelect"><option value="latest">최신순</option><option value="oldest">오래된순</option></select></div><div class="filters"><button class="filter active" data-state="all">전체</button><button class="filter" data-state="open">요청 중</button><button class="filter" data-state="done">나눔 완료</button></div><div class="feed" id="feed"></div><button class="outline more hidden" id="moreBtn">요청 글 더 보기 ↓</button></div><div class="info-box"><div><strong>나누고 싶은 물건이 있으신가요?</strong><p>별도로 물건을 올리지 않아도 돼요. 필요한 이웃의 요청 글에서 바로 나눔을 제안할 수 있어요.</p></div><button class="outline" id="browseBtn">나눔 요청 둘러보기 →</button></div></div></section>
 </main><section class="user-area hidden" id="userArea"><div class="shell"><div class="user-heading"><div><h1 id="userTitle">나의 나눔 활동</h1><p class="user-subtitle" id="userSubtitle">나의 나눔 내역을 확인하세요.</p></div><button class="outline" id="userBack">← 홈으로</button></div><div id="userContent"></div></div></section><section class="admin-area hidden" id="adminArea"><div class="shell"><div class="admin-head"><div><span class="admin-badge">● ADMIN CONSOLE</span><h1>NEED IT 관리자 센터</h1><p>캠페인 운영 · 광고 배너 · 사용자 행동 데이터</p></div><button class="outline" id="adminBack">← 서비스로 돌아가기</button></div><div class="admin-tabs" id="adminTabs"><button class="active" data-tab="dashboard">📊 대시보드</button><button data-tab="campaigns">🎯 캠페인 관리</button><button data-tab="banners">🖼️ 광고 배너</button><button data-tab="logs">🧾 행동 로그</button><button data-tab="reports">🚩 신고 관리 <span id="reportPendingBadge"></span></button></div><div id="adminContent"></div></div></section>
-<footer class="footer"><div class="shell"><span><b style="color:var(--deep)">NEED IT</b> · 필요한 물건, 함께 나눠요.</span><span>화면 설계용 데모</span></div></footer>
+<footer class="footer"><div class="shell"><span><b style="color:var(--deep)">NEED IT</b> · 필요한 물건, 함께 나눠요.</span><span class="footer-right"><span>화면 설계용 데모</span><button type="button" class="admin-footer-link" id="footerAdminLink">관리자 페이지 ↗</button></span></div></footer>
 <div class="overlay hidden" id="overlay" role="presentation"><div aria-labelledby="dialogTitle" aria-modal="true" class="dialog" role="dialog"><div class="dialog-head"><h2 id="dialogTitle"></h2><button aria-label="닫기" class="close" id="closeDialog">×</button></div><div id="dialogBody"></div></div></div><div class="toast hidden" id="toast" role="status"></div>
 
 <section
@@ -12,7 +12,7 @@
     id="welcomeLanding"
     class="hidden"
 >
-<div class="welcome-inner">
+<div class="landing-topbar"><span><b>NEED IT</b> · 필요한 물건, 함께 나눠요.</span><div class="landing-auth"><button type="button" id="landingLogin">로그인</button><button type="button" id="landingSignup">회원가입</button></div></div><div class="welcome-inner">
 <div class="welcome-logo">NEED<span> IT</span></div>
 <h1>필요한 물건을 나누는<br/>가장 쉬운 방법</h1>
 <p class="welcome-lead">어떤 나눔을 시작할까요?</p>
@@ -28,8 +28,26 @@
 </div>
 <p class="welcome-footer">우리 동네 나눔 커뮤니티 · NEED IT</p>
 </div>
+<div class="landing-admin-footer"><span>© 2026 NEED IT</span><button type="button" id="landingAdminLink">관리자 페이지 ↗</button></div>
 </section>
-
+<section id="adminLoginPage" class="admin-login-page hidden" aria-label="관리자 로그인 화면">
+  <header class="admin-login-top"><button type="button" id="adminLoginHome" class="admin-login-logo">NEED<span> IT</span></button><span>관리자 전용</span></header>
+  <div class="admin-login-card">
+    <div class="admin-login-symbol">✦</div>
+    <span class="admin-login-eyebrow">ADMIN CONSOLE</span>
+    <h1>관리자 로그인</h1>
+    <p class="admin-login-description">NEED IT 운영 관리자만 접근할 수 있습니다.</p>
+    <form id="adminPageLoginForm">
+      <label for="adminPageId">관리자 아이디</label><input id="adminPageId" type="text" autocomplete="username" placeholder="아이디를 입력하세요" required />
+      <label for="adminPagePassword">비밀번호</label><input id="adminPagePassword" type="password" autocomplete="current-password" placeholder="비밀번호를 입력하세요" required />
+      <p class="admin-page-error" id="adminPageError" role="alert"></p>
+      <button type="submit" class="admin-page-submit">관리자 로그인</button>
+    </form>
+    <p class="admin-demo-hint">프론트엔드 시연 계정: admin / admin1234<br/>실제 관리자 인증 및 권한 확인은 백엔드에서 처리해야 합니다.</p>
+    <button type="button" class="admin-login-return" id="adminLoginReturn">← 서비스로 돌아가기</button>
+  </div>
+  <footer class="admin-login-bottom">© 2026 NEED IT · 관리자 전용 페이지</footer>
+</section>
 
 
 
