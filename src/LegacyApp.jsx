@@ -8,7 +8,7 @@ import markup from './legacy-markup.html?raw';
  */
 export default function LegacyApp() {
   useEffect(() => {
-    const urls = ['/legacy/js/config.js', '/legacy/js/api-client.js', '/legacy/js/app.js'];
+    const urls = ['/legacy/js/config.js', '/legacy/js/api-client.js', '/legacy/js/app.js', '/legacy/js/audience-analysis.js'];
     let cancelled = false;
     const appended = [];
     (async () => {

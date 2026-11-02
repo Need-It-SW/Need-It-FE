@@ -1,0 +1,23 @@
+
+/* 고객 필터링 분석 */
+.aud-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:22px}.aud-grid label{display:grid;gap:8px;font-size:13px;font-weight:750;color:#536d5c}.aud-grid input,.aud-grid select,.aud-actions input,.aud-actions select{width:100%;box-sizing:border-box;min-height:46px;border:1px solid #cbded1;border-radius:10px;padding:10px 12px;background:#fff;color:#20382a}.aud-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:18px 0}.aud-actions input{max-width:270px}.aud-actions select{max-width:190px}.aud-metrics{margin-top:18px}.admin-bar{grid-template-columns:minmax(130px,200px) 1fr 65px!important}@media(max-width:750px){.aud-grid{grid-template-columns:1fr}.aud-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-bar{grid-template-columns:110px 1fr 50px!important}}
+
+/* 고객 필터링 화면: 입력창 높이 통일 + 표 내용 넘침 방지 */
+.aud-grid{align-items:stretch;gap:18px 20px}
+.aud-grid>label{display:flex!important;flex-direction:column;min-width:0;gap:10px;align-self:stretch;margin:0!important;line-height:1.45}
+.aud-grid>label>input,.aud-grid>label>select{display:block!important;width:100%!important;min-width:0!important;height:54px!important;min-height:54px!important;max-height:54px!important;margin:0!important;padding:0 15px!important;box-sizing:border-box!important;border:1px solid #cbded1!important;border-radius:10px!important;font:inherit!important;font-size:15px!important;line-height:normal!important;background-color:#fff!important;box-shadow:none!important}
+.aud-grid>label>select{padding-right:34px!important}
+.admin-table-wrap:has(.aud-results-table){width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+.aud-results-table{width:100%!important;min-width:760px;table-layout:fixed!important;border-collapse:collapse}
+.aud-results-table th,.aud-results-table td{box-sizing:border-box;min-width:0!important;max-width:0;white-space:normal!important;overflow-wrap:anywhere!important;word-break:break-word!important;vertical-align:middle;line-height:1.5;padding:14px 12px!important}
+.aud-results-table th:nth-child(1){width:13%}.aud-results-table th:nth-child(2){width:14%}.aud-results-table th:nth-child(3){width:15%}.aud-results-table th:nth-child(4){width:11%}.aud-results-table th:nth-child(5){width:34%}.aud-results-table th:nth-child(6){width:13%}
+.aud-results-table td:last-child{font-size:13px;word-break:keep-all!important;overflow-wrap:normal!important}
+.aud-results-table td:last-child .aud-exposure{display:inline-block;max-width:100%;white-space:normal;word-break:keep-all}
+@media(max-width:750px){.aud-grid{grid-template-columns:1fr!important}.aud-results-table{min-width:760px}}
+
+
+/* 고객별 결과 검색 컨트롤: 선택 박스와 검색 박스 동일 규격 */
+.admin-panel .aud-actions:has(#audView){display:grid!important;grid-template-columns:repeat(2,minmax(0,320px))!important;align-items:stretch!important;gap:14px!important;margin:18px 0 24px!important}
+.admin-panel .aud-actions #audView,.admin-panel .aud-actions #audQuery{appearance:auto;display:block!important;width:100%!important;max-width:none!important;min-width:0!important;height:54px!important;min-height:54px!important;max-height:54px!important;margin:0!important;padding:0 16px!important;box-sizing:border-box!important;border:1px solid #cbded1!important;border-radius:11px!important;background:#fff!important;color:#20382a!important;font-size:15px!important;line-height:normal!important;box-shadow:none!important}
+.admin-panel .aud-actions #audQuery::placeholder{color:#9aa59e}
+@media(max-width:650px){.admin-panel .aud-actions:has(#audView){grid-template-columns:minmax(0,1fr)!important}}
