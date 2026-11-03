@@ -1,4 +1,1005 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>NEED IT | 관리자 로그인 분리 미리보기</title><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/><script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script><style>
+:root{--green:#27845f;--deep:#176445;--ink:#202c25;--muted:#58695e;--line:#dce7df;--bg:#f7faf7;--pale:#e8f5ec;--white:#fff;--shadow:0 8px 28px rgba(29,68,45,.055)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:'Noto Sans KR',system-ui,sans-serif;color:var(--ink);background:var(--bg);font-size:16px}button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #8dc7a8;outline-offset:3px}a{text-decoration:none;color:inherit}.shell{max-width:1180px;margin:auto;padding:0 24px}.header{background:white;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}.header-inner{display:flex;align-items:center;min-height:80px;gap:38px}.logo{font-size:28px;font-weight:900;letter-spacing:-1.7px;color:var(--deep);white-space:nowrap}.logo span{color:#a6c76b}.nav{display:flex;gap:7px;align-items:center;flex:1}.nav button{border:0;background:transparent;color:#53655a;padding:11px 16px;font-weight:700;border-radius:10px;white-space:nowrap}.nav button.active,.nav button:hover{background:var(--pale);color:var(--deep)}.header-actions{display:flex;gap:9px;align-items:center}.ghost,.outline,.primary{min-height:48px;border-radius:10px;padding:0 19px;font-weight:800;border:1px solid var(--line);background:white;color:var(--ink)}.outline{border-color:#a9cbb5;color:var(--deep)}.primary{background:var(--green);border-color:var(--green);color:white}.primary:hover{background:var(--deep)}.outline:hover,.ghost:hover{background:#eff7f1}.mobile-menu{display:none}.banner{padding:38px 0 30px}.hero{display:grid;grid-template-columns:1.5fr .68fr;background:#eaf5ee;border:1px solid #d4e9db;border-radius:20px;padding:39px 44px;gap:25px;align-items:center;position:relative;overflow:hidden}.eyebrow{color:var(--deep);font-size:14px;font-weight:800;margin:0 0 12px}.hero h1{font-size:clamp(27px,3.2vw,41px);line-height:1.42;letter-spacing:-1.4px;margin:0 0 15px}.hero h1 em{font-style:normal;color:var(--deep)}.hero p{color:#506658;margin:0;font-size:16px;line-height:1.85}.hero-art{display:flex;justify-content:center;align-items:center;min-height:185px}.art-orbit{width:190px;height:190px;border-radius:50%;background:#d0e9d7;display:grid;place-items:center;position:relative}.art-center{width:98px;height:98px;background:white;border-radius:25px;display:grid;place-items:center;font-size:52px;box-shadow:var(--shadow);transform:rotate(-8deg)}.art-chip{position:absolute;background:white;box-shadow:var(--shadow);border:1px solid #dfede2;border-radius:15px;padding:10px 13px;font-weight:800;font-size:14px}.art-chip.a{top:0;right:-27px}.art-chip.b{bottom:13px;left:-34px}.top-tools{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:25px 0 18px}.location{display:flex;align-items:center;gap:9px;flex-wrap:wrap;font-size:16px}.location strong{font-size:18px}.small-btn{border:1px solid #c9dbce;color:var(--deep);background:white;padding:8px 14px;border-radius:9px;font-size:14px;font-weight:800;min-height:41px}.search-row{display:grid;grid-template-columns:1fr;gap:14px}.search-wrap{position:relative}.search-wrap svg{position:absolute;left:19px;top:50%;transform:translateY(-50%);color:#567562}.search-wrap input{width:100%;height:59px;border:1.5px solid #bfd1c4;border-radius:11px;padding:0 16px 0 55px;background:white;font-size:16px;color:var(--ink)}.search-wrap input::placeholder{color:#728377}.create-btn{min-width:225px;font-size:16px}.hint-strip{margin-top:13px;color:#637468;font-size:14px}.content{padding:16px 0 65px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:0 0 18px}.section-head h2{font-size:23px;letter-spacing:-.7px;margin:0 0 5px}.section-head p{margin:0;font-size:14px;color:var(--muted)}.categories{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:11px;margin-bottom:42px}.category{border:1px solid var(--line);border-radius:12px;background:white;min-height:106px;display:flex;align-items:center;justify-content:center;gap:8px;flex-direction:column;color:#37493d;font-weight:700;font-size:14px}.category .icon{font-size:27px}.category:hover,.category.active{background:var(--pale);border-color:#83b99a;color:var(--deep)}.list-head{display:flex;justify-content:space-between;gap:16px;align-items:end;margin-bottom:17px}.list-head h2{margin:0 0 6px;font-size:25px;letter-spacing:-.8px}.list-head p{margin:0;color:var(--muted);font-size:14px}.select{height:45px;border:1px solid #c9d8cd;background:white;border-radius:9px;padding:0 13px;min-width:128px;color:var(--ink)}.filters{display:flex;align-items:center;gap:9px;margin-bottom:19px;flex-wrap:wrap}.filter{border:1px solid #ccded2;color:#4c6655;background:#fff;padding:9px 16px;border-radius:999px;font-size:14px;font-weight:700;min-height:41px}.filter.active{background:var(--deep);color:white;border-color:var(--deep)}.feed{display:grid;grid-template-columns:1fr 1fr;gap:15px}.post{display:flex;flex-direction:column;align-items:stretch;text-align:left;background:white;border:1px solid var(--line);border-radius:14px;padding:23px 24px;min-height:210px;box-shadow:var(--shadow);transition:border-color .15s,transform .15s}.post:hover{border-color:#91c2a2;transform:translateY(-2px)}.post-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.tag{background:#edf5ef;color:#27724f;font-size:13px;font-weight:800;padding:6px 11px;border-radius:7px}.state{font-size:13px;font-weight:800;color:#9a631b;background:#fff4df;padding:6px 10px;border-radius:7px}.state.done{color:#5b6a60;background:#f1f3f1}.post h3{font-size:18px;margin:0 0 10px;line-height:1.55;letter-spacing:-.5px}.post p{color:#65746a;line-height:1.7;margin:0 0 15px;font-size:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:1}.post-foot{padding-top:13px;border-top:1px solid #edf1ed;display:flex;align-items:center;justify-content:space-between;color:#64756a;font-size:13px;gap:10px}.empty{grid-column:1/-1;text-align:center;padding:63px 20px;background:white;border:1px solid var(--line);border-radius:15px;color:var(--muted)}.empty .icon{font-size:39px;margin-bottom:10px}.empty h3{color:var(--ink)}.more{margin:27px auto 0;display:block;padding:0 33px}.info-box{display:grid;grid-template-columns:1fr auto;align-items:center;gap:15px;margin-top:43px;padding:25px 30px;background:#fff;border:1px solid var(--line);border-radius:15px}.info-box strong{display:block;font-size:18px;margin-bottom:6px}.info-box p{margin:0;color:var(--muted);font-size:14px;line-height:1.7}.footer{border-top:1px solid var(--line);padding:28px 0 36px;background:#fff;color:#718075;font-size:13px}.footer .shell{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.overlay{position:fixed;inset:0;background:rgba(12,30,20,.58);z-index:30;display:flex;align-items:center;justify-content:center;padding:18px}.dialog{background:white;border-radius:17px;width:min(100%,590px);max-height:90vh;overflow:auto;padding:28px;box-shadow:0 24px 70px #0002}.dialog-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:17px}.dialog h2{font-size:23px;letter-spacing:-.6px;margin:0}.close{width:42px;height:42px;background:#f3f7f4;border:0;border-radius:9px;font-size:22px}.field{margin:0 0 19px}.field label{display:block;font-size:15px;font-weight:800;margin-bottom:8px}.field input,.field select,.field textarea{width:100%;border:1.5px solid #b5c9bc;border-radius:9px;padding:12px 14px;min-height:51px;color:var(--ink);background:#fff}.field textarea{resize:vertical;min-height:140px;line-height:1.7}.field .help{margin:8px 0 0;font-size:13px;color:var(--muted);line-height:1.6}.form-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}.demo-note{font-size:13px;color:#617367;background:#f4f8f5;border-radius:9px;padding:12px 14px;line-height:1.7;margin-bottom:20px}.detail-text{font-size:16px;line-height:1.9;white-space:pre-wrap;color:#3b4d41}.detail-meta{color:var(--muted);font-size:14px;margin:0 0 20px}.detail-actions{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}.hidden{display:none!important}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#193d2b;color:white;border-radius:10px;padding:13px 20px;box-shadow:0 8px 28px #0003;z-index:50;max-width:calc(100vw - 32px);text-align:center;font-size:14px}
+@media(max-width:900px){.header-inner{gap:20px}.nav{gap:2px}.nav button{padding:10px}.categories{grid-template-columns:repeat(4,1fr)}.hero{grid-template-columns:1fr .5fr;padding:32px}.art-orbit{transform:scale(.82)}}
+@media(max-width:680px){.shell{padding:0 16px}.header-inner{min-height:66px;gap:10px}.logo{font-size:25px}.nav{display:none}.header-actions{margin-left:auto}.header-actions .ghost{display:none}.header-actions .outline{min-height:42px;padding:0 11px;font-size:13px}.banner{padding-top:18px}.hero{display:block;padding:28px 22px;border-radius:14px}.hero h1{font-size:28px}.hero p{font-size:14px}.hero-art{display:none}.top-tools{margin:21px 0 14px}.location strong{font-size:16px}.search-row{grid-template-columns:1fr}.create-btn{width:100%;min-height:54px}.categories{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:34px}.category{min-height:90px;font-size:12px}.category .icon{font-size:24px}.feed{grid-template-columns:1fr}.post{min-height:178px;padding:20px}.list-head h2{font-size:22px}.info-box{grid-template-columns:1fr;padding:22px}.info-box .outline{width:100%}.dialog{padding:20px}.form-actions>*{flex:1}}
+@media(max-width:360px){.categories{grid-template-columns:repeat(2,1fr)}.header-actions .outline{font-size:12px;padding:0 9px}}
 
+.region-verified{font-weight:800;font-size:13px;color:#965a20;background:#fff3e0;padding:8px 12px;border-radius:9px}.region-verified.demo{background:#e9f4ec;color:#246f4c}.region-picked{padding:15px;border:1px solid #d5e5da;border-radius:10px;background:#fafcfb;font-weight:700}.region-picked span{font-size:12px;color:#677c6b;margin-left:10px}.region-demo{border:1px dashed #b4c9bb;background:#f7faf7;padding:17px;border-radius:12px;margin:20px 0}.region-demo p{font-size:14px;color:#5f7266;line-height:1.7}.region-demo button{width:100%}.field button:disabled,.region-demo button:disabled{opacity:.5;cursor:not-allowed}
+/* 요청하기를 메인 핵심 액션으로 강조 */
+.hero-main-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;margin-top:24px;min-height:62px;padding:0 28px;border:0;border-radius:12px;background:var(--green);color:white;font-size:19px;font-weight:900;box-shadow:0 5px 0 #17644522;transition:background .15s}
+.hero-main-cta:hover{background:var(--deep)}.hero-main-cta:focus-visible{outline:3px solid #176445;outline-offset:4px}
+.hero-main-hint{font-size:14px!important;margin-top:12px!important;color:#496b55!important}
+.photo-upload{border:2px dashed #a2c7ad;border-radius:12px;padding:20px;text-align:center;background:#f8fbf8}
+.photo-upload input{min-height:0;border:0;padding:0;max-width:100%;margin-top:10px}
+.photo-preview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+.photo-preview>div{position:relative}.photo-preview img{display:block;width:100%;aspect-ratio:1.3;object-fit:cover;border-radius:9px;border:1px solid var(--line)}
+.photo-preview button{position:absolute;right:4px;top:4px;border:0;border-radius:8px;padding:5px 8px;background:#fff;color:#a32c2c;font-weight:800}
+.post-thumb{width:100%;max-height:150px;object-fit:cover;border-radius:9px;margin:2px 0 13px}
+.detail-images{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:12px 0 22px}.detail-images img{width:100%;max-height:290px;object-fit:cover;border-radius:10px}
+@media(max-width:680px){.hero-main-cta{width:100%;font-size:17px}.photo-preview{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* NEED IT admin console */
+.admin-area{background:#f5f8f5;min-height:calc(100vh - 80px);padding:32px 0 70px}.admin-head{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}.admin-head h1{margin:4px 0;font-size:29px;letter-spacing:-1px}.admin-head p,.admin-sub{color:#6a7b6e;font-size:14px}.admin-badge{font-size:12px;background:#e3f2e8;color:#176445;padding:7px 11px;border-radius:30px;font-weight:800}.admin-tabs{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:22px;border-bottom:1px solid #dbe7df;padding-bottom:13px}.admin-tabs button{border:0;border-radius:9px;background:transparent;padding:12px 17px;font-weight:800;color:#687a6c}.admin-tabs button.active{background:#207750;color:white}.admin-panel{background:#fff;border:1px solid #dce8df;border-radius:15px;padding:24px;margin-bottom:18px;box-shadow:var(--shadow)}.admin-panel h2{margin:0 0 9px;font-size:20px}.admin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}.metric{background:#fff;border:1px solid #deeadf;border-radius:14px;padding:20px}.metric small{display:block;color:#728074;font-weight:700;margin-bottom:10px}.metric strong{font-size:29px;color:#176445}.admin-table-wrap{overflow-x:auto}.admin-table{width:100%;border-collapse:collapse;min-width:790px;font-size:14px}.admin-table th{text-align:left;background:#f5f9f6;color:#617469;padding:14px 12px;white-space:nowrap}.admin-table td{padding:15px 12px;border-bottom:1px solid #eaf0eb;vertical-align:middle}.admin-table td .mini{color:#7b8c80;font-size:12px;margin-top:4px}.admin-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:15px 0 18px}.admin-toolbar input,.admin-toolbar select{border:1px solid #d3e0d7;border-radius:9px;padding:11px;background:#fff;min-height:44px}.admin-toolbar input{flex:1;min-width:180px}.admin-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.admin-form-grid .field{margin-bottom:0}.admin-form-grid .full{grid-column:1/-1}.admin-form-grid .field textarea{min-height:85px}.pill{display:inline-block;border-radius:30px;padding:5px 10px;font-size:12px;font-weight:800;background:#e8f5ed;color:#21734b}.pill.off{background:#f1f3f1;color:#6c776e}.pill.wait{background:#fff2df;color:#9a681f}.admin-btn{border:1px solid #c9dbce;border-radius:8px;background:white;padding:8px 11px;color:#176445;font-weight:800;white-space:nowrap}.admin-btn.danger{color:#a34242}.admin-empty{padding:45px;text-align:center;color:#768478}.admin-notice{padding:13px 16px;background:#edf7ef;border-radius:10px;color:#456c52;font-size:13px;line-height:1.8;margin-bottom:20px}.admin-bars{display:grid;gap:12px;margin-top:17px}.admin-bar{display:grid;grid-template-columns:110px 1fr 55px;gap:12px;align-items:center;font-size:14px}.admin-track{height:13px;border-radius:20px;background:#edf4ee;overflow:hidden}.admin-fill{height:100%;background:#4b9d72;border-radius:20px}.banner-thumb{width:100px;height:52px;border-radius:7px;object-fit:cover;background:#edf4ee}.ad-slot{margin:0 auto 18px;max-width:1180px;padding:0 24px}.ad-card{display:flex;align-items:center;justify-content:space-between;gap:18px;background:#e9f4ed;border:1px solid #cde4d5;border-radius:14px;padding:18px 23px}.ad-card img{width:150px;height:76px;object-fit:cover;border-radius:9px}.ad-card small{font-size:11px;color:#4f7c5d}.ad-card h3{margin:5px 0}.ad-card p{margin:0;color:#5c7263;font-size:13px}.admin-login-note{font-size:13px;color:#637468;line-height:1.7}.admin-switch{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.admin-switch button{min-height:40px}.admin-section-title{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.admin-section-title p{margin:0;color:#758377;font-size:13px}
+@media(max-width:800px){.admin-grid{grid-template-columns:repeat(2,1fr)}.admin-form-grid{grid-template-columns:1fr}.admin-form-grid .full{grid-column:auto}}@media(max-width:520px){.admin-grid{grid-template-columns:1fr 1fr;gap:8px}.metric{padding:14px}.metric strong{font-size:23px}.admin-panel{padding:16px}.admin-area{padding-top:18px}.ad-card img{width:92px;height:70px}}
+
+/* NEED IT 광고: 요청 흐름을 방해하지 않는 3개 추가 위치 */
+.inline-ad-wrap{margin:18px 0 8px}.feed-ad-wrap{grid-column:1/-1}.detail-ad-wrap{margin:24px 0 10px}
+.ad-compact{position:relative;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:17px 20px;background:#f2f8f3;border:1px solid #d5e6da;border-radius:13px;min-height:98px}
+.ad-compact .ad-kicker{font-size:11px;font-weight:800;color:#5a7762;letter-spacing:.04em}
+.ad-compact h3{font-size:16px;margin:5px 0 4px;color:#23563b}.ad-compact p{font-size:12px;color:#647a6a;margin:0;line-height:1.6}
+.ad-compact img{width:116px;height:74px;object-fit:cover;border-radius:9px;flex-shrink:0}
+.ad-compact .ad-go{display:inline-flex;margin-top:9px;font-size:12px;font-weight:800;color:#26734c;border:0;background:transparent;padding:0;text-decoration:underline}
+.feed-ad-wrap .ad-compact{background:#fbfcf9;border-style:dashed}.detail-ad-wrap .ad-compact{background:#f8faf5}
+.ad-preview{background:linear-gradient(110deg,#f1f7ee,#e6f4ee);border:1px solid #d1e5d5;border-radius:15px;padding:22px 25px;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:128px}.ad-preview .ad-kicker{font-size:11px;font-weight:900;letter-spacing:.7px;color:#277650}.ad-preview h3{font-size:19px;margin:9px 0 5px;color:#225d41}.ad-preview p{font-size:13px;color:#657d6a;margin:0;line-height:1.7}.ad-preview-icon{font-size:44px;background:white;border-radius:16px;padding:12px;flex-shrink:0}.ad-preview-tag{display:inline-block;background:#fff;color:#347b57;font-size:11px;padding:4px 8px;border-radius:6px;margin-left:7px}.feed-ad-wrap{margin:0}.feed-ad-wrap .ad-preview{min-height:140px}.detail-ad-wrap .ad-preview{min-height:118px}@media(max-width:680px){.ad-preview{padding:17px}.ad-preview h3{font-size:16px}.ad-preview-icon{font-size:28px;padding:10px}}
+@media(max-width:680px){.ad-compact{padding:14px}.ad-compact img{width:85px;height:70px}.ad-compact h3{font-size:14px}}
+
+/* 사용자 중심 나눔 흐름 */
+.user-area{padding:32px 0 70px;min-height:65vh}.user-tabs{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0}.user-tabs button{padding:12px 17px;border:1px solid #d7e5db;background:white;border-radius:10px;font-weight:800;color:#41644c}.user-tabs button.active{background:var(--deep);color:white}.user-card{background:white;border:1px solid var(--line);border-radius:15px;padding:21px;margin:12px 0;box-shadow:var(--shadow)}.user-card h3{margin:0 0 9px;font-size:18px}.user-card p{line-height:1.7;color:#5e7063}.user-card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.user-card-actions button{min-height:39px}.user-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.user-stat{background:#eaf5ee;border-radius:13px;padding:18px}.user-stat strong{display:block;font-size:25px;color:var(--deep)}.user-stat small{color:#5e7364}.user-heading{display:flex;align-items:center;justify-content:space-between;gap:10px}.favorite-toggle{border:1px solid #cfe0d4;background:white;color:#38754f;border-radius:9px;padding:8px 12px;font-weight:800}.favorite-toggle.saved{color:#c44866;background:#fff3f5}.conversation{border:1px solid var(--line);background:#f8faf8;border-radius:12px;padding:13px;max-height:270px;overflow:auto}.bubble{background:white;border:1px solid #e2eae4;border-radius:12px;padding:10px 13px;margin:8px 0;max-width:85%;width:fit-content;line-height:1.6;white-space:pre-wrap}.bubble.mine{margin-left:auto;background:#e2f4e7}.chat-compose{display:flex;gap:8px;margin-top:12px}.chat-compose input{flex:1;min-width:0;border:1px solid #b9d0bf;border-radius:9px;padding:12px}.chat-compose button{min-height:44px}.mini-tag{display:inline-block;font-size:12px;background:#eaf5ee;color:#286b49;padding:5px 9px;border-radius:7px;font-weight:800;margin-right:6px}.user-empty{text-align:center;padding:45px 15px;color:#66766a;background:white;border:1px dashed #c8dccc;border-radius:14px}.search-suggestions{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.search-suggestions button{border:1px solid #c9dbce;border-radius:20px;background:white;padding:7px 13px;color:#276d4a;font-weight:700}.notice-dot{background:#c74646;color:white;border-radius:30px;font-size:11px;padding:2px 6px;margin-left:5px}.user-subtitle{color:#607566;font-size:14px}.ad-metric-row{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:#5a7662;margin-top:9px}@media(max-width:680px){.user-stats{grid-template-columns:repeat(3,1fr);gap:6px}.user-stat{padding:11px}.user-stat strong{font-size:19px}.chat-compose{flex-direction:column}}
+
+/* 역할 중심 온보딩: 요청자와 제공자 진입점 분리 */
+.role-intro{padding-top:38px}.role-intro-top{text-align:center;max-width:760px;margin:0 auto 26px}.role-eyebrow{font-size:13px;font-weight:900;color:#267a55;letter-spacing:.05em}.role-intro h1{font-size:clamp(27px,3.4vw,39px);line-height:1.45;letter-spacing:-1.5px;margin:11px 0}.role-intro h1 em{font-style:normal;color:var(--green)}.role-intro-top p{color:var(--muted);font-size:15px;line-height:1.8}.role-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.role-card{border:2px solid #d8e7dc;border-radius:19px;background:white;text-align:left;padding:29px;display:flex;align-items:flex-start;gap:21px;min-height:190px;box-shadow:var(--shadow);transition:transform .15s,border-color .15s,background .15s}.role-card:hover{transform:translateY(-2px);border-color:#8abfa0}.role-card.selected{border-color:#27845f;background:#f0f9f2;box-shadow:0 8px 25px rgba(39,132,95,.11)}.role-card.help.selected{border-color:#547c69;background:#f0f7f5}.role-symbol{font-size:39px;background:#e6f3e9;width:74px;height:74px;display:grid;place-items:center;border-radius:18px;flex-shrink:0}.role-card.help .role-symbol{background:#e9f0ed}.role-card-copy{display:flex;flex-direction:column;gap:10px}.role-card-copy strong{font-size:23px;color:#1c4d35;letter-spacing:-.6px}.role-card-copy small{font-size:14px;line-height:1.7;color:#617469}.role-link{color:#176445;font-size:14px;font-weight:900;margin-top:5px}.role-footnote{text-align:center;color:#647569;font-size:13px;margin:16px 0 0}.banner{padding-top:22px}.mode-panel{display:flex;justify-content:space-between;align-items:center;gap:22px;padding:25px 30px;border:1px solid #d6e7db;border-radius:16px;background:#f4faf5}.mode-panel h2{font-size:24px;margin:8px 0;letter-spacing:-.8px}.mode-panel p{font-size:14px;line-height:1.7;color:#637568;margin:0}.mode-badge{font-size:12px;font-weight:900;color:#26704c}.mode-actions{display:flex;gap:10px;flex-direction:column;min-width:230px}.mode-actions button{width:100%}.mode-panel.help-mode{background:#f4f8f6}.role-card:focus-visible{outline:3px solid #176445;outline-offset:3px}
+@media(max-width:680px){.role-intro{padding-top:25px}.role-grid{grid-template-columns:1fr;gap:12px}.role-card{min-height:140px;padding:19px;gap:16px}.role-symbol{width:57px;height:57px;font-size:30px}.role-card-copy strong{font-size:20px}.role-intro-top p{font-size:14px}.mode-panel{display:block;padding:21px}.mode-panel h2{font-size:21px}.mode-actions{margin-top:17px;min-width:0}.header-inner{flex-wrap:wrap;padding-top:8px;padding-bottom:8px}.nav{display:flex;order:3;width:100%;overflow-x:auto;flex:none;gap:3px}.nav button{font-size:12px;padding:8px 10px}.header-actions{margin-left:auto}}
+
+/* 두 화면을 동시에 보여주지 않는 탭형 서비스 */
+.banner{padding-top:34px}.mode-panel{background:#f0f8f2;border:1px solid #d2e7d9;border-radius:19px;padding:33px 35px}.mode-panel h2{font-size:29px}.mode-panel.help-mode{background:#f2f8f5}.mode-badge{font-size:14px}.request-workspace{margin-top:24px}.request-guide{background:#fff;border:1px solid #d8e8de;border-radius:13px;padding:20px 24px;margin-bottom:22px}.request-guide strong{font-size:17px}.request-guide p{color:#607267;font-size:14px;margin:9px 0 0}.request-workspace-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px}.request-workspace-head h2{font-size:23px;margin:0 0 6px}.request-workspace-head p{margin:0;color:#697b70;font-size:14px}.request-my-posts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.request-post{background:#fff;border:1px solid #dce7df;border-radius:13px;padding:20px;text-align:left;cursor:pointer}.request-post:hover{border-color:#78b392}.request-post h3{margin:9px 0;font-size:17px}.request-post p{color:#607268;font-size:13px}.request-empty{grid-column:1/-1;text-align:center;padding:48px 20px;border:1px dashed #b9d5c3;background:#fff;border-radius:13px}.request-empty strong{display:block;font-size:18px;margin:10px}.request-empty p{color:#697b70}.mode-switcher{display:flex;gap:9px;margin:0 0 22px}.mode-switcher button{border:1px solid #bdd9c7;background:white;color:#315e43;border-radius:10px;padding:12px 19px;font-weight:800}.mode-switcher button.active{background:#217750;color:white;border-color:#217750}.mode-switcher button:focus-visible{outline:3px solid #8dc7a8}.request-mode #browseContent{display:none}.request-mode #helpBrowseArea{display:none}.help-mode-page #requestWorkspace{display:none}.help-mode-page #browseContent{display:block}.request-mode #requestWorkspace{display:block}.request-mode #mainAdSlot{display:none!important}
+@media(max-width:680px){.mode-panel{padding:22px}.mode-panel h2{font-size:23px}.request-my-posts{grid-template-columns:1fr}.request-workspace-head{align-items:flex-start;flex-direction:column}.request-workspace-head button{width:100%}.mode-switcher button{flex:1;padding:11px 8px;font-size:13px}}
+
+/* NEED IT — calm, spacious, Toss-inspired visual refresh */
+:root{--green:#15855d;--deep:#163a2b;--ink:#17251e;--muted:#7a8881;--line:#edf1ee;--bg:#fff}
+*{box-sizing:border-box}
+body{background:#fff!important;color:#17251e!important;font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif!important}
+.shell{max-width:1080px!important;margin:0 auto;padding-left:28px!important;padding-right:28px!important}
+.header{background:rgba(255,255,255,.97)!important;border-bottom:1px solid #f0f2f0!important;box-shadow:none!important;position:sticky;top:0;z-index:60}
+.header-inner{min-height:78px!important;gap:22px!important}.logo{font-size:25px!important;letter-spacing:-1.1px!important}.nav{gap:7px!important}.nav button{padding:12px 15px!important;border-radius:11px!important;font-size:14px!important;font-weight:700!important;color:#66756c!important}.nav button.active{background:#eaf7f0!important;color:#15855d!important}.nav button:hover{background:#f5f8f6!important}
+#homeNav{display:none!important}.header-actions{gap:8px!important}.header-actions button{border-radius:10px!important}
+.mode-switcher{display:none!important}
+.banner{background:#fff!important;padding:88px 0 0!important}.mode-panel,.mode-panel.help-mode{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0 0 58px!important;display:flex!important;align-items:flex-end!important;justify-content:space-between!important;gap:40px!important}
+.mode-panel>div:first-child{max-width:600px!important}.mode-badge{display:inline-flex!important;align-items:center!important;font-size:13px!important;font-weight:800!important;letter-spacing:.01em!important;color:#18825a!important;background:#ecf8f1!important;border:0!important;padding:9px 14px!important;border-radius:100px!important;margin-bottom:24px!important}
+.mode-panel h2{font-size:clamp(32px,4.1vw,48px)!important;line-height:1.3!important;letter-spacing:-1.8px!important;font-weight:800!important;color:#17251e!important;margin:0 0 19px!important;word-break:keep-all!important}
+.mode-panel p{font-size:17px!important;line-height:1.85!important;color:#75827a!important;word-break:keep-all!important;margin:0!important}
+.mode-actions{display:flex!important;flex-direction:column!important;gap:10px!important;min-width:220px!important;margin:0!important}
+.primary,.mode-actions .primary{background:#16865e!important;border:1px solid #16865e!important;color:white!important;border-radius:13px!important;min-height:54px!important;font-size:15px!important;font-weight:800!important;box-shadow:none!important;white-space:nowrap!important}
+.mode-actions .outline{background:#f5f8f6!important;color:#375545!important;border:0!important;border-radius:13px!important;min-height:49px!important;font-size:14px!important;font-weight:700!important}
+.outline,.small-btn{box-shadow:none!important;border-radius:11px!important}
+.request-workspace{border-top:1px solid #eff2ef!important;margin-top:0!important;padding:52px 0 90px!important}
+.request-guide{background:#f6faf7!important;border:0!important;border-radius:17px!important;padding:25px 30px!important;margin-bottom:54px!important}
+.request-guide strong{font-size:16px!important;color:#213b2d!important}.request-guide p{color:#788b7d!important;line-height:1.7!important}
+.request-workspace-head{margin-bottom:24px!important}.request-workspace-head h2{font-size:25px!important;letter-spacing:-.7px!important}.request-workspace-head p{color:#849087!important;margin-top:9px!important}
+.request-post{border:1px solid #edf0ed!important;border-radius:18px!important;padding:26px!important;box-shadow:0 5px 22px rgba(22,44,28,.035)!important}.request-post:hover{border-color:#b2dcc3!important;transform:translateY(-2px)}.request-empty{background:#fafcfb!important;border:1px solid #eff2ef!important;border-radius:18px!important;padding:65px 25px!important}
+#helpBrowseArea{border-top:1px solid #eff2ef!important;padding:30px 0 34px!important}.top-tools{margin:0 0 22px!important}.location{background:transparent!important;border:0!important;padding:0!important;gap:10px!important}.location strong{font-size:14px!important}.region-verified{font-size:12px!important}
+.search-row{margin:0!important}.search-wrap{background:#f5f7f5!important;border:1px solid transparent!important;border-radius:15px!important;min-height:64px!important;box-shadow:none!important}.search-wrap:focus-within{border-color:#90c8a7!important;background:white!important}.search-wrap input{font-size:16px!important}
+#browseContent{background:#fff!important;padding-top:20px!important}.section-head{margin:25px 0 20px!important}.section-head h2,.list-head h2{font-size:25px!important;letter-spacing:-.8px!important}.section-head p,.list-head p{font-size:14px!important;color:#8a968d!important;margin-top:9px!important}
+.categories{gap:10px!important;margin-bottom:65px!important}.categories button{border-radius:13px!important;box-shadow:none!important;border:1px solid #edf1ed!important;background:#fff!important}.categories button:hover{background:#f3faf5!important}
+.list-head{padding-top:14px!important;margin-bottom:24px!important}.filters{margin-bottom:23px!important;gap:8px!important}.filter{border-radius:100px!important;padding:10px 17px!important;font-size:13px!important}.feed{gap:15px!important}.feed>*{border-radius:18px!important;box-shadow:none!important;border-color:#edf1ed!important}
+.info-box{background:#f7faf8!important;border:0!important;border-radius:19px!important;margin:70px 0!important;padding:31px 36px!important}.info-box strong{font-size:18px!important}.info-box p{color:#7b897f!important;line-height:1.7!important}
+.user-area{background:#fff!important}.user-heading{padding-top:65px!important}.user-heading h1{font-size:32px!important;letter-spacing:-1px!important}.user-subtitle{color:#839087!important}
+.footer{border-top:1px solid #eff2ef!important;background:#fff!important}
+.ad-slot,.inline-ad-wrap{border-radius:14px!important;overflow:hidden!important}
+@media(max-width:800px){.banner{padding-top:56px!important}.mode-panel{flex-direction:column!important;align-items:stretch!important;gap:27px!important;padding-bottom:45px!important}.mode-actions{flex-direction:row!important;min-width:0!important}.mode-actions button{flex:1!important}.mode-panel h2{font-size:34px!important}.header-inner{flex-wrap:wrap!important;padding-top:12px!important;padding-bottom:12px!important}.nav{order:3!important;width:100%!important;overflow-x:auto!important;gap:3px!important}.nav button{white-space:nowrap!important;padding:9px 12px!important}.header-actions{margin-left:auto!important}}
+@media(max-width:560px){.shell{padding-left:19px!important;padding-right:19px!important}.banner{padding-top:42px!important}.mode-panel h2{font-size:31px!important;letter-spacing:-1px!important}.mode-panel p{font-size:15px!important}.mode-actions{flex-direction:column!important}.mode-actions button{width:100%!important}.request-guide{padding:22px!important}.request-workspace-head{align-items:stretch!important}.info-box{padding:25px!important}.section-head h2,.list-head h2{font-size:22px!important}}
+
+/* 요청 작성 모달: 심플한 폼 */
+#overlay:has(#requestForm) .dialog{width:min(100%,560px);max-height:min(88vh,900px);padding:32px 36px;border-radius:22px;box-shadow:0 24px 80px #0002}
+#overlay:has(#requestForm) .dialog-head{margin-bottom:5px;align-items:center}
+#overlay:has(#requestForm) .dialog-head h2{font-size:25px;font-weight:800;letter-spacing:-.8px}
+#overlay:has(#requestForm) .close{background:transparent;font-size:28px;border-radius:50%;color:#53645a}
+#overlay:has(#requestForm) .close:hover{background:#f2f5f3}
+.request-intro{margin:0 0 27px;color:#748077;font-size:14px}
+#requestForm .field{margin-bottom:23px}
+#requestForm .field label{font-size:14px;font-weight:700;color:#283b30;margin-bottom:9px}
+#requestForm .field input:not([type=file]),#requestForm .field select,#requestForm .field textarea{border:1px solid #e1e8e3;border-radius:11px;background:#fff;padding:13px 15px;font-size:15px;min-height:49px;transition:border-color .15s}
+#requestForm .field input:focus,#requestForm .field select:focus,#requestForm .field textarea:focus{outline:none;border-color:#27845f;box-shadow:0 0 0 3px #27845f14}
+#requestForm .field textarea{min-height:112px;resize:vertical}
+#requestForm .field input::placeholder,#requestForm .field textarea::placeholder{color:#a5aea8}
+#requestForm .optional-label{font-weight:400;color:#8a978e;font-size:13px}
+#requestForm .photo-upload{border:1px dashed #d3ded6;background:#fafcfb;border-radius:12px;padding:18px;display:flex;flex-direction:column;align-items:center;gap:8px}
+#requestForm .photo-pick{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid #d8e5dc;border-radius:9px;padding:10px 18px;background:white;color:#2c6246;font-weight:700;cursor:pointer;margin:0}
+#requestForm .photo-pick span{font-size:20px;line-height:1}
+#requestForm #reqPhotos{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;padding:0;border:0}
+#requestForm .photo-meta{font-size:12px;color:#94a096}
+#requestForm #photoStatus{font-size:12px;color:#7a887f;margin-top:6px}
+#requestForm .request-disclaimer{font-size:12px;color:#98a49b;margin:0 0 17px}
+#requestForm .form-actions{border-top:1px solid #eef1ef;padding-top:19px;gap:9px}
+#requestForm .form-actions button{min-height:47px;border-radius:10px;font-size:14px}
+#requestForm .form-actions .primary{min-width:145px}
+@media(max-width:600px){#overlay:has(#requestForm) .dialog{padding:23px 20px;border-radius:16px}#overlay:has(#requestForm) .dialog-head h2{font-size:22px}}
+
+
+/* 모달이 고정 헤더 뒤로 가려지지 않도록 레이어 및 높이 조정 */
+#overlay.overlay{z-index:3000!important;position:fixed!important;inset:0!important;display:flex;align-items:center;justify-content:center;padding:clamp(16px,4vh,36px) 18px;overflow-y:auto;overscroll-behavior:contain}
+#overlay.overlay.hidden{display:none!important}
+#overlay .dialog{position:relative;flex:0 1 auto;max-height:calc(100dvh - 48px);overflow-y:auto;overscroll-behavior:contain;margin:auto;scrollbar-width:thin}
+#overlay:has(#requestForm) .dialog{max-height:calc(100dvh - 48px)!important}
+#overlay .dialog-head{position:sticky;top:-1px;z-index:2;background:#fff;padding:8px 0 12px}
+@media(max-width:600px){#overlay.overlay{padding:12px}#overlay .dialog,#overlay:has(#requestForm) .dialog{max-height:calc(100dvh - 24px)!important}}
+.need-stage{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.need-stage span{border:1px solid #e0e9e3;color:#7b8b80;border-radius:8px;padding:7px 9px;font-size:12px}.need-stage span.now{background:#e6f4eb;border-color:#b8ddc6;color:#13653c;font-weight:800}.user-card-actions{flex-wrap:wrap} 
+
+/* 나눔 진행 단계: 완료/현재/예정 상태를 색상과 아이콘으로 구분 */
+.need-stage{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px!important;margin:22px 0 18px!important}
+.need-stage>span{min-width:0;display:flex;align-items:center;justify-content:center;gap:9px;min-height:54px;padding:10px 8px!important;border-radius:12px!important;border:1px solid #e5e9e8!important;background:#f8faf9;color:#9aa6a1!important;font-size:13px!important;font-weight:650!important;white-space:normal;text-align:center;line-height:1.3}
+.need-stage .stage-dot{width:25px;height:25px;flex:0 0 25px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:#e9eeeb;color:#87958e;font-size:12px;font-weight:800}
+.need-stage>span.passed{background:#eaf5ee!important;border-color:#c3e1cd!important;color:#357550!important}
+.need-stage>span.passed .stage-dot{background:#27865b;color:white}
+.need-stage>span.now{font-weight:800!important;box-shadow:0 2px 9px rgba(0,0,0,.05)}
+.need-stage>span.now.stage-0{background:#e9f5ed!important;border:2px solid #238758!important;color:#13663e!important}
+.need-stage>span.now.stage-0 .stage-dot{background:#238758;color:white}
+.need-stage>span.now.stage-1{background:#fff4df!important;border:2px solid #e6a63a!important;color:#945a0b!important}
+.need-stage>span.now.stage-1 .stage-dot{background:#d99527;color:white}
+.need-stage>span.now.stage-2{background:#eaf1ff!important;border:2px solid #5489e6!important;color:#2457aa!important}
+.need-stage>span.now.stage-2 .stage-dot{background:#477edb;color:white}
+.need-stage>span.now.stage-3{background:#e4f5ee!important;border:2px solid #16865b!important;color:#08613c!important}
+.need-stage>span.now.stage-3 .stage-dot{background:#16865b;color:white}
+@media(max-width:650px){.need-stage{grid-template-columns:repeat(2,minmax(0,1fr))}.need-stage>span{font-size:12px!important;min-height:49px}}
+.profile-check-row{display:flex;gap:9px;align-items:stretch}.profile-check-row input{min-width:0;flex:1}.profile-check-row button{white-space:nowrap;padding:0 15px;font-size:14px}.profile-check-row+.field small{display:block}@media(max-width:480px){.profile-check-row{gap:6px}.profile-check-row button{padding:0 10px}}
+
+.need-chat-head{position:relative;border:0;background:transparent;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;color:#344047;padding:7px 12px;border-radius:12px}.need-chat-head svg{display:block;flex:none}.need-chat-head:hover{background:#f1f7f3}.need-chat-badge{position:absolute;top:0;right:0;background:#e55b49;color:white;border-radius:12px;font-size:10px;min-width:17px;padding:2px 4px}.need-chat-badge.hidden{display:none!important}
+.need-notice-link{width:100%;border:0;text-align:left;background:#fff;cursor:pointer;display:block}.need-notice-link:hover{background:#f3f8f4}.need-chat-info{display:flex;justify-content:space-between;gap:12px;margin-bottom:16px;color:#1d3f2d}.need-appointment{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#f5f9f6;border:1px solid #e5eee7;border-radius:14px;padding:16px;margin-bottom:15px}.need-appointment p{margin:8px 0 0;color:#65776b}.need-chat-messages{height:270px;max-height:35vh;overflow:auto;border-radius:12px;background:#f8faf8;padding:14px}.need-chat-messages .bubble small{display:block;font-size:10px;opacity:.7;margin-top:4px}.need-chat-bottom{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.need-chat-list-item{padding:24px!important}
+@media(max-width:600px){.need-appointment{align-items:flex-start;flex-direction:column}.need-chat-head{padding:5px}}
+.demo-offer-panel{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:22px;padding:16px;border:1px solid #e3eae6;border-radius:14px;background:#f9fcfa}.demo-offer-panel label{font-size:13px;font-weight:650;color:#43564b}.demo-offer-panel select{min-width:180px;max-width:100%;padding:10px 12px;border:1px solid #d9e3dc;border-radius:10px;background:white;font:inherit}.demo-offer-panel .help{flex-basis:100%;margin:0;font-size:12px;color:#718078}
+
+/* 카카오톡처럼 대화에 집중하는 심플한 채팅 화면 */
+.need-talk{display:flex;flex-direction:column;min-height:440px;max-height:72vh}
+.need-talk-top{display:flex;align-items:center;gap:12px;padding:10px 2px 16px;border-bottom:1px solid #edf0ed;position:relative}.need-talk-top>div:nth-child(2){min-width:0;flex:1}.need-chat-menu-wrap{position:relative;margin-left:auto;flex-shrink:0}.need-chat-menu-btn{width:40px;height:40px;border:1px solid #e2e9e3;background:#fff;border-radius:12px;font-size:22px;cursor:pointer;color:#536458}.need-chat-menu-panel{position:absolute;right:0;top:46px;z-index:15;min-width:200px;background:#fff;border:1px solid #dfe9e1;border-radius:14px;box-shadow:0 12px 30px #172d1b20;padding:7px}.need-chat-menu-panel[hidden]{display:none}.need-chat-menu-panel button{display:block;width:100%;padding:12px;border:0;border-radius:9px;background:#fff;text-align:left;cursor:pointer;font-size:14px;color:#245b3b}.need-chat-menu-panel button:hover{background:#f0f8f1}.need-chat-menu-panel small{display:block;color:#7c8b80;font-size:11px;margin:3px 12px 7px}
+.need-talk-avatar{width:42px;height:42px;border-radius:16px;background:#e3f1e8;color:#267345;display:grid;place-items:center;font-weight:800;font-size:18px}
+.need-talk-top strong{font-size:16px}.need-talk-sub{font-size:12px;color:#7a867e;margin-top:5px}
+.need-talk-messages{background:#f5f7f5;flex:1;min-height:260px;max-height:44vh;overflow-y:auto;padding:22px 16px;border-radius:14px;margin:14px 0;display:flex;flex-direction:column;gap:13px}
+.need-talk-line{display:flex;align-items:flex-end;gap:7px;max-width:86%;align-self:flex-start}
+.need-talk-line.mine{align-self:flex-end;flex-direction:row-reverse}
+.need-talk-bubble{background:white;padding:11px 14px;border-radius:14px 14px 14px 3px;box-shadow:0 1px 3px #0000000a;white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px;line-height:1.6}
+.need-talk-line.mine .need-talk-bubble{background:#d8efdf;border-radius:14px 14px 3px 14px}
+.need-talk-line small{color:#87918b;font-size:10px;white-space:nowrap}
+.need-talk-empty{color:#87918b;text-align:center;margin:auto;line-height:1.8;font-size:13px}
+.need-talk-compose{display:flex;gap:10px}.need-talk-compose input{flex:1;min-width:0;border:1px solid #dfe6e0;border-radius:12px;padding:12px 14px;font-size:14px}
+.need-talk-footer{display:flex;justify-content:flex-start;padding-top:14px}
+@media(max-width:600px){.need-talk{min-height:380px}.need-talk-messages{min-height:230px}.need-talk-line{max-width:92%}}
+
+/* 완료 후 후기: 기존 NEED IT 색상 및 간결한 UI 유지 */
+.review-title{font-weight:800;margin:20px 0 10px}.review-options{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.review-options label{cursor:pointer}.review-options input{position:absolute;opacity:0;width:1px;height:1px}
+.review-options span{display:block;padding:11px 14px;border:1px solid #dce7de;border-radius:12px;background:#fff;font-weight:700;font-size:13px}
+.review-options input:checked+span{background:#e8f6ed;border-color:#27865b;color:#1e6e48}
+.review-options input:focus-visible+span{outline:3px solid #76b894;outline-offset:2px}
+.review-saved{background:#f4faf5;border:1px solid #e0efe3;border-radius:12px;padding:14px;margin-top:14px}
+.review-saved strong{color:#286e48;font-size:13px}.review-saved p{margin:8px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px}
+.need-chat-row-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}
+.need-unread-pill{display:inline-flex;align-items:center;justify-content:center;min-width:23px;height:23px;padding:0 6px;border-radius:99px;background:#e65a43;color:white;font-size:12px;font-weight:800}
+.need-demo-msg{font-size:12px!important;opacity:.72;margin-left:auto}
+
+/* 이웃 공개 프로필: 게시글·후기·대화 연결 */
+.neighbor-profile{display:grid;gap:18px}.neighbor-hero{background:#f5faf6;border:1px solid #e0eee3;border-radius:20px;padding:23px}.neighbor-head{display:flex;gap:16px;align-items:center}.neighbor-avatar{width:68px;height:68px;border-radius:50%;background:#dcefe1;color:#327651;display:grid;place-items:center;font-size:29px;font-weight:800;flex-shrink:0}.neighbor-head h3{margin:0 0 5px;font-size:23px}.neighbor-head p{margin:0;color:#687b6d;font-size:13px}.neighbor-actions{display:flex;gap:9px;margin-top:18px;flex-wrap:wrap}.neighbor-section{border:1px solid #e2ebe4;border-radius:17px;padding:18px}.neighbor-section h4{font-size:17px;margin:0 0 13px}.neighbor-post{display:flex;gap:12px;align-items:center;width:100%;text-align:left;border:0;border-top:1px solid #edf2ee;padding:12px 0;background:transparent;cursor:pointer;color:inherit}.neighbor-post:first-of-type{border-top:0}.neighbor-post img{width:62px;height:62px;border-radius:10px;object-fit:cover}.neighbor-post strong{display:block;font-size:14px}.neighbor-post small{display:block;margin-top:5px;color:#78857b}.neighbor-review{padding:12px 0;border-top:1px solid #edf2ee}.neighbor-review:first-of-type{border-top:0}.neighbor-review strong{font-size:13px;color:#2a7651}.neighbor-review p{margin:5px 0 0;font-size:14px;overflow-wrap:anywhere}.neighbor-empty{font-size:13px;color:#7d8980;line-height:1.7;margin:0}.neighbor-name-link{background:none;border:0;padding:0;color:#28734d;text-decoration:underline;text-underline-offset:3px;cursor:pointer;font:inherit;font-weight:700}.need-talk-top .neighbor-name-link{font-size:16px;text-decoration:none}.neighbor-count{font-size:13px;color:#63766a;margin:0 0 8px}
+.need-talk-photo{display:block;max-width:min(250px,65vw);max-height:290px;object-fit:contain;border-radius:12px;cursor:zoom-in}.need-talk-line.photo .need-talk-bubble{padding:5px}.need-talk-compose .need-photo-add{flex:0 0 auto;border:1px solid #dfe6e0;border-radius:12px;padding:9px 12px;background:white;cursor:pointer;font-size:20px}.need-talk-compose .need-photo-add:hover{background:#edf7ef}.need-talk-footer{align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.need-chat-complete{font-size:13px}.need-talk-finished{font-size:13px;color:#39734f;background:#eaf6ed;border-radius:10px;padding:10px 12px;text-align:center}.need-talk-compose input[type=file]{display:none}
+.need-chat-draft{display:flex;align-items:center;gap:10px;padding:10px 12px;margin:8px 0;background:#f3f8f4;border:1px solid #dceade;border-radius:12px}.need-chat-draft[hidden]{display:none!important}.need-chat-draft img{width:66px;height:66px;object-fit:cover;border-radius:9px}.need-chat-draft span{flex:1;font-size:13px;color:#4b6653}.need-chat-draft button{border:0;background:#e1eee4;border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:19px}.need-talk-caption{margin:7px 4px 3px;white-space:pre-wrap;font-size:14px}
+
+/* 카카오톡처럼 간결한 채팅 목록: 프로필 / 이름 / 마지막 메시지 / 시간 / 읽지 않음 */
+.need-chat-compact-list{background:#fff;border:1px solid #edf0ec;border-radius:17px;overflow:hidden;max-width:960px;margin:0 auto}
+.need-chat-compact-row{display:flex;align-items:center;border-bottom:1px solid #f1f3f0;min-height:86px;position:relative;padding:0 15px 0 0}
+.need-chat-compact-row:last-child{border-bottom:0}
+.need-chat-compact-row:hover{background:#f8faf8}
+.need-chat-main{display:flex;align-items:center;gap:15px;min-width:0;flex:1;padding:15px 12px 15px 19px;text-align:left;border:0;background:transparent;cursor:pointer;color:#24352b;font:inherit}
+.need-chat-person-avatar{width:54px;height:54px;flex:0 0 54px;border-radius:19px;background:#e4f1e8;color:#24774c;font-weight:800;font-size:23px;display:grid;place-items:center;overflow:hidden}
+.need-chat-person-body{display:flex;flex-direction:column;gap:5px;min-width:0;flex:1}
+.need-chat-person-top{display:flex;align-items:center;gap:9px;min-width:0}
+.need-chat-person-top strong{font-size:16px;color:#202d25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.need-chat-status{display:inline-flex;align-items:center;flex-shrink:0;padding:3px 8px;border-radius:7px;background:#edf7ef;color:#328258;font-size:11px;font-weight:700;white-space:nowrap}
+.need-chat-person-post{display:block;font-size:12px;color:#69917a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.need-chat-person-preview{display:block;font-size:14px;color:#77867d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.need-chat-side{align-self:stretch;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:8px;flex:0 0 auto;min-width:60px;padding:14px 4px}
+.need-chat-time{font-size:11px;color:#9aa69e;white-space:nowrap}
+.need-chat-unread{min-width:21px;height:21px;border-radius:12px;display:grid;place-items:center;padding:0 5px;font-size:11px;background:#e9a33b;color:white;font-weight:800}
+.need-chat-demo-compact{border:0;background:transparent;color:#8e9d92;padding:7px 6px;cursor:pointer;font-size:11px;white-space:nowrap;border-radius:7px}
+.need-chat-demo-compact:hover{background:#eef5ef;color:#246e48}
+@media(max-width:600px){.need-chat-compact-row{min-height:80px;padding-right:8px}.need-chat-main{padding:12px 4px 12px 12px;gap:11px}.need-chat-person-avatar{width:46px;height:46px;flex-basis:46px;border-radius:16px;font-size:20px}.need-chat-person-top strong{font-size:14px}.need-chat-person-post{font-size:11px}.need-chat-person-preview{font-size:12px}.need-chat-side{min-width:45px;padding-right:0}.need-chat-demo-compact{font-size:10px;padding:5px 3px}}
+
+/* Compact neighbor profile — no oversized nested cards */
+.np-wrap{color:#222e27}.np-head{display:flex;align-items:center;gap:14px;padding:4px 0 18px}.np-avatar{width:64px;height:64px;border-radius:50%;background:#e2f2e7;color:#25734c;display:grid;place-items:center;font-size:27px;font-weight:800;overflow:hidden;flex:none}.np-identity{min-width:0}.np-identity h3{font-size:22px;line-height:1.3;margin:0 0 4px;overflow-wrap:anywhere}.np-identity p{font-size:13px;color:#7d8b81;margin:0}.np-stats{display:flex;border-top:1px solid #edf1ed;border-bottom:1px solid #edf1ed;padding:15px 0;margin-bottom:16px}.np-stats>div{flex:1;text-align:center;display:grid;gap:4px}.np-stats>div+div{border-left:1px solid #edf1ed}.np-stats strong{font-size:21px;color:#23754e}.np-stats span{font-size:12px;color:#748379}.np-actions{display:flex;gap:9px;margin-bottom:22px}.np-actions button{flex:1;min-height:44px;border-radius:11px}.np-tabs{display:flex;gap:0;border-bottom:1px solid #e4ebe6}.np-tab{border:0;background:transparent;color:#718076;font-size:15px;font-weight:700;padding:13px 18px;cursor:pointer;border-bottom:3px solid transparent}.np-tab.active{color:#18825a;border-bottom-color:#18825a}.np-tab span{font-size:12px;margin-left:3px}.np-panel{min-height:94px}.np-panel[hidden]{display:none}.np-empty{padding:30px 8px;text-align:center;font-size:14px;color:#87938b}.np-post{display:flex;align-items:center;gap:12px;padding:14px 4px;width:100%;border:0;border-bottom:1px solid #eef1ee;background:transparent;text-align:left;cursor:pointer;color:inherit}.np-post img,.np-post-fallback{width:58px;height:58px;border-radius:10px;object-fit:cover;flex:none}.np-post-fallback{display:grid;place-items:center;background:#f2f6f3;font-size:23px}.np-post-info{min-width:0;flex:1}.np-post-info strong{display:block;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.np-post-info small{display:block;margin-top:6px;color:#87938b;font-size:12px}.np-post-status{font-size:12px;color:#29865b;white-space:nowrap}.np-review{padding:17px 4px;border-bottom:1px solid #eef1ee}.np-review-title{display:flex;align-items:center;justify-content:space-between;gap:12px}.np-review-title strong{font-size:14px;color:#257e53}.np-review-title small{font-size:12px;color:#87938b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.np-review p{font-size:14px;line-height:1.6;margin:8px 0 0;overflow-wrap:anywhere}.np-footnote{font-size:11px;color:#99a49b;margin:18px 0 0;line-height:1.5}@media(max-width:480px){.np-tab{padding:12px 10px;font-size:14px}.np-post-status{font-size:11px}}
+
+/* 내가 요청한 물건: 핵심 정보와 행동만 남긴 간결한 목록 */
+.request-compact-card{padding:19px 22px!important;margin:10px 0!important;box-shadow:none!important;border-radius:14px!important}
+.request-compact-card .user-heading{gap:12px;align-items:center}
+.request-title-link{appearance:none;border:0;background:none;padding:2px 0;color:#202a25;font-size:19px;font-weight:800;text-align:left;cursor:pointer;min-width:0;overflow-wrap:anywhere}
+.request-title-link span{color:#789487;font-size:23px;margin-left:5px}
+.request-title-link:hover{color:#188359}
+.request-compact-card .request-meta{font-size:13px;color:#728176;margin:9px 0 13px;line-height:1.5}
+.request-progress{margin:10px 0 13px}
+.request-progress-track{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+.request-progress-track span{height:5px;border-radius:9px;background:#e9eeeb}
+.request-progress-track span.filled{background:#58aa7e}
+.request-progress-track span.active{background:#158257}
+.request-progress-label{display:flex;justify-content:space-between;margin-top:6px;font-size:12px;color:#74857a}
+.request-progress-label span:first-child{color:#21764e;font-weight:800}
+.request-main-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.request-offers-link{border:0;background:#eaf5ed;color:#226c49;border-radius:9px;font-size:13px;font-weight:800;padding:10px 13px;cursor:pointer;min-height:38px}
+.request-offers-link:hover{background:#dcefe2}
+.request-complete-btn{font-size:13px!important;padding:9px 13px!important;min-height:38px!important}
+.request-secondary-actions{display:flex;gap:14px;margin-top:10px!important;border-top:1px solid #f0f2f0;padding-top:9px}
+.request-secondary-actions:empty{display:none}
+.request-text-action{background:none;border:0;color:#708276;padding:7px 10px;cursor:pointer;font-size:14px;font-weight:700;min-height:36px!important;border-radius:8px}
+.request-text-action:hover{text-decoration:underline}
+.request-secondary-actions .request-text-action:first-child{margin-left:auto}
+.request-delete-action{color:#9a6262;margin-left:0}
+.request-delete-action:hover{background:#fff3f3;text-decoration:none}
+.request-review-line{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;background:#f7faf8;padding:9px 11px;border-radius:8px;font-size:12px;color:#397352;margin:8px 0}
+.request-review-text{color:#52685b;overflow-wrap:anywhere}
+@media(max-width:520px){.request-compact-card{padding:15px!important}.request-title-link{font-size:17px}.request-main-actions{gap:8px}}
+
+/* 요청 수정 화면: 사진 첨부 영역 간격과 정렬 정리 */
+#editRequestForm .field:has(#editPhotos){margin-bottom:16px}
+#editRequestForm .field:has(#editPhotos)>label{margin-bottom:10px}
+#editRequestForm .photo-upload{display:flex;align-items:center;gap:12px;flex-wrap:wrap;text-align:left;padding:12px 14px;border:1px solid #dbe8df;border-radius:11px;background:#f8faf8;min-height:64px}
+#editRequestForm .photo-upload input[type=file]{position:absolute;width:1px;height:1px;padding:0;margin:0;opacity:0;overflow:hidden;clip-path:inset(50%)}
+#editRequestForm .photo-upload .photo-pick{display:inline-flex;align-items:center;justify-content:center;margin:0;padding:10px 15px;min-height:40px;background:#fff;border:1px solid #b7d3c1;border-radius:9px;color:#176b47;font-size:14px;font-weight:800;white-space:nowrap;cursor:pointer}
+#editRequestForm .photo-upload .photo-pick:hover{background:#eaf5ed}
+#editRequestForm .photo-upload:has(input:focus-visible) .photo-pick{outline:3px solid #8dc7a8;outline-offset:2px}
+#editRequestForm .photo-upload .photo-meta{margin:0;color:#75857b;font-size:12px;line-height:1.5}
+#editRequestForm #editPhotoStatus{margin:7px 0 0;min-height:0}
+#editRequestForm #editPhotoStatus:empty{display:none}
+#editRequestForm #editPhotoPreview:empty{display:none}
+#editRequestForm #editPhotoPreview{margin-top:9px}
+#editRequestForm .form-actions{margin-top:18px}
+@media(max-width:520px){#editRequestForm .photo-upload{gap:8px;padding:11px}#editRequestForm .photo-upload .photo-meta{font-size:11px}}
+
+/* 요청 등록·수정: 시각적인 카테고리 선택 */
+.category-choice-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:10px}
+.category-choice{position:relative;cursor:pointer;min-width:0}
+.category-choice input{position:absolute;opacity:0;width:1px;height:1px}
+.category-choice .choice-face{min-height:82px;border:1px solid #dce7df;border-radius:13px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:12px 5px;font-size:14px;font-weight:650;color:#37483d;transition:background .15s,border-color .15s}
+.category-choice .choice-icon{font-size:25px;line-height:1.1}
+.category-choice input:checked+.choice-face{border:2px solid #18845c;background:#edf8f1;color:#176342;padding:11px 4px}
+.category-choice input:focus-visible+.choice-face{outline:3px solid #8dc9aa;outline-offset:2px}
+.category-choice:hover .choice-face{border-color:#18845c}
+@media(max-width:540px){.category-choice-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.category-choice .choice-face{min-height:76px;font-size:13px}}
+
+
+.stage-photo-preview,.stage-offer-images{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.stage-photo-preview>div{position:relative}.stage-photo-preview img,.stage-offer-images img{width:100px;height:90px;object-fit:cover;border-radius:10px;border:1px solid #dce7df}
+.stage-photo-preview button{position:absolute;right:3px;top:3px;border:0;border-radius:50%;background:#fff;cursor:pointer}
+.request-secondary-actions{display:flex;justify-content:flex-end;gap:14px}
+
+/* 요청 상세: 핵심 행동만 노출 */
+.need-detail-status{display:flex;align-items:center;gap:9px;margin:14px 0 18px;color:#7b8b80;font-size:13px}
+.need-detail-status .mini-tag{margin:0}
+.need-detail-clean-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:relative;margin-top:18px}
+.need-detail-clean-actions button{min-height:42px}
+.need-detail-clean-actions .primary{padding:10px 24px}
+.need-detail-clean-actions .favorite-toggle{padding:9px 15px}
+.need-detail-more{margin-left:auto;border:1px solid #e1e9e2;border-radius:12px;background:#fff;color:#53665b;min-width:44px;font-size:24px;cursor:pointer}
+.need-detail-more-menu{position:absolute;right:0;bottom:calc(100% + 7px);z-index:20;min-width:150px;padding:6px;background:#fff;border:1px solid #e1e9e2;border-radius:12px;box-shadow:0 12px 26px #102c1a1c}
+.need-detail-more-menu[hidden]{display:none!important}
+.need-detail-more-menu button{width:100%;text-align:left;background:transparent;border:0;padding:10px 12px;color:#36463c;cursor:pointer;border-radius:8px}
+.need-detail-more-menu button:hover{background:#f2f7f3}
+/* 상세 액션 버튼: 동일 높이 및 정렬 */
+.need-detail-clean-actions{display:flex;align-items:stretch;gap:9px;flex-wrap:wrap}
+.need-detail-clean-actions > button{height:46px!important;min-height:46px!important;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;padding:0 17px!important;line-height:1.2;border-radius:10px}
+.need-detail-clean-actions > .need-detail-more{width:46px;min-width:46px;padding:0!important;font-size:23px}
+.need-detail-more-menu{position:fixed!important;top:auto;bottom:auto;right:auto;z-index:99999;min-width:154px;box-shadow:0 10px 30px #102c1a24}
+.need-detail-more-menu button{min-height:40px!important;height:40px!important;justify-content:flex-start!important;font-size:14px!important}
+@media(max-width:520px){.need-detail-clean-actions .primary{flex:1}.need-detail-clean-actions{gap:8px}}
+
+/* 알림 삭제: 항목별 버튼과 전체 삭제 */
+.bell-heading-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.bell-clear-all{color:#9b5151!important}
+.bell-notice-row{position:relative;border-bottom:1px solid #edf0ed;border-radius:12px}
+.bell-notice-row.unread{background:#f4f9f5}
+.bell-notice-row .need-notice-link{padding-right:48px!important;background:transparent;min-height:82px}
+.bell-delete-one{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:34px;height:34px;border:0;border-radius:9px;background:transparent;color:#819087;font-size:24px;cursor:pointer;display:grid;place-items:center}
+.bell-delete-one:hover,.bell-delete-one:focus-visible{background:#fbeeee;color:#a33e3e}
+
+/* 채팅 상세: 상대 이름 옆에 거래 상태만 표시 */
+.need-talk-name-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap;min-width:0}
+.need-talk-state{display:inline-flex;align-items:center;padding:4px 9px;border-radius:8px;background:#edf7f0;color:#277249;font-size:12px;font-weight:700;white-space:nowrap}
+
+/* 캠페인 목록: 열 너비를 확보하고 한글/날짜의 부자연스러운 줄바꿈 방지 */
+.campaign-table-wrap{overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch}
+.campaign-table{min-width:1160px;table-layout:fixed;width:100%}
+.campaign-table th,.campaign-table td{box-sizing:border-box;word-break:keep-all;overflow-wrap:anywhere;line-height:1.55}
+.campaign-table th:nth-child(1){width:17%}
+.campaign-table th:nth-child(2){width:13%}
+.campaign-table th:nth-child(3){width:10%}
+.campaign-table th:nth-child(4){width:16%}
+.campaign-table th:nth-child(5){width:15%}
+.campaign-table th:nth-child(6){width:9%}
+.campaign-table th:nth-child(7){width:9%}
+.campaign-table th:nth-child(8){width:11%}
+.campaign-table .mini{overflow-wrap:anywhere;word-break:break-word}
+.campaign-table .campaign-date span{display:block;white-space:nowrap;font-size:13px}
+.campaign-table .campaign-date .date-separator{line-height:1.1;color:#89978c}
+.campaign-table .campaign-actions{white-space:nowrap}
+.campaign-table .campaign-actions .admin-btn{display:inline-flex;align-items:center;justify-content:center;min-width:52px;margin:2px 3px 2px 0}
+.campaign-table .pill{white-space:nowrap}
+
+/* 메인 상단 광고: 가로형 이미지 히어로 배너 */
+#mainAdSlot.ad-slot{max-width:1180px;padding:0 24px;margin:22px auto 28px}
+.hero-ad-frame{position:relative;width:100%;aspect-ratio:3.65/1;min-height:160px;max-height:320px;border-radius:18px;overflow:hidden;background:#f1f5f2;border:1px solid #e3eae5}
+.hero-ad-creative{width:100%;height:100%;display:block;overflow:hidden}
+.hero-ad-image{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.hero-ad-fallback{height:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;padding:clamp(22px,5vw,64px);background:linear-gradient(115deg,#e4f4e9,#c7e6d4);color:#153f2c;gap:8px}
+.hero-ad-fallback span{font-size:13px;font-weight:700;opacity:.75}.hero-ad-fallback strong{font-size:clamp(23px,3.2vw,43px);letter-spacing:-1.4px}.hero-ad-fallback small{font-size:clamp(12px,1.4vw,17px);color:#466858}
+.hero-ad-label{position:absolute;top:12px;left:14px;background:#fffdf1d9;color:#5e6a62;font-size:11px;padding:4px 9px;border-radius:6px;pointer-events:none}
+.hero-ad-counter{position:absolute;right:15px;bottom:13px;background:#17261c9c;color:#fff;border-radius:20px;padding:5px 11px;font-size:12px;pointer-events:none}
+.hero-ad-prev,.hero-ad-next{position:absolute;top:50%;transform:translateY(-50%);border:0;border-radius:50%;background:#ffffffd9;color:#234b35;width:38px;height:38px;font-size:28px;display:grid;place-items:center;cursor:pointer;box-shadow:0 2px 10px #0001}
+.hero-ad-prev{left:13px}.hero-ad-next{right:13px}.hero-ad-prev:hover,.hero-ad-next:hover{background:#fff}
+@media(max-width:640px){#mainAdSlot.ad-slot{padding:0 16px;margin:14px auto 20px}.hero-ad-frame{aspect-ratio:2.2/1;min-height:145px;border-radius:13px}.hero-ad-prev,.hero-ad-next{width:30px;height:30px;font-size:22px}.hero-ad-fallback{padding:22px 42px}.hero-ad-label{top:8px;left:9px}}
+
+/* 신고 관리: 일정한 간격과 정렬, 압축된 정보 구조 */
+#adminContent .report-panel{padding:26px 28px 30px}
+.report-panel .admin-section-title{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}
+.report-panel .admin-section-title h2{margin:0 0 5px}
+.report-panel .admin-section-title p{margin:0}
+.report-summary{flex:none;font-size:13px;font-weight:700;color:#42765a;background:#eef7f1;border-radius:9px;padding:9px 12px}
+.report-panel .admin-notice{margin:0 0 18px;padding:12px 15px;font-size:13px;line-height:1.5}
+.report-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.report-toolbar label{font-size:13px;font-weight:700;color:#50675a}
+.report-toolbar select{width:160px;min-height:42px;padding:8px 12px;background:#fff;border:1px solid #dce7df;border-radius:9px}
+.report-list{display:grid;gap:10px}
+.report-card{border:1px solid #e2eae5;border-radius:12px;padding:17px 19px;background:#fff;min-width:0}
+.report-card-top{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:9px}
+.report-reason{font-size:14px;font-weight:800;color:#263a2f}
+.report-status{flex:none;background:#eaf5ed;color:#24784e;border-radius:7px;padding:5px 9px;font-size:12px;font-weight:700}
+.report-post-title{margin:0 0 7px!important;font-size:17px;font-weight:750;line-height:1.45;overflow-wrap:anywhere}
+.report-meta{font-size:12px;color:#7b8b80;line-height:1.55;overflow-wrap:anywhere}
+.report-detail{margin:11px 0 0;padding:11px 13px;background:#f6f9f7;border-radius:8px;font-size:13px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
+.report-card-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding-top:12px;border-top:1px solid #edf1ee}
+.report-card-bottom label{display:flex;align-items:center;gap:10px;font-size:13px;color:#536a5b;font-weight:700}
+.report-card-bottom select{min-height:38px;width:132px;padding:6px 10px;border-radius:8px;background:#fff;border:1px solid #dce7df}
+.report-card-bottom button{min-height:38px;padding:7px 14px;font-size:13px}
+@media(max-width:650px){#adminContent .report-panel{padding:18px 15px}.report-panel .admin-section-title{align-items:flex-start;flex-direction:column}.report-card{padding:14px}.report-card-bottom{flex-wrap:wrap}.report-toolbar{flex-wrap:wrap}}
+
+
+/* NEED IT — 미니멀 2화면 UI */
+:root{--green:#16885c!important;--line:#e9edf0!important}
+body{background:#fff!important;color:#20252b!important}
+.shell{max-width:1080px!important}
+.header{background:#fff!important;border-bottom:1px solid #edf0f2!important;box-shadow:none!important}
+.header-inner{min-height:72px!important}
+.nav{gap:6px!important}
+.nav button{font-weight:600!important;border-radius:10px!important;padding:10px 16px!important}
+.nav button.active{background:#eaf7f0!important;color:#16885c!important}
+#homeNav,.mode-switcher,.mode-badge,.request-guide,.info-box,.hint-strip,#categoryGrid,.section-head,#categoryHeading,#browseBtn{display:none!important}
+.banner{background:#fff!important;padding:46px 0 12px!important;border:0!important}
+.mode-panel{background:#fff!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:22px!important}
+.mode-panel h2{font-size:clamp(29px,4vw,40px)!important;line-height:1.3!important;letter-spacing:-1.5px!important;margin:0 0 10px!important;color:#20252b!important}
+.mode-panel p{font-size:15px!important;line-height:1.7!important;color:#78818a!important;max-width:550px!important;margin:0!important}
+.mode-actions{flex-shrink:0!important;display:flex!important;gap:8px!important}
+.mode-actions .primary{border-radius:12px!important;padding:14px 20px!important;box-shadow:none!important}
+#modeSecondary{display:none!important}
+#requestWorkspace{margin-top:26px!important}
+.request-workspace-head{margin-bottom:20px!important}
+.request-workspace-head h2{font-size:21px!important}
+.request-workspace-head p{font-size:14px!important;color:#899099!important}
+.request-my-posts{gap:12px!important}
+.top-tools{margin:24px 0 12px!important}
+.location{background:none!important;padding:0!important;border:0!important;box-shadow:none!important}
+.search-row{margin:12px 0 24px!important}
+.search-wrap{border-radius:14px!important;background:#f7f9fa!important;border:1px solid #eef1f3!important;box-shadow:none!important}
+.search-wrap input{background:transparent!important}
+.content{padding-top:8px!important;background:#fff!important}
+.list-head{padding:0 0 14px!important}
+.list-head h2{font-size:22px!important;letter-spacing:-.6px!important}
+.list-head p{font-size:14px!important;color:#8b949b!important}
+.filters{margin:0 0 18px!important;gap:8px!important}
+.filters .filter{border-radius:9px!important}
+.feed{gap:12px!important}
+.feed>*{box-shadow:none!important}
+.request-workspace,.request-my-posts>*{box-shadow:none!important}
+@media(max-width:760px){.header-inner{flex-wrap:wrap!important;padding:14px 0!important}.nav{order:3!important;width:100%!important;overflow-x:auto!important}.nav button{white-space:nowrap!important;padding:9px 12px!important}.banner{padding-top:30px!important}.mode-panel{align-items:flex-start!important;flex-direction:column!important}.mode-actions{width:100%!important}.mode-actions .primary{width:100%!important}.mode-panel h2{font-size:30px!important}}
+
+
+
+/* 모달의 헤더는 고정된 영역, 내용만 독립 스크롤: 스크롤 시 입력 항목이 헤더 위로 비치지 않음 */
+#overlay.overlay { overflow:hidden!important; padding:20px 16px!important; align-items:center!important; }
+#overlay .dialog,
+#overlay:has(#requestForm) .dialog {
+  display:flex!important; flex-direction:column!important;
+  overflow:hidden!important; padding:0!important;
+  width:min(100%,650px)!important;
+  max-height:calc(100dvh - 40px)!important;
+  margin:auto!important; border-radius:20px!important;
+  background:#fff!important;
+}
+#overlay .dialog-head {
+  position:relative!important; top:auto!important; flex:0 0 auto!important;
+  margin:0!important; padding:26px 30px 17px!important;
+  border-bottom:1px solid #edf1ee!important;
+  background:#fff!important; z-index:1!important;
+}
+#overlay #dialogBody {
+  flex:1 1 auto!important; min-height:0!important;
+  overflow-y:auto!important; overscroll-behavior:contain!important;
+  padding:22px 30px 30px!important;
+  scrollbar-gutter:stable;
+}
+@media(max-width:600px){
+  #overlay.overlay {padding:12px!important;}
+  #overlay .dialog,#overlay:has(#requestForm) .dialog{max-height:calc(100dvh - 24px)!important;}
+  #overlay .dialog-head{padding:20px 20px 14px!important;}
+  #overlay #dialogBody{padding:18px 20px 24px!important;}
+}
+
+
+/* NEED IT 프로필 관리 */
+.need-profile{max-width:900px;margin:0 auto;background:#fff;border:1px solid #e8eeea;border-radius:22px;padding:34px 38px;box-shadow:0 10px 32px rgba(25,65,43,.035)}
+.need-profile-top{display:flex;gap:22px;align-items:center;padding-bottom:28px;border-bottom:1px solid #edf0ed}
+.need-avatar{width:94px;height:94px;flex:none;border-radius:50%;background:#eff6f1;display:grid;place-items:center;font-size:38px;overflow:hidden;color:#327453}
+.need-avatar img{width:100%;height:100%;object-fit:cover}
+.need-profile-top h3{font-size:23px;margin:0 0 6px;color:#1f2b25}.need-profile-top p{margin:0 0 13px;color:#7d8b81;font-size:14px}
+.need-photo-btn,.need-photo-remove{display:inline-block;font-size:13px;font-weight:700;border:1px solid #cbded0;background:#fff;color:#275a3c;border-radius:9px;padding:8px 13px;cursor:pointer;margin-right:7px}
+.need-photo-remove{color:#77857b;border-color:#e5ebe6}
+.need-profile-section{font-size:17px;margin:28px 0 16px;color:#23392b}
+.need-profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.need-profile .field{margin:0}.need-profile .field label{display:block;margin-bottom:9px;font-size:14px;font-weight:700}
+.need-profile .field input{width:100%;height:49px;padding:12px 14px;border:1px solid #dce6df;border-radius:11px;font-size:15px;box-sizing:border-box;background:#fff}
+.need-profile .field input:focus{outline:2px solid #b3d9c0;border-color:#378c62}
+.need-profile small{display:block;color:#8b988e;font-size:12px;margin-top:7px}
+.need-region-line{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px;background:#f7faf8;border-radius:13px}
+.need-region-line strong{font-size:15px}.need-profile-bottom{display:flex;align-items:center;justify-content:space-between;gap:18px;border-top:1px solid #edf0ed;margin-top:30px;padding-top:24px}
+.need-profile-bottom span{font-size:12px;color:#929e95}.need-profile-bottom button{min-width:160px}
+@media(max-width:650px){.need-profile{padding:22px 18px;border-radius:15px}.need-profile-grid{grid-template-columns:1fr}.need-profile-bottom,.need-region-line{align-items:stretch;flex-direction:column}.need-profile-top{gap:14px}.need-avatar{width:75px;height:75px}}
+
+
+/* 받은/보낸 제안: 제목으로 게시글 상세 이동 */
+.offer-title-link{background:none;border:0;padding:0;color:inherit;font:inherit;font-weight:inherit;text-align:left;cursor:pointer;display:inline-flex;align-items:center;gap:6px;max-width:100%;white-space:normal}
+.offer-title-link:hover{color:#17845c}
+.offer-title-link:focus-visible{outline:2px solid #17845c;outline-offset:4px;border-radius:3px}
+.offer-title-link span{color:#6f8c7d;font-size:.9em}
+
+
+.sent-view-tabs{display:flex;gap:8px;margin:0 0 18px;border-bottom:1px solid #e6ece8;padding-bottom:10px}
+.sent-view-tabs button{border:0;background:transparent;padding:11px 20px;border-radius:10px;color:#718078;font:inherit;font-weight:700;cursor:pointer}
+.sent-view-tabs button.selected{background:#e8f4ec;color:#176e49}
+.sent-view-tabs button:focus-visible{outline:2px solid #19865d;outline-offset:2px}
+
+
+/* 2026-10-29 — NEED IT spacing / responsiveness consistency pass */
+:root{--ui-gap:12px;--ui-radius:14px}
+/* Prevent unexpected width expansion caused by long titles or chat messages. */
+.shell,.dialog,.user-card,.post,.need-chat-list-item{min-width:0}
+.dialog{width:min(100%,640px);padding:24px 26px;border-radius:20px}
+.dialog-head{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid #edf1ee}
+.dialog-head h2{line-height:1.35}
+.field{margin-bottom:16px}
+.field label{margin-bottom:7px}
+.field textarea{min-height:112px}
+.detail-actions,.form-actions{gap:10px}
+.detail-actions button,.form-actions button{min-height:44px}
+.user-card{padding:20px 22px;margin:10px 0;border-radius:16px}
+.user-card-actions{margin-top:12px;gap:9px}
+.user-heading{gap:16px}
+.need-chat-list-item{padding:18px 20px!important}
+.need-chat-messages{height:clamp(250px,38vh,430px);max-height:48vh;padding:16px;border-radius:16px}
+.need-chat-messages .bubble{max-width:min(82%,540px);overflow-wrap:anywhere;margin:7px 0;padding:10px 14px}
+.need-chat-messages .bubble.mine{margin-left:auto}
+.chat-compose{display:flex;flex-direction:row;align-items:stretch;gap:8px;margin-top:12px}
+.chat-compose input{min-width:0;flex:1}
+.chat-compose button{flex:none;min-height:44px}
+.need-chat-bottom{margin-top:12px;gap:8px}
+.need-chat-info{align-items:center;margin-bottom:12px}
+.post{padding:20px 22px;min-height:180px}
+.post-top{margin-bottom:10px}
+.post-foot{margin-top:auto}
+@media(max-width:680px){
+ .dialog{padding:18px 18px 20px;border-radius:16px;max-height:calc(100dvh - 24px)}
+ .dialog-head{margin-bottom:14px;padding-bottom:12px}
+ .user-heading{padding-top:28px!important;align-items:flex-start;flex-wrap:wrap}
+ .user-card{padding:16px;margin:9px 0}
+ .need-chat-list-item{padding:14px!important}
+ .need-chat-messages{height:clamp(230px,42dvh,390px);max-height:45dvh;padding:12px}
+ .chat-compose{flex-direction:row;gap:6px}
+ .chat-compose input{padding:10px;min-width:0}
+ .chat-compose button{padding-left:12px;padding-right:12px}
+ .post{min-height:0;padding:18px}
+ .detail-actions{gap:8px}
+ .detail-actions button{max-width:100%}
+}
+@media(max-width:380px){.dialog{padding:14px}.chat-compose{gap:5px}.need-chat-messages .bubble{max-width:92%}}
+
+
+/* 처음 이용하는 사람도 이해하기 쉬운 내 메뉴 */
+#accountMenu.account-pop{width:min(340px,calc(100vw - 28px));padding:12px;border-radius:18px;box-sizing:border-box;max-height:min(78vh,630px);overflow-y:auto}
+#accountMenu .account-group-title{font-size:12px;font-weight:800;letter-spacing:.01em;color:#82938a;padding:10px 13px 6px}
+#accountMenu button[data-menu-tab]{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:64px;gap:12px;padding:11px 13px;border-radius:11px;text-align:left;box-sizing:border-box}
+#accountMenu button[data-menu-tab]:hover,#accountMenu button[data-menu-tab]:focus-visible{background:#f0f7f2}
+#accountMenu .account-item-text{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0;flex:1}
+#accountMenu .account-item-text strong{font-size:15px;font-weight:750;color:#20372a;line-height:1.3}
+#accountMenu .account-item-text small{font-size:12px;font-weight:400;color:#7b8d82;line-height:1.4;white-space:normal}
+#accountMenu .menu-arrow{font-size:19px;color:#9cac9f;flex:none}
+#accountMenu .account-menu-divider{margin:9px 10px;border-top:1px solid #e9eee9}
+@media(max-width:420px){#accountMenu.account-pop{width:min(320px,calc(100vw - 20px))}#accountMenu button[data-menu-tab]{min-height:61px}}
+
+
+/* 관리자 광고·캠페인 UI 균형 조정 */
+.campaign-controls{display:grid;grid-template-columns:minmax(220px,1fr) 190px auto;gap:12px;align-items:end;margin:22px 0 20px}
+.campaign-controls label{display:block;margin-bottom:7px;color:#607367;font-size:13px;font-weight:700}
+.campaign-controls input,.campaign-controls select,.campaign-controls button{width:100%;height:48px;min-height:48px;box-sizing:border-box;border-radius:10px;font-size:14px}
+.campaign-controls input,.campaign-controls select{padding:0 14px;border:1px solid #d3e0d7;background:white}
+.campaign-controls button{white-space:nowrap;padding:0 22px}
+#campaignForm #cCategory,#campaignForm #cAction{min-height:52px;height:52px;padding:0 14px;border-radius:10px;background:#fff}
+.placement-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.campaign-placement{display:grid;grid-template-columns:1fr 1fr auto;gap:9px;align-items:center;margin:10px 0}
+.campaign-placement select{height:48px;min-width:0;padding:0 10px;border:1px solid #d3e0d7;border-radius:9px;background:white}
+.banner-preview{margin-top:12px;min-height:130px;display:flex;align-items:center;justify-content:center;background:#f5f9f6;border:1px dashed #c5dacb;border-radius:12px;overflow:hidden;color:#718477;font-size:13px}
+.banner-preview img{width:100%;max-height:250px;object-fit:contain;display:block}
+.admin-btn:disabled{opacity:.45;cursor:not-allowed;background:#f1f3f1}
+@media(max-width:700px){.campaign-controls{grid-template-columns:1fr 1fr}.campaign-search{grid-column:1/-1}.campaign-controls button{grid-column:1/-1}.campaign-placement{grid-template-columns:1fr 1fr}.campaign-placement button{grid-column:1/-1}.admin-section-title{align-items:flex-start}}
+
+
+/* 배너 관리 표: 긴 이름·캠페인·영역 텍스트가 옆 열을 침범하지 않도록 */
+.banner-management-wrap{width:100%;max-width:100%;overflow-x:auto;overflow-y:visible}
+.banner-management-table{width:100%;min-width:760px;table-layout:fixed;border-collapse:collapse}
+.banner-management-table th,.banner-management-table td{box-sizing:border-box;min-width:0;padding:13px 10px;vertical-align:top;overflow-wrap:anywhere;word-break:break-word;white-space:normal;line-height:1.55}
+.banner-management-table th:nth-child(1){width:13%}
+.banner-management-table th:nth-child(2){width:17%}
+.banner-management-table th:nth-child(3){width:19%}
+.banner-management-table th:nth-child(4){width:26%}
+.banner-management-table th:nth-child(5){width:9%}
+.banner-management-table th:nth-child(6){width:16%}
+.banner-management-table .banner-thumb{display:block;width:100%;max-width:110px;height:58px;object-fit:cover}
+.banner-management-table td .mini{overflow-wrap:anywhere;word-break:break-word;line-height:1.45}
+.banner-management-table td:last-child .admin-btn{display:inline-flex;align-items:center;justify-content:center;min-height:36px;margin:0 4px 6px 0;padding:7px 10px}
+.banner-management-table td:last-child .mini{font-size:11px}
+@media(max-width:900px){.banner-management-table{min-width:760px}.banner-management-wrap{scrollbar-width:thin}}
+
+
+.need-auth-admin{margin-top:14px;text-align:center}.need-auth-link{border:0;background:none;color:#277b54;text-decoration:underline;cursor:pointer;font:inherit;padding:9px}.profile-check-row{display:flex;gap:8px;align-items:stretch}.profile-check-row input{min-width:0;flex:1}.profile-check-row button{white-space:nowrap;flex:none;padding:0 14px}.field small{display:block;margin-top:6px;color:#78877d}#memberSignupError,#memberLoginError{color:#ba3c3c;min-height:1.1em}
+
+
+.signup-region-row{display:flex;gap:10px;align-items:stretch;width:100%;min-width:0}
+.signup-region-row input{flex:1;min-width:0;background:#f8faf8;cursor:pointer}
+.signup-region-row button{flex:0 0 auto;white-space:nowrap;padding:0 13px;min-height:48px;font-size:14px}
+@media(max-width:780px){.signup-region-row{flex-wrap:wrap}.signup-region-row input{flex-basis:100%}.signup-region-row button{flex:1}}
+@media(max-width:540px){.signup-region-row{flex-direction:column}.signup-region-row button{min-height:44px}}
+
+
+/* 로그인 상태에서는 우측 닉네임을 클릭 가능한 버튼이 아닌 텍스트로 표시 */
+.header-actions #signupBtn.member-name-label{
+  appearance:none!important;background:transparent!important;border:0!important;
+  box-shadow:none!important;outline:0!important;padding:8px 2px!important;
+  min-width:0!important;min-height:48px!important;height:48px!important;
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  line-height:1.2!important;white-space:nowrap!important;vertical-align:middle!important;
+  color:#213b2d!important;font-weight:700!important;cursor:default!important;
+  opacity:1!important;pointer-events:none!important;
+}
+.header-actions #signupBtn.member-name-label:hover,
+.header-actions #signupBtn.member-name-label:focus{
+  background:transparent!important;border:0!important;box-shadow:none!important;
+}
+
+
+/* The landing page is a separate, deliberate entry screen. */
+body.landing-state{background:#fff;overflow-x:hidden}
+body.landing-state>.header,body.landing-state>main,body.landing-state>#userArea,body.landing-state>#adminArea{display:none!important}
+body:not(.landing-state) #welcomeLanding{display:none!important}
+#welcomeLanding{min-height:100svh;background:#fff;display:flex;align-items:center;justify-content:center;padding:36px 22px;color:#172820}
+.welcome-inner{width:min(100%,660px);text-align:center}
+.welcome-logo{display:inline-block;font-size:25px;font-weight:900;letter-spacing:-1.5px;color:#20744d;margin-bottom:55px}
+.welcome-logo span{color:#a3c87e}
+.welcome-inner h1{font-size:clamp(30px,5vw,45px);letter-spacing:-1.8px;line-height:1.38;margin:0 0 13px;font-weight:800}
+.welcome-lead{font-size:16px;color:#75827a;margin:0 0 45px;line-height:1.7}
+.welcome-actions{display:grid;grid-template-columns:1fr 1fr;gap:14px;text-align:left}
+.welcome-action{display:flex;flex-direction:column;justify-content:space-between;min-height:190px;padding:28px 26px;background:#f6f8f7;border:1px solid #edf0ee;border-radius:22px;text-align:left;transition:background .15s,transform .15s,border-color .15s;color:#1b2c22}
+.welcome-action:hover{background:#eff7f1;border-color:#b5d8c2;transform:translateY(-2px)}
+/* 이웃 도와주기: 한 단계 강조된 초록색 선택 카드 */
+#landingHelp{background:#207c56;border-color:#207c56;color:#fff;box-shadow:0 8px 22px rgba(28,112,76,.10)}
+#landingHelp small{color:#e2f3e9}
+#landingHelp .welcome-arrow{color:#fff}
+#landingHelp:hover{background:#176744;border-color:#176744;transform:translateY(-2px)}
+#landingHelp:active{background:#115637;transform:translateY(0)}
+
+.welcome-action:focus-visible{outline:3px solid #25845c;outline-offset:3px}
+.welcome-action strong{font-size:23px;font-weight:800;letter-spacing:-.9px}
+.welcome-action small{font-size:14px;line-height:1.6;color:#6c7a71;margin-top:11px}
+.welcome-arrow{align-self:flex-end;font-size:23px;color:#27845f;margin-top:20px}
+.welcome-footer{margin-top:32px;color:#98a49b;font-size:12px}
+@media(max-width:540px){.welcome-logo{margin-bottom:40px}.welcome-lead{margin-bottom:32px}.welcome-actions{grid-template-columns:1fr;gap:12px}.welcome-action{min-height:145px;padding:22px 23px}.welcome-action strong{font-size:21px}.welcome-arrow{margin-top:5px}}
+
+
+/* 요청 화면: 첫 행동인 글 작성에 시선을 집중 */
+body.request-mode .banner{padding-top:58px!important}
+body.request-mode #modePanel{display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;gap:26px!important;padding:0 0 35px!important;border-bottom:1px solid #edf1ee!important}
+body.request-mode #modePanel h2{font-size:clamp(31px,4.3vw,44px)!important;letter-spacing:-1.7px!important;margin-bottom:10px!important}
+body.request-mode #modePanel p{font-size:16px!important}
+body.request-mode #modePanel .mode-actions{display:block!important;width:min(100%,470px)!important;margin-inline:auto!important;text-align:center!important}
+body.request-mode #modePanel .mode-actions::before{content:'지금 바로 시작해 보세요';display:block;color:#66776c;font-size:13px;font-weight:700;margin-bottom:12px}
+body.request-mode #heroCreateBtn{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;min-height:68px!important;padding:19px 24px!important;background:#16885c!important;color:white!important;border:0!important;border-radius:16px!important;font-size:19px!important;font-weight:800!important;letter-spacing:-.5px!important;box-shadow:0 8px 22px rgba(22,136,92,.14)!important;cursor:pointer}
+body.request-mode #heroCreateBtn:hover{background:#10724b!important;transform:translateY(-1px)}
+body.request-mode #heroCreateBtn:focus-visible{outline:3px solid #9cdec0!important;outline-offset:3px!important}
+body.request-mode #requestWorkspace{margin-top:34px!important}
+body.request-mode .request-workspace-head{padding-bottom:8px!important}
+body.request-mode .request-workspace-head h2{font-size:23px!important}
+@media(max-width:560px){body.request-mode .banner{padding-top:34px!important}body.request-mode #modePanel{gap:22px!important}body.request-mode #heroCreateBtn{min-height:62px!important;font-size:17px!important}}
+
+
+/* 요청 화면: 구분선 제거 + 남는 화면 높이에서 세로 중앙 정렬 */
+body.request-mode #modePanel{border-bottom:0!important}
+body.request-mode #requestWorkspace{border-top:0!important}
+body.request-mode .request-workspace{border-top:0!important}
+body.request-mode .footer{border-top:0!important}
+body.request-mode{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+body.request-mode > .header{flex:0 0 auto}
+body.request-mode > #top{flex:1 0 auto;display:flex;flex-direction:column}
+body.request-mode > .footer{flex:0 0 auto;margin-top:auto}
+/* 작성 화면에 추가 콘텐츠가 없을 때만 정확히 화면 중앙에 배치 */
+body.request-mode:has(#requestWorkspace.hidden) > #top{justify-content:center}
+body.request-mode:has(#requestWorkspace.hidden) .banner{padding:30px 0!important;width:100%}
+body.request-mode:has(#requestWorkspace.hidden) #modePanel{padding:0!important;gap:28px!important}
+body.request-mode:has(#requestWorkspace.hidden) #modePanel > div:first-child{max-width:780px!important}
+body.request-mode:has(#requestWorkspace.hidden) #modePanel .mode-actions{width:min(100%,470px)!important}
+@media(max-width:560px){body.request-mode:has(#requestWorkspace.hidden) .banner{padding:26px 0!important}}
+
+
+/* 주요 탐색은 두 역할에 집중하고 개인 메뉴는 우측으로 분리 */
+.header-actions{display:flex;align-items:center;gap:8px}
+.header-pop-wrap{position:relative;display:flex;align-items:center}
+.bell-button,.account-button{height:40px;border:1px solid transparent;background:transparent;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:#343e43}
+.bell-button{width:42px;position:relative}
+.bell-button:hover,.account-button:hover{background:#f2f6f3}
+.account-button{padding:0 12px;font-size:13px;font-weight:700;gap:8px;white-space:nowrap}
+.account-chevron{font-size:17px;color:#83918a}
+.bell-dot{position:absolute;right:9px;top:7px;width:8px;height:8px;border-radius:50%;background:#e75c4a;border:2px solid #fff;box-sizing:content-box}
+.header-pop{position:absolute;top:calc(100% + 12px);right:0;width:min(350px,calc(100vw - 28px));background:#fff;border:1px solid #e8eeea;box-shadow:0 14px 45px rgba(24,50,38,.12);border-radius:16px;z-index:1000;padding:12px;color:#24332c}
+.header-pop.hidden,.bell-dot.hidden{display:none!important}
+.account-pop{width:190px;padding:7px;max-height:calc(100vh - 100px);overflow-y:auto}
+.account-pop button{display:block;width:100%;border:0;border-radius:9px;background:none;text-align:left;padding:13px 12px;cursor:pointer;color:#26372e;font-size:14px;font-weight:600}
+.account-pop button:hover{background:#f1f7f3}
+.pop-heading{display:flex;align-items:center;justify-content:space-between;padding:5px 6px 12px;border-bottom:1px solid #f0f3f1}
+.pop-heading strong{font-size:16px}
+.pop-text-btn{border:0;background:none;color:#13845a;font-size:12px;cursor:pointer}
+.bell-items{max-height:340px;overflow:auto}
+.bell-item{padding:14px 7px;border-bottom:1px solid #f2f4f2}
+.bell-item:last-child{border-bottom:0}
+.bell-item p{font-size:13px;line-height:1.6;margin:0 0 4px;color:#273c30}
+.bell-item small{font-size:11px;color:#8b9990}
+.bell-item.unread{background:#f6fbf7;border-radius:8px}
+.bell-empty{padding:36px 10px;text-align:center;color:#8b9690;font-size:13px}
+@media(max-width:720px){.header-actions{gap:2px}.account-button{padding:0 6px;font-size:12px}.bell-button{width:35px}.header-pop{right:-30px}.account-pop{right:0}}
+
+/* 간결한 내 메뉴: 관련 항목을 묶고 대화 단독 메뉴 제거 */
+.account-pop{width:240px!important;padding:13px!important;border-radius:18px!important;box-shadow:0 16px 44px rgba(24,48,35,.12)!important}
+.account-group-title{padding:11px 12px 7px;font-size:11px;letter-spacing:.05em;font-weight:800;color:#8b9a90}
+.account-pop button{display:flex!important;align-items:center;justify-content:space-between;min-height:46px;padding:12px 13px!important;border-radius:10px!important;font-size:14px!important;font-weight:700!important;color:#26392e!important}
+.account-pop button:hover,.account-pop button:focus-visible{background:#f1f8f4!important;color:#13784f!important}
+.menu-arrow{font-size:20px;font-weight:400;line-height:1;color:#a6b5ab}
+.account-menu-divider{height:1px;background:#edf1ee;margin:10px 5px 5px}
+@media(max-width:600px){.account-pop{width:220px!important}}
+
+/* 탐색 화면: 키워드 버튼 대신 명확한 카테고리 선택 */
+.category-shortcuts{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:22px 0 25px;padding:0!important;background:transparent!important;border:0!important}
+.category-shortcuts-title{font-size:14px;font-weight:800;color:#6a7b70;margin-right:4px;white-space:nowrap}
+.category-shortcuts .category-chip{display:inline-flex;align-items:center;justify-content:center;gap:5px;border:1px solid #d9e4dc;background:#fff;color:#43584a;border-radius:999px;min-height:43px;padding:9px 16px;font-size:14px;font-weight:700;transition:background .15s,border-color .15s}
+.category-shortcuts .category-chip:hover{background:#f1f7f3;border-color:#91bca0}
+.category-shortcuts .category-chip.selected{background:#183f2c;color:#fff;border-color:#183f2c}
+@media(max-width:680px){.category-shortcuts{gap:7px;margin:17px 0 22px}.category-shortcuts-title{flex-basis:100%;margin-bottom:2px}.category-shortcuts .category-chip{font-size:13px;min-height:40px;padding:8px 12px}}
+
+
+/* 검색창을 클릭하면 인기 검색어를 보여주는 가벼운 드롭다운 */
+.search-row{position:relative;z-index:15}
+.popular-search-panel{position:absolute;top:calc(100% + 8px);left:0;right:0;background:#fff;border:1px solid #e6ece8;border-radius:18px;box-shadow:0 16px 42px rgba(17,44,31,.12);padding:18px 18px 12px;max-height:min(420px,65vh);overflow:auto;z-index:30}
+.popular-search-panel.hidden{display:none!important}
+.popular-search-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:12px}
+.popular-search-heading strong{font-size:15px;color:#203c2d}
+.popular-search-heading span{font-size:12px;color:#89978c}
+.popular-search-list{display:grid;grid-template-columns:1fr 1fr;gap:3px 16px}
+.popular-search-list button{display:flex;align-items:center;gap:12px;width:100%;min-height:44px;padding:8px 10px;border:0;border-radius:9px;background:#fff;color:#24372b;text-align:left;font-size:14px;cursor:pointer}
+.popular-search-list button:hover,.popular-search-list button:focus-visible{background:#f1f7f3;outline:none}
+.popular-search-rank{font-weight:800;color:#148052;min-width:18px;font-size:14px}
+.popular-search-empty{color:#8a968c;padding:12px;font-size:13px}
+@media(max-width:600px){.popular-search-panel{padding:14px 10px 10px}.popular-search-list{grid-template-columns:1fr}.popular-search-heading{padding:0 8px}}
+
+/* 요청 목록: 설명은 상세 화면에서만 표시 */
+.feed .post{min-height:0!important;padding:19px 21px!important;gap:0}
+.feed .post h3{margin:0 0 14px!important;font-size:18px;line-height:1.5}
+.feed .post .post-thumb{max-height:135px;margin:0 0 14px}
+.feed .post .post-foot{margin-top:auto;padding-top:12px}
+@media(max-width:680px){.feed .post{padding:17px!important}}
+/* 신고 관리 / 읽음 표시 */
+.report-controls{display:flex;align-items:center;gap:12px;margin:20px 0}.report-controls select{width:180px;min-height:42px}.report-list{display:grid;gap:12px}.report-item{border:1px solid #e3ebe5;border-radius:14px;padding:18px;background:#fff;min-width:0}.report-item-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.report-status{background:#eaf5ed;color:#24784e;border-radius:8px;padding:5px 10px;font-size:12px;font-weight:700}.report-post-title{font-weight:700;overflow-wrap:anywhere}.report-detail{padding:12px;background:#f6f9f7;border-radius:8px;white-space:pre-wrap;overflow-wrap:anywhere}.report-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.report-actions label{display:flex;align-items:center;gap:10px}.report-actions select{min-height:40px}.chat-read-label{font-weight:600;color:#7d8c82}.chat-read-label.is-read{color:#18895d}.chat-read-demo{display:flex;justify-content:space-between;align-items:center;gap:12px;color:#829187;font-size:12px;margin:4px 0 8px}.chat-read-demo button{font-size:12px;padding:7px 10px;min-height:32px}
+
+/* React 환경에서 기존 NEED IT 화면 구조 보정 */
+
+/* 기본 레이아웃 */
+html,
+body,
+#root,
+#legacy-app {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+}
+
+#legacy-app {
+    min-height: 100vh;
+}
+
+/* 시작 화면에서 일반 화면 숨기기 */
+body.landing-state #legacy-app > .header,
+body.landing-state #legacy-app > main,
+body.landing-state #legacy-app > #userArea,
+body.landing-state #legacy-app > #adminArea,
+body.landing-state #legacy-app > .footer {
+    display: none !important;
+}
+
+/* 시작 화면 */
+body.landing-state #welcomeLanding {
+    display: flex !important;
+    min-height: 100dvh;
+}
+
+/* 시작 화면 종료 후 숨기기 */
+body:not(.landing-state) #welcomeLanding {
+    display: none !important;
+}
+
+/* 물건 요청 화면 */
+body.request-mode #legacy-app {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+body.request-mode #legacy-app > .header {
+    flex: 0 0 auto;
+}
+
+body.request-mode #legacy-app > #top {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+body.request-mode #legacy-app > .footer {
+    flex: 0 0 auto;
+    margin-top: auto;
+}
+
+/* 요청 글이 없는 경우 중앙 정렬 */
+body.request-mode:has(#requestWorkspace.hidden) #legacy-app > #top {
+    justify-content: center;
+}
+
+/* 일반 화면 너비 */
+#legacy-app .shell {
+    width: min(100% - 40px, 1080px);
+    margin-inline: auto;
+    box-sizing: border-box;
+}
+/* 2026-10-30 UI updates */
+#welcomeLanding{position:relative}
+.landing-topbar{position:absolute;top:0;left:0;right:0;width:min(100% - 48px,1220px);margin:auto;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:28px 0;font-size:13px;color:#7a8980}
+.landing-topbar b{color:#1b4631}.landing-auth{display:flex;gap:9px}.landing-auth button{height:41px;min-width:86px;border:1px solid #dce7df;border-radius:11px;background:white;color:#234833;font-weight:800;padding:0 16px}.landing-auth button:last-child{border-color:#25835b;background:#25835b;color:white}.landing-auth button:hover{filter:brightness(.96)}
+@media(max-width:600px){.landing-topbar{width:calc(100% - 32px);padding:18px 0}.landing-topbar>span{font-size:11px;max-width:45%}.landing-auth button{min-width:68px;padding:0 10px;font-size:12px}}
+#overlay:has(#adminLoginForm) .dialog{width:min(100%,480px);padding:30px;border-radius:18px}
+#adminLoginForm .field input{width:100%;min-height:52px;border-radius:11px}
+#adminLoginForm .form-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#adminLoginForm .form-actions button{width:100%;min-height:50px;padding:0 10px;border-radius:11px}
+.report-subtabs{display:flex;gap:8px;margin:20px 0 15px;border-bottom:1px solid #e5ece7;padding-bottom:12px;flex-wrap:wrap}
+.report-subtabs button{border:1px solid #dce7df;background:white;color:#3c6550;border-radius:10px;padding:11px 17px;font-weight:800}
+.report-subtabs button.active{background:#217750;color:white;border-color:#217750}
+.report-user-list{display:grid;gap:12px}.report-user-card{border:1px solid #e1ebe4;border-radius:13px;padding:18px;background:#fff}
+.report-user-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.report-user-head strong{font-size:17px}
+.report-user-card p{margin:9px 0;color:#647568;font-size:13px;line-height:1.7}.report-user-actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:13px}.report-user-actions select{min-height:43px;border:1px solid #cbded1;border-radius:9px;padding:0 12px;background:white}
+
+
+/* 10/30 header controls: matching heights and consistent typography */
+.header-actions #loginBtn,
+.header-actions #signupBtn,
+.header-actions #adminLogout{
+  box-sizing:border-box!important;
+  display:inline-flex;align-items:center;justify-content:center;
+  height:48px!important;min-height:48px!important;
+  padding:0 19px!important;border-radius:11px!important;
+  font-size:14px!important;font-weight:800!important;line-height:1.2!important;
+  white-space:nowrap!important;
+}
+.header-actions #adminLogout{min-width:148px!important;border:1px solid #bdd6c5!important;background:#fff!important;color:#176445!important}
+.header-actions #adminLogout.hidden,.header-actions #signupBtn.hidden{display:none!important}
+@media(max-width:680px){.header-actions #loginBtn,.header-actions #signupBtn,.header-actions #adminLogout{height:42px!important;min-height:42px!important;padding:0 11px!important;font-size:12px!important}.header-actions #adminLogout{min-width:0!important}}
+/* banner cross-fade: outgoing slide fades out and incoming slide fades in */
+#mainAdSlot .hero-ad-frame{transition:opacity .32s ease-in-out;opacity:1;will-change:opacity}
+#mainAdSlot .hero-ad-frame.ad-changing{opacity:0}
+@media(prefers-reduced-motion:reduce){#mainAdSlot .hero-ad-frame{transition:none!important}}
+
+/* Campaign targeting settings */
+.ad-type-picker{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+.ad-type-picker label{display:flex;align-items:center;gap:11px;padding:14px;border:1px solid #dfe8e2;border-radius:12px;cursor:pointer;background:#fff}
+.ad-type-picker label:has(input:checked){border-color:#26875b;background:#f0f8f2}
+.ad-type-picker input{width:17px!important;min-height:17px!important;accent-color:#208257}
+.ad-type-picker strong,.ad-type-picker small{display:block}.ad-type-picker strong{font-size:14px;color:#213c2c}.ad-type-picker small{font-size:12px;color:#718377;margin-top:3px}
+.ad-target-disabled{opacity:.55}.ad-kind{display:inline-flex;border-radius:7px;background:#f0f2f0;color:#66766b;padding:5px 9px;font-size:12px;font-weight:800;white-space:nowrap}.ad-kind.personalized{background:#e7f6ed;color:#17744a}
+/* Compact, restrained sponsored cards in feed and search */
+.ad-compact-polished{background:#f9fbf9!important;border:1px solid #e8eee9!important;border-radius:17px!important;padding:20px 24px!important;min-height:134px;gap:26px;opacity:0;transform:translateY(5px);transition:opacity .48s ease,transform .48s ease}
+.ad-compact-polished.is-visible{opacity:1;transform:translateY(0)}
+.ad-compact-copy{min-width:0;flex:1}.ad-compact-polished .ad-kicker{display:inline-flex;font-size:11px!important;color:#779184!important;letter-spacing:.06em}
+.ad-compact-polished h3{font-size:17px!important;font-weight:800!important;color:#253f30!important;margin:8px 0 5px!important;overflow-wrap:anywhere}
+.ad-compact-polished p{font-size:13px!important;color:#829087!important;line-height:1.6!important}
+.ad-compact-polished .ad-go{font-size:12px!important;color:#25835a!important;margin-top:12px!important;text-decoration:none!important}
+.ad-compact-polished .ad-go:hover{text-decoration:underline!important}
+.ad-compact-media{flex:0 0 170px;max-width:35%;height:102px;overflow:hidden;border-radius:12px;background:#f1f5f2}
+.ad-compact-media img{display:block;width:100%!important;height:100%!important;object-fit:cover!important;border-radius:0!important}
+@media(max-width:640px){.ad-type-picker{grid-template-columns:1fr}.ad-compact-polished{padding:15px!important;gap:12px;min-height:115px}.ad-compact-media{flex-basis:108px;height:88px}.ad-compact-polished h3{font-size:15px!important}}
+@media(prefers-reduced-motion:reduce){.ad-compact-polished{transition:none!important;transform:none!important}}
+
+/* 신고 대상 사용자 카드 크기 및 버튼 정렬 통일 */
+.report-user-list{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:stretch}
+.report-user-card{box-sizing:border-box;width:100%;min-height:270px;display:flex;flex-direction:column;padding:22px 24px;border-radius:16px}
+.report-user-card .report-user-head{min-height:30px}
+.report-user-card .sanction-state{align-self:flex-start;box-sizing:border-box;min-height:32px;margin:10px 0 8px;display:inline-flex;align-items:center}
+.report-user-card p{margin:7px 0;line-height:1.6}
+.report-user-card .report-user-actions{margin-top:auto;padding-top:18px;display:flex;align-items:stretch;gap:10px}
+.report-user-card .report-user-actions button{box-sizing:border-box;min-width:128px;height:46px;min-height:46px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;padding:0 16px;line-height:1.2}
+@media(max-width:520px){.report-user-card{min-height:270px;padding:18px}.report-user-card .report-user-actions button{flex:1;min-width:0}}
+
+
+/* 광고 노출·클릭 기록: 제목/설명/표 간격 및 행 가독성 */
+/* 노출 로그 CSV 버튼을 제목 상단과 정렬 */
+.ad-event-log-panel .admin-section-title{align-items:flex-start}
+.ad-event-log-panel #audImpressionExport{align-self:flex-start;margin-top:0;flex-shrink:0}
+@media(max-width:760px){.ad-event-log-panel .admin-section-title{align-items:flex-start}}
+</style><style>
+/* Landing: hide underlying app in both standalone HTML and React wrapper. */
+body.landing-state #legacy-app > .header,
+body.landing-state #legacy-app > main,
+body.landing-state #legacy-app > #userArea,
+body.landing-state #legacy-app > #adminArea,
+body.landing-state #legacy-app > .footer,
+body.landing-state > .header,
+body.landing-state > main,
+body.landing-state > #userArea,
+body.landing-state > #adminArea,
+body.landing-state > .footer {display:none!important}
+body.landing-state #welcomeLanding {display:flex!important;min-height:100dvh!important;position:relative!important}
+body:not(.landing-state) #welcomeLanding{display:none!important}
+body.landing-state #welcomeLanding .landing-topbar{position:absolute;top:0;left:0;right:0;z-index:2}
+</style><style>/* 신고 대상 사용자 제재 관리 */
+.sanction-state{display:inline-flex;align-items:center;border-radius:9px;background:#eef5f0;color:#37664c;padding:6px 10px;font-size:12px;font-weight:800;margin:8px 0}
+.sanction-state.suspended{background:#fff0ee;color:#a33d36}.sanction-state.warning{background:#fff4df;color:#986318}
+.report-user-actions .primary,.report-user-actions .outline{min-height:42px;padding:0 16px;font-size:13px}
+.sanction-history{display:grid;gap:12px}.sanction-history-item{border:1px solid #e3ece5;border-radius:13px;padding:18px;background:white}
+.sanction-history-item>div{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.sanction-history-item p{margin:8px 0;color:#44594a;white-space:pre-wrap;overflow-wrap:anywhere}.sanction-history-item small{color:#7b8b80}
+.sanction-person{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#f6faf7;border-radius:12px;padding:16px}.sanction-count{font-size:13px;color:#687b6e;line-height:1.7;margin:14px 0 22px}
+.sanction-modal .field select{width:100%;min-height:52px;border:1px solid #cbded1;border-radius:10px;padding:10px;background:white}
+</style><style>
+/* 신고 대상 사용자 카드: 내용과 관계없이 모든 행을 동일 위치에 고정 */
+.report-user-list { display:grid!important; grid-template-columns:minmax(0,1fr)!important; gap:18px!important; }
+.report-user-list .report-user-card {
+  box-sizing:border-box!important; width:100%!important;
+  height:310px!important; min-height:310px!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-template-rows:34px 40px 30px 30px minmax(0,1fr) 48px!important;
+  row-gap:7px!important; align-items:center!important;
+  padding:22px 24px!important; overflow:hidden;
+}
+.report-user-card .report-user-head{grid-row:1;min-height:0!important;margin:0!important}
+.report-user-card .sanction-state{grid-row:2;justify-self:start;align-self:center!important;margin:0!important;min-height:30px!important}
+.report-user-card > p:nth-of-type(1){grid-row:3;margin:0!important;line-height:1.4!important}
+.report-user-card > p:nth-of-type(2){grid-row:4;margin:0!important;line-height:1.4!important}
+.report-user-card .report-user-actions{grid-row:6;align-self:end!important;margin:0!important;padding:0!important;display:flex!important;gap:10px!important}
+.report-user-card .report-user-actions button{height:48px!important;min-height:48px!important;width:160px!important;min-width:160px!important;padding:0 14px!important}
+@media(max-width:520px){
+ .report-user-list .report-user-card{height:310px!important;min-height:310px!important;padding:18px!important}
+ .report-user-card .report-user-actions button{width:auto!important;min-width:0!important;flex:1!important;font-size:12px!important}
+}
+</style><style>
+/* NEED IT 관리자 로그인 독립 화면 및 푸터 링크 */
+.footer-right{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.admin-footer-link,.landing-admin-footer button{border:0;background:transparent;color:#557667;font-size:13px;font-weight:700;cursor:pointer;padding:6px 2px}
+.admin-footer-link:hover,.landing-admin-footer button:hover{color:#16825a;text-decoration:underline}
+.landing-admin-footer{position:absolute;bottom:15px;left:0;right:0;display:flex;justify-content:center;gap:20px;align-items:center;color:#98a69c;font-size:12px;z-index:3}
+body.admin-login-route #legacy-app > :not(#adminLoginPage){display:none!important}
+body.admin-login-route #adminLoginPage{display:flex!important}
+#adminLoginPage.admin-login-page{min-height:100dvh;background:#f6f9f6;flex-direction:column;align-items:center;position:relative;padding:0 24px;box-sizing:border-box;color:#18372a}
+.admin-login-top{width:min(100%,1120px);height:86px;display:flex;align-items:center;justify-content:space-between;color:#8a9d92;font-size:13px}
+.admin-login-logo{border:0;background:transparent;color:#166444;font-size:22px;font-weight:900;cursor:pointer;padding:0}.admin-login-logo span{color:#a5cb86}
+.admin-login-card{width:min(100%,440px);background:#fff;border:1px solid #e3ebe5;border-radius:22px;box-shadow:0 18px 65px rgba(25,68,45,.07);padding:38px;box-sizing:border-box;margin:auto 0}
+.admin-login-symbol{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:#e8f5ed;color:#20815c;font-size:24px;margin-bottom:20px}
+.admin-login-eyebrow{font-size:11px;font-weight:900;letter-spacing:.12em;color:#28835f}
+.admin-login-card h1{font-size:27px;letter-spacing:-.04em;margin:9px 0 7px}
+.admin-login-description{color:#829188;font-size:14px;margin:0 0 30px}
+#adminPageLoginForm{display:flex;flex-direction:column;gap:10px}
+#adminPageLoginForm label{font-size:13px;font-weight:800;margin-top:6px}
+#adminPageLoginForm input{height:49px;width:100%;border:1px solid #dbe7de;border-radius:11px;box-sizing:border-box;padding:0 14px;font-size:14px;outline:0;background:#fff}
+#adminPageLoginForm input:focus{border-color:#20815c;box-shadow:0 0 0 3px #e6f5eb}
+.admin-page-error{color:#b03b3b;font-size:12px;min-height:17px;margin:0}
+.admin-page-submit{height:49px;background:#207d57;color:white;border:0;border-radius:11px;font-size:15px;font-weight:800;cursor:pointer}
+.admin-page-submit:hover{background:#166c4a}
+.admin-demo-hint{margin:20px 0 0;font-size:11px;line-height:1.8;color:#9aa79f;text-align:center}
+.admin-login-return{display:block;border:0;background:transparent;margin:20px auto 0;color:#47715c;font-size:13px;font-weight:700;cursor:pointer}
+.admin-login-bottom{height:68px;display:flex;align-items:center;color:#a1ada4;font-size:12px}
+@media(max-width:520px){.admin-login-card{padding:26px 22px}.admin-login-top{height:70px}.landing-admin-footer{bottom:8px}}
+</style><style>
+.needit-suspension{text-align:center;padding:10px 8px 4px}.needit-suspension-icon{font-size:38px}.needit-suspension h3{font-size:19px;margin:12px 0}.needit-suspension p{color:#607066}.needit-suspension dl{background:#f3f8f3;border:1px solid #dae8da;border-radius:12px;padding:18px;text-align:left;display:grid;grid-template-columns:100px 1fr;gap:14px;margin:20px 0}.needit-suspension dt{font-weight:700;color:#3b5c44}.needit-suspension dd{margin:0;overflow-wrap:anywhere}.needit-suspension .primary{width:100%}
+</style><style id="needit-conditional-header-signup">.header-actions #signupBtn.hidden{display:none!important}</style><style>
+/* 고객 필터링 분석 */
+.aud-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:22px}.aud-grid label{display:grid;gap:8px;font-size:13px;font-weight:750;color:#536d5c}.aud-grid input,.aud-grid select,.aud-actions input,.aud-actions select{width:100%;box-sizing:border-box;min-height:46px;border:1px solid #cbded1;border-radius:10px;padding:10px 12px;background:#fff;color:#20382a}.aud-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:18px 0}.aud-actions input{max-width:270px}.aud-actions select{max-width:190px}.aud-metrics{margin-top:18px}.admin-bar{grid-template-columns:minmax(130px,200px) 1fr 65px!important}@media(max-width:750px){.aud-grid{grid-template-columns:1fr}.aud-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-bar{grid-template-columns:110px 1fr 50px!important}}
+
+
+/* 고객 필터링 화면: 입력창 높이 통일 + 표 내용 넘침 방지 */
+.aud-grid{align-items:stretch;gap:18px 20px}
+.aud-grid>label{display:flex!important;flex-direction:column;min-width:0;gap:10px;align-self:stretch;margin:0!important;line-height:1.45}
+.aud-grid>label>input,.aud-grid>label>select{display:block!important;width:100%!important;min-width:0!important;height:54px!important;min-height:54px!important;max-height:54px!important;margin:0!important;padding:0 15px!important;box-sizing:border-box!important;border:1px solid #cbded1!important;border-radius:10px!important;font:inherit!important;font-size:15px!important;line-height:normal!important;background-color:#fff!important;box-shadow:none!important}
+.aud-grid>label>select{padding-right:34px!important}
+.admin-table-wrap:has(.aud-results-table){width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+.aud-results-table{width:100%!important;min-width:760px;table-layout:fixed!important;border-collapse:collapse}
+.aud-results-table th,.aud-results-table td{box-sizing:border-box;min-width:0!important;max-width:0;white-space:normal!important;overflow-wrap:anywhere!important;word-break:break-word!important;vertical-align:middle;line-height:1.5;padding:14px 12px!important}
+.aud-results-table th:nth-child(1){width:13%}.aud-results-table th:nth-child(2){width:14%}.aud-results-table th:nth-child(3){width:15%}.aud-results-table th:nth-child(4){width:11%}.aud-results-table th:nth-child(5){width:34%}.aud-results-table th:nth-child(6){width:13%}
+.aud-results-table td:last-child{font-size:13px;word-break:keep-all!important;overflow-wrap:normal!important}
+.aud-results-table td:last-child .aud-exposure{display:inline-block;max-width:100%;white-space:normal;word-break:keep-all}
+@media(max-width:750px){.aud-grid{grid-template-columns:1fr!important}.aud-results-table{min-width:760px}}
+
+</style><style id="aud-result-control-size-fix">
+/* 고객별 결과 검색 컨트롤: 선택 박스와 검색 박스 동일 규격 */
+.admin-panel .aud-actions:has(#audView){display:grid!important;grid-template-columns:repeat(2,minmax(0,320px))!important;align-items:stretch!important;gap:14px!important;margin:18px 0 24px!important}
+.admin-panel .aud-actions #audView,.admin-panel .aud-actions #audQuery{appearance:auto;display:block!important;width:100%!important;max-width:none!important;min-width:0!important;height:54px!important;min-height:54px!important;max-height:54px!important;margin:0!important;padding:0 16px!important;box-sizing:border-box!important;border:1px solid #cbded1!important;border-radius:11px!important;background:#fff!important;color:#20382a!important;font-size:15px!important;line-height:normal!important;box-shadow:none!important}
+.admin-panel .aud-actions #audQuery::placeholder{color:#9aa59e}
+@media(max-width:650px){.admin-panel .aud-actions:has(#audView){grid-template-columns:minmax(0,1fr)!important}}
+</style><style>
+/* 실제 광고 노출·클릭 기록: CSV 버튼과 표가 붙지 않도록 헤더 아래 간격 확보 */
+.ad-event-log-panel .admin-section-title {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  gap: 24px !important;
+  margin-bottom: 30px !important;
+}
+.ad-event-log-panel .admin-section-title > div { min-width: 0; }
+.ad-event-log-panel #audImpressionExport {
+  align-self: flex-start !important;
+  margin: -3px 0 0 !important;
+  flex-shrink: 0 !important;
+}
+.ad-event-log-panel > .admin-table-wrap { margin-top: 0 !important; }
+@media (max-width: 650px) {
+  .ad-event-log-panel .admin-section-title { margin-bottom: 22px !important; }
+}
+</style></head><body class="landing-state">
+<header class="header"><div class="shell header-inner"><a aria-label="NEED IT 홈" class="logo" href="#top">NEED<span> IT</span></a><nav aria-label="주 메뉴" class="nav"><button class="active" id="homeNav">홈</button><button id="requestsNav">물건 요청하기</button><button id="helpNav">이웃 도와주기</button><button class="hidden" id="adminNav">관리자 센터</button></nav><button aria-hidden="true" class="hidden" id="activityNav" tabindex="-1" type="button"></button><button aria-hidden="true" class="hidden" id="myNav" tabindex="-1" type="button"></button><div class="header-actions"><button aria-label="채팅방 목록" class="need-chat-head" id="headerChats" title="채팅방 목록" type="button"><svg aria-hidden="true" fill="none" height="23" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24" width="23"><path d="M20 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 20l1-4.4A8.5 8.5 0 1 1 20 11.5Z"></path></svg> <span class="need-chat-badge hidden" id="chatUnread">0</span></button><div class="header-pop-wrap"><button aria-expanded="false" aria-label="알림" class="bell-button" id="headerBell" title="알림"><svg fill="none" height="21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24" width="21"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path><path d="M10 21h4"></path></svg><span class="bell-dot hidden" id="bellDot"></span></button><div aria-label="알림 목록" class="header-pop hidden" id="bellPanel" role="region"><div class="pop-heading"><strong>알림</strong><div class="bell-heading-actions"><button class="pop-text-btn" id="bellReadAll" type="button">모두 읽음</button><button class="pop-text-btn bell-clear-all" id="bellClearAll" type="button">전체 삭제</button></div></div><div class="bell-items" id="bellItems"></div></div></div><div class="header-pop-wrap"><button aria-expanded="false" aria-label="내 메뉴" class="account-button" id="accountMenuBtn">내 메뉴 <span class="account-chevron">⌄</span></button><div aria-label="내 메뉴" class="header-pop account-pop hidden" id="accountMenu" role="menu"><div class="account-group-title">나의 나눔 활동</div><button data-menu-tab="requests" role="menuitem"><span class="account-item-text"><strong>내 요청</strong><small>내가 올린 물건 요청 관리</small></span><span class="menu-arrow">›</span></button><button data-menu-tab="received" role="menuitem"><span class="account-item-text"><strong>받은 제안</strong><small>내 요청에 도착한 나눔 제안</small></span><span class="menu-arrow">›</span></button><button data-menu-tab="sent" role="menuitem"><span class="account-item-text"><strong>보낸 제안</strong><small>이웃에게 내가 보낸 나눔 제안</small></span><span class="menu-arrow">›</span></button><button data-menu-tab="favorites" role="menuitem"><span class="account-item-text"><strong>관심 목록</strong><small>저장해 둔 요청 글 보기</small></span><span class="menu-arrow">›</span></button><div class="account-menu-divider"></div><div class="account-group-title">계정 설정</div><button data-menu-tab="profile" role="menuitem"><span class="account-item-text"><strong>내 정보</strong><small>프로필과 동네 설정</small></span><span class="menu-arrow">›</span></button></div></div><button class="ghost" id="loginBtn">로그인</button><button class="outline" id="signupBtn">회원가입</button><button class="small-btn hidden" id="adminLogout">관리자 로그아웃</button></div></div></header>
+<main id="top"><div class="ad-slot hidden" id="mainAdSlot"></div>
+<section class="banner"><div class="shell"><div aria-label="나눔 이용 목적" class="mode-switcher" role="tablist"><button aria-selected="false" id="viewRequest" role="tab" type="button">🙋 물건 요청하기</button><button aria-selected="true" id="viewHelp" role="tab" type="button">🎁 이웃 도와주기</button></div><div aria-live="polite" class="mode-panel" id="modePanel"><div><span class="mode-badge" id="modeBadge">🙋 물건 요청하기</span><h2 id="modeTitle">어떤 물건이 필요하세요?</h2><p id="modeDescription">요청 글을 작성하면 이웃이 나눔을 제안할 수 있어요. 사진은 없어도 괜찮아요.</p></div><div class="mode-actions"><button class="primary" id="heroCreateBtn" type="button">＋ 필요한 물건 요청하기</button><button class="outline" id="modeSecondary" type="button">내 요청 확인하기 →</button></div></div><div class="request-workspace hidden" id="requestWorkspace"><div class="request-guide"><strong>나눔은 이렇게 진행돼요</strong><p>필요한 물건 요청 → 이웃의 제안 확인 → 제안 수락 → 나눔 완료</p></div><div class="request-workspace-head"><div><h2>내가 요청한 물건</h2><p>작성한 요청과 받은 제안을 한곳에서 확인하세요.</p></div><button class="outline" id="requestReceivedBtn" type="button">받은 제안 확인 →</button></div><div class="request-my-posts" id="requestMyPosts"></div></div><div id="helpBrowseArea"><div class="top-tools"><div class="location"><span aria-hidden="true">📍</span><strong id="regionText">서울특별시 마포구 상암동</strong><span class="region-verified" id="regionStatus">● 동네 인증 필요</span><button class="small-btn" id="regionBtn">동네 인증·변경</button></div></div><div class="search-row"><label class="search-wrap"><svg aria-hidden="true" fill="none" height="22" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="22"><circle cx="10.8" cy="10.8" r="7"></circle><path d="m16 16 5 5"></path></svg><input aria-label="요청 게시글 검색" id="searchInput" placeholder="이웃이 요청한 물건 검색하기 · 예: 모니터, 책상"/></label></div><div class="inline-ad-wrap hidden" id="searchAdSlot"></div><p class="hint-strip" id="roleHint">요청 글을 작성하면 이웃이 나눔을 제안할 수 있어요. 필요한 물건을 직접 구매할 필요는 없어요.</p></div></div></section>
+<section class="content" id="browseContent"><div class="shell"><div class="section-head"><div><h2 id="categoryHeading">이웃들이 찾는 물건 살펴보기</h2><p>관심 있는 물품 종류를 선택해 보세요.</p></div></div><div class="categories" id="categoryGrid"></div><div id="feedArea"><div class="list-head"><div><h2 id="feedHeading">우리 동네 나눔 요청 <span id="resultCount" style="color:var(--green);font-size:17px"></span></h2><p id="feedDescription">필요한 물건을 찾는 이웃에게 나눔을 제안해 보세요.</p></div><select aria-label="정렬 방식" class="select" id="sortSelect"><option value="latest">최신순</option><option value="oldest">오래된순</option></select></div><div class="filters"><button class="filter active" data-state="all">전체</button><button class="filter" data-state="open">요청 중</button><button class="filter" data-state="done">나눔 완료</button></div><div class="feed" id="feed"></div><button class="outline more hidden" id="moreBtn">요청 글 더 보기 ↓</button></div><div class="info-box"><div><strong>나누고 싶은 물건이 있으신가요?</strong><p>별도로 물건을 올리지 않아도 돼요. 필요한 이웃의 요청 글에서 바로 나눔을 제안할 수 있어요.</p></div><button class="outline" id="browseBtn">나눔 요청 둘러보기 →</button></div></div></section>
+</main><section class="user-area hidden" id="userArea"><div class="shell"><div class="user-heading"><div><h1 id="userTitle">나의 나눔 활동</h1><p class="user-subtitle" id="userSubtitle">나의 나눔 내역을 확인하세요.</p></div><button class="outline" id="userBack">← 홈으로</button></div><div id="userContent"></div></div></section><section class="admin-area hidden" id="adminArea"><div class="shell"><div class="admin-head"><div><span class="admin-badge">● ADMIN CONSOLE</span><h1>NEED IT 관리자 센터</h1><p>캠페인 운영 · 광고 배너 · 사용자 행동 데이터</p></div><button class="outline" id="adminBack">← 서비스로 돌아가기</button></div><div class="admin-tabs" id="adminTabs"><button class="active" data-tab="dashboard">📊 대시보드</button><button data-tab="campaigns">🎯 캠페인 관리</button><button data-tab="banners">🖼️ 광고 배너</button><button data-tab="logs">🧾 행동 로그</button><button data-tab="reports">🚩 신고 관리 <span id="reportPendingBadge"></span></button></div><div id="adminContent"></div></div></section>
+<footer class="footer"><div class="shell"><span><b style="color:var(--deep)">NEED IT</b> · 필요한 물건, 함께 나눠요.</span><span class="footer-right"><span>화면 설계용 데모</span><button class="admin-footer-link" id="footerAdminLink" type="button">관리자 페이지 ↗</button></span></div></footer>
+<div class="overlay hidden" id="overlay" role="presentation"><div aria-labelledby="dialogTitle" aria-modal="true" class="dialog" role="dialog"><div class="dialog-head"><h2 id="dialogTitle"></h2><button aria-label="닫기" class="close" id="closeDialog">×</button></div><div id="dialogBody"></div></div></div><div class="toast hidden" id="toast" role="status"></div>
+<section aria-label="NEED IT 시작 화면" class="hidden" id="welcomeLanding">
+<div class="landing-topbar"><span><b>NEED IT</b> · 필요한 물건, 함께 나눠요.</span><div class="landing-auth"><button id="landingLogin" type="button">로그인</button><button id="landingSignup" type="button">회원가입</button></div></div><div class="welcome-inner">
+<div class="welcome-logo">NEED<span> IT</span></div>
+<h1>필요한 물건을 나누는<br/>가장 쉬운 방법</h1>
+<p class="welcome-lead">어떤 나눔을 시작할까요?</p>
+<div class="welcome-actions">
+<button class="welcome-action" id="landingRequest" type="button">
+<span><strong>물건 요청하기</strong><br/><small>필요한 물건을 이웃에게 요청해요</small></span>
+<span aria-hidden="true" class="welcome-arrow">↗</span>
+</button>
+<button class="welcome-action" id="landingHelp" type="button">
+<span><strong>이웃 도와주기</strong><br/><small>이웃이 찾는 물건을 나눠줘요</small></span>
+<span aria-hidden="true" class="welcome-arrow">↗</span>
+</button>
+</div>
+<p class="welcome-footer">우리 동네 나눔 커뮤니티 · NEED IT</p>
+</div>
+<div class="landing-admin-footer"><span>© 2026 NEED IT</span><button id="landingAdminLink" type="button">관리자 페이지 ↗</button></div>
+</section>
+<section aria-label="관리자 로그인 화면" class="admin-login-page hidden" id="adminLoginPage">
+<header class="admin-login-top"><button class="admin-login-logo" id="adminLoginHome" type="button">NEED<span> IT</span></button><span>관리자 전용</span></header>
+<div class="admin-login-card">
+<div class="admin-login-symbol">✦</div>
+<span class="admin-login-eyebrow">ADMIN CONSOLE</span>
+<h1>관리자 로그인</h1>
+<p class="admin-login-description">NEED IT 운영 관리자만 접근할 수 있습니다.</p>
+<form id="adminPageLoginForm">
+<label for="adminPageId">관리자 아이디</label><input autocomplete="username" id="adminPageId" placeholder="아이디를 입력하세요" required="" type="text"/>
+<label for="adminPagePassword">비밀번호</label><input autocomplete="current-password" id="adminPagePassword" placeholder="비밀번호를 입력하세요" required="" type="password"/>
+<p class="admin-page-error" id="adminPageError" role="alert"></p>
+<button class="admin-page-submit" type="submit">관리자 로그인</button>
+</form>
+<p class="admin-demo-hint">프론트엔드 시연 계정: admin / admin1234<br/>실제 관리자 인증 및 권한 확인은 백엔드에서 처리해야 합니다.</p>
+<button class="admin-login-return" id="adminLoginReturn" type="button">← 서비스로 돌아가기</button>
+</div>
+<footer class="admin-login-bottom">© 2026 NEED IT · 관리자 전용 페이지</footer>
+</section>
+<script>
 /* NEED IT: ordered application modules, combined into one script to preserve initialization order. */
 
 const STAGE_SAFETY_KEY='needit_safety_v1';
@@ -301,7 +1302,7 @@ function renderAdPlacement(slot,selector,category='전체'){
  el.classList.remove('hidden');
  const nextMarkup=`<div class="ad-compact ad-compact-polished"><div class="ad-compact-copy"><span class="ad-kicker">SPONSORED · 광고</span><h3>${esc(b.name)}</h3><p>${slot==='SEARCH_001'?'지금 찾는 물건과 함께 살펴볼 만한 정보':slot==='FEED_001'?'일상에 도움이 되는 추천 정보':'나눔 이후에 도움이 될 수 있는 추천 정보'}</p>${b.link?`<button type="button" class="ad-go">광고 자세히 보기 <span aria-hidden="true">↗</span></button>`:''}</div>${b.image?`<div class="ad-compact-media"><img src="${esc(b.image)}" alt="${esc(b.name)} 광고 이미지"></div>`:''}</div>`;
  if(el.dataset.currentBanner===b.id&&el.querySelector('.ad-compact'))return;
- const swap=()=>{el.innerHTML=nextMarkup;el.dataset.currentBanner=b.id;requestAnimationFrame(()=>el.querySelector('.ad-compact')?.classList.add('is-visible'));el.querySelector('.ad-go')?.addEventListener('click',()=>window.open(b.link,'_blank','noopener,noreferrer'))};
+ const swap=()=>{el.innerHTML=nextMarkup;el.dataset.currentBanner=b.id;el.dataset.adSlot=slot;window.needitAdObserve?.(el,b.id,slot);requestAnimationFrame(()=>el.querySelector('.ad-compact')?.classList.add('is-visible'));el.querySelector('.ad-go')?.addEventListener('click',()=>{window.needitAdClick?.(b.id,slot);window.open(b.link,'_blank','noopener,noreferrer')})};
  if(el.querySelector('.ad-compact')){el.querySelector('.ad-compact').classList.remove('is-visible');clearTimeout(el._adFadeTimer);el._adFadeTimer=setTimeout(swap,260)}else swap();
 }
 
@@ -320,8 +1321,8 @@ function renderMainAd(){
    const b=items[index];slot.dataset.slide=index;
    const content=b.image?`<img class="hero-ad-image" src="${esc(b.image)}" alt="${esc(b.name)} 광고 배너">`:`<div class="hero-ad-fallback"><span>NEED IT · 이웃과 함께하는 나눔</span><strong>${esc(b.name)}</strong><small>우리 동네에서 필요한 물건을 함께 나눠요.</small></div>`;
    slot.innerHTML=`<div class="hero-ad-frame"><div class="hero-ad-creative" ${b.link?'role="link" tabindex="0"':''} aria-label="${esc(b.name)} 광고">${content}</div><span class="hero-ad-label">광고</span>${items.length>1?`<button type="button" class="hero-ad-prev" aria-label="이전 광고">‹</button><button type="button" class="hero-ad-next" aria-label="다음 광고">›</button><span class="hero-ad-counter">${index+1} / ${items.length}</span>`:''}</div>`;
-   const go=()=>{if(b.link)window.open(b.link,'_blank','noopener,noreferrer')};
-   const creative=slot.querySelector('.hero-ad-creative');creative.style.cursor=b.link?'pointer':'default';
+   const go=()=>{window.needitAdClick?.(b.id,'MAIN_001');if(b.link)window.open(b.link,'_blank','noopener,noreferrer')};
+   const creative=slot.querySelector('.hero-ad-creative');window.needitAdObserve?.(creative,b.id,'MAIN_001');creative.style.cursor=b.link?'pointer':'default';
    creative.addEventListener('click',go);creative.addEventListener('keydown',e=>{if(b.link&&(e.key==='Enter'||e.key===' ')){e.preventDefault();go()}});
    const changeSlide=(direction)=>{
     if(slot.dataset.transitioning==='1')return;
@@ -959,8 +1960,7 @@ setInterval(()=>{
 /* 관리자 페이지 전용 진입: 푸터 링크 -> /admin/login -> 관리자 화면 */
 (function(){
  const page=document.getElementById('adminLoginPage');
- if(!page) return;
-
+ const landing=document.getElementById('welcomeLanding');
  const isFilePreview=location.protocol==='file:';
  const isAdminRoute=()=>isFilePreview ? location.hash==='#admin/login' : location.pathname==='/admin/login';
  function navigateAdmin(open){
@@ -1070,3 +2070,151 @@ document.addEventListener('submit',e=>{
 const needitAuthObserver=new MutationObserver(()=>{});
 setTimeout(needitSyncAuthUI,0);
 
+</script><script>/* NEED IT campaign audience analysis: browser demo only. */
+(function(){
+'use strict';
+const SETTINGS='needit_audience_settings_v1',RUNS='needit_audience_runs_v1';
+const IMPRESSIONS='needit_ad_impressions_v1',CLICKS='needit_ad_clicks_v1';
+const read=(key,def)=>{try{return JSON.parse(localStorage.getItem(key))??def}catch{return def}};
+const save=(key,obj)=>{try{localStorage.setItem(key,JSON.stringify(obj));return true}catch(e){alert('저장 공간이 부족합니다. 오래된 분석 이력을 정리해 주세요.');return false}};
+const h=v=>String(v??'').replace(/[&<>"']/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+const day=()=>new Date().toISOString().slice(0,10);
+let selected='',view='all',query='';
+const sample=[{id:'demo-seoul-laptop',nickname:'시연_서울노트북',region:'서울',demo:true},{id:'demo-busan-laptop',nickname:'시연_부산노트북',region:'부산',demo:true},{id:'demo-seoul-chair',nickname:'시연_서울가구',region:'서울',demo:true},{id:'demo-incheon',nickname:'시연_인천',region:'인천',demo:true}];
+const sampleLogs=[{userId:'demo-seoul-laptop',category:'전자제품',keyword:'노트북',timestamp:new Date().toISOString()},{userId:'demo-busan-laptop',category:'전자제품',keyword:'노트북',timestamp:new Date().toISOString()},{userId:'demo-seoul-chair',category:'가구',keyword:'의자',timestamp:new Date().toISOString()}];
+const getCustomers=()=>[...memberAccounts().map(a=>({id:a.id,nickname:a.nickname||a.id,region:a.region||'',demo:false})),...(window.needitSampleAudience?sample:[])];
+const getLogs=()=>[...behaviorLogs.filter(l=>l.userId),...(window.needitSampleAudience?sampleLogs:[])];
+const opts=()=>read(SETTINGS,{});
+const currentRun=()=>read(RUNS,[]).find(r=>r.campaignId===selected);
+function addTab(){const tabs=document.getElementById('adminTabs');if(!tabs||tabs.querySelector('[data-tab="audience"]'))return;const b=document.createElement('button');b.dataset.tab='audience';b.textContent='👥 고객 필터링 분석';b.onclick=()=>showAdmin('audience');tabs.appendChild(b)}
+function render(){addTab();const root=document.getElementById('adminContent');if(!root)return;const cs=campaigns;if(!cs.length){root.innerHTML='<div class="admin-panel"><h2>고객 필터링 분석</h2><p>먼저 캠페인 관리에서 캠페인을 등록해 주세요.</p></div>';return}if(!cs.some(c=>c.id===selected))selected=cs[0].id;
+ const c=cs.find(c=>c.id===selected),settings=opts()[selected]||{},run=currentRun();
+ const rows=run?.results||[],included=rows.filter(x=>x.included),excluded=rows.filter(x=>!x.included),exposure=read(IMPRESSIONS,[]).filter(x=>x.campaignId===selected&&x.runId===run?.id).map(x=>x.userId);
+ const impressionRows=read(IMPRESSIONS,[]).filter(x=>x.campaignId===selected&&x.runId===run?.id),clickRows=read(CLICKS,[]).filter(x=>x.campaignId===selected&&x.runId===run?.id);
+ const exposedIds=[...new Set(exposure)];
+ const reasons={};excluded.forEach(r=>r.reasons.forEach(reason=>reasons[reason]=(reasons[reason]||0)+1));
+ root.innerHTML=`<div class="admin-notice"><b>시연용 고객 필터링</b> · 현재 브라우저에 가입한 회원만 분석합니다. 검색·카테고리 행동은 로그인 계정에 연결된 기록만 사용합니다. 노출·클릭은 이 브라우저에서 로그인한 계정으로 실제 화면에 표시된 시연 이벤트만 기록합니다. 노출이 0건이면 캠페인 진행 상태·배너 노출 위치·선정 고객 계정 일치 여부를 확인하세요. 서버·다른 기기의 노출은 집계되지 않습니다. <label style="margin-left:12px"><input id="audDemo" type="checkbox" ${window.needitSampleAudience?'checked':''}> 예시 고객 4명 추가</label></div>
+ <div class="admin-panel"><div class="admin-section-title"><div><h2>고객 필터링 분석</h2><p>캠페인별 조건을 설정하고 선정·제외 이유를 기록합니다.</p></div><button class="outline" id="audExport">CSV 다운로드</button></div>
+ <div class="aud-grid"><label>캠페인 선택<select id="audCampaign">${cs.map(x=>`<option value="${h(x.id)}" ${x.id===selected?'selected':''}>${h(x.name)}</option>`).join('')}</select></label><label>대상 지역<input id="audRegion" placeholder="전체 (비우면 제한 없음)" value="${h(settings.region||'')}"></label><label>관심 카테고리<select id="audCategory"><option value="">전체</option>${['전자제품','가구','생활','의류','도서','기타'].concat(settings.category&&!['전자제품','가구','생활','의류','도서','기타'].includes(settings.category)?[settings.category]:[]).map(x=>`<option ${settings.category===x?'selected':''}>${h(x)}</option>`).join('')}</select></label><label>검색 키워드<input id="audKeyword" placeholder="전체 (예: 노트북)" value="${h(settings.keyword||'')}"></label><label>최근 활동<select id="audDays">${[['0','제한 없음'],['7','7일'],['30','30일'],['90','90일']].map(([v,t])=>`<option value="${v}" ${String(settings.days||0)===v?'selected':''}>${t}</option>`).join('')}</select></label></div>
+ <div class="aud-actions"><button class="outline" id="audSave">필터 조건 저장</button><button class="primary" id="audRun">고객 필터링 실행</button></div><p class="help">설정한 조건은 모두 충족해야 선정됩니다. 필터링을 다시 실행하면 이 캠페인의 최근 결과가 갱신되고 실행 이력은 보존됩니다.</p></div>
+ ${run?`<div class="admin-grid aud-metrics"><div class="metric"><small>분석 고객</small><strong>${rows.length}</strong></div><div class="metric"><small>선정 고객</small><strong>${included.length}</strong></div><div class="metric"><small>제외 고객</small><strong>${excluded.length}</strong></div><div class="metric"><small>선정률</small><strong>${rows.length?(included.length/rows.length*100).toFixed(1):'0'}%</strong></div></div>
+ <div class="admin-grid aud-metrics"><div class="metric"><small>노출 고객(고유)</small><strong>${exposedIds.length}</strong></div><div class="metric"><small>노출 횟수</small><strong>${impressionRows.length}</strong></div><div class="metric"><small>클릭 횟수</small><strong>${clickRows.length}</strong></div><div class="metric"><small>노출 대비 클릭률</small><strong>${impressionRows.length?(clickRows.length/impressionRows.length*100).toFixed(1):'0'}%</strong></div></div>
+ <div class="admin-panel"><div class="admin-section-title"><h2>제외 사유 분석</h2><p>최근 실행: ${h(new Date(run.at).toLocaleString('ko-KR'))} · ${run.demo?'예시 고객 포함':'실제 로컬 회원만'}</p></div>${Object.keys(reasons).length?`<div class="admin-bars">${Object.entries(reasons).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div class="admin-bar"><b>${h(k)}</b><div class="admin-track"><div class="admin-fill" style="width:${v/Math.max(...Object.values(reasons))*100}%"></div></div><b>${v}명</b></div>`).join('')}</div>`:'<p class="admin-empty">제외 사유가 없습니다.</p>'}<p class="help">한 고객에게 제외 사유가 여러 개일 수 있어 합계가 제외 고객 수보다 클 수 있습니다.</p></div>
+ <div class="admin-panel"><div class="admin-section-title"><h2>고객별 결과</h2><span class="pill">선정과 실제 노출은 별개</span></div><div class="aud-actions"><select id="audView"><option value="all">전체</option><option value="included" ${view==='included'?'selected':''}>선정</option><option value="excluded" ${view==='excluded'?'selected':''}>제외</option><option value="exposed" ${view==='exposed'?'selected':''}>실제 노출</option></select><input id="audQuery" placeholder="고객 ID·닉네임 검색" value="${h(query)}"></div><div class="admin-table-wrap"><table class="admin-table aud-results-table"><thead><tr><th>고객 ID</th><th>닉네임</th><th>지역</th><th>필터링 결과</th><th>사유</th><th>실제 노출</th></tr></thead><tbody>${rows.filter(r=>(view==='all'||(view==='included'&&r.included)||(view==='excluded'&&!r.included)||(view==='exposed'&&exposure.includes(r.id)))&&(r.id+' '+r.nickname).toLowerCase().includes(query.toLowerCase())).map(r=>`<tr><td>${h(r.id)}</td><td>${h(r.nickname)}${r.demo?' <small>(예시)</small>':''}</td><td>${h(r.region||'미설정')}</td><td>${r.included?'<span class="pill">선정</span>':'<span class="pill off">제외</span>'}</td><td>${h(r.reasons.join(', ')||'모든 조건 충족')}</td><td><span class="aud-exposure">${exposure.includes(r.id)?'노출':'미노출 / 미집계'}</span></td></tr>`).join('')||'<tr><td colspan="6" class="admin-empty">해당하는 고객이 없습니다.</td></tr>'}</tbody></table></div></div>
+ <div class="admin-panel ad-event-log-panel"><div class="admin-section-title"><div><h2>실제 광고 노출·클릭 기록</h2><p>로그인한 회원이 광고 영역을 50% 이상 1초간 본 경우 기록 · 이 브라우저 시연 데이터</p></div><button class="outline" id="audImpressionExport">노출 로그 CSV</button></div><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>발생 시각</th><th>고객 ID</th><th>이벤트</th><th>배너</th><th>노출 위치</th></tr></thead><tbody>${[...impressionRows.map(x=>({...x,event:'노출'})),...clickRows.map(x=>({...x,event:'클릭'}))].sort((a,b)=>b.at.localeCompare(a.at)).slice(0,200).map(x=>`<tr><td>${h(new Date(x.at).toLocaleString('ko-KR'))}</td><td>${h(x.userId)}</td><td>${h(x.event)}</td><td>${h(x.bannerId)}</td><td>${h(x.slot)}</td></tr>`).join('')||'<tr><td colspan="5" class="admin-empty">아직 기록이 없습니다. 현재 로그인한 회원이 필터링에서 ‘선정’인지, 캠페인이 진행 중인지, 배너가 해당 위치에 연결되어 있는지 확인해 주세요. 예시 고객은 실제 로그인할 수 없으므로 노출 테스트에 사용할 수 없습니다.</td></tr>'}</tbody></table></div></div>
+ <div class="admin-panel"><h2>필터링 실행 이력</h2><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>실행 일시</th><th>전체</th><th>선정</th><th>제외</th><th>적용 조건</th></tr></thead><tbody>${read(RUNS,[]).filter(x=>x.campaignId===selected).map(x=>`<tr><td>${h(new Date(x.at).toLocaleString('ko-KR'))}</td><td>${x.results.length}</td><td>${x.results.filter(r=>r.included).length}</td><td>${x.results.filter(r=>!r.included).length}</td><td>${h([x.filters.region,x.filters.category,x.filters.keyword,x.filters.days?x.filters.days+'일 이내':''].filter(Boolean).join(' · ')||'전체')}</td></tr>`).join('')}</tbody></table></div></div>`:'<div class="admin-panel admin-empty">아직 필터링 결과가 없습니다. 조건을 저장하고 고객 필터링을 실행해 주세요.</div>'}`;
+ document.getElementById('audDemo').onchange=e=>{window.needitSampleAudience=e.target.checked;render()};
+ document.getElementById('audCampaign').onchange=e=>{selected=e.target.value;view='all';query='';render()};
+ const filters=()=>({region:document.getElementById('audRegion').value.trim(),category:document.getElementById('audCategory').value,keyword:document.getElementById('audKeyword').value.trim(),days:Number(document.getElementById('audDays').value)});
+ const store=()=>{const o=opts();o[selected]=filters();return save(SETTINGS,o)};
+ document.getElementById('audSave').onclick=()=>{if(store())notify('필터 조건을 저장했습니다.')};
+ document.getElementById('audRun').onclick=()=>{const f=filters();if(!store())return;const now=Date.now(),logs=getLogs(),results=getCustomers().map(u=>{const l=logs.filter(x=>x.userId===u.id),reasons=[];if(f.region&&!u.region.includes(f.region))reasons.push('지역 불일치');if(f.category&&!l.some(x=>x.category===f.category))reasons.push('카테고리 기록 없음/불일치');if(f.keyword&&!l.some(x=>String(x.keyword||'').toLowerCase().includes(f.keyword.toLowerCase())))reasons.push('검색 키워드 기록 없음/불일치');if(f.days&&!l.some(x=>now-new Date(x.timestamp).getTime()<=f.days*86400000&&now>=new Date(x.timestamp).getTime()))reasons.push('최근 활동 기록 없음');return {id:u.id,nickname:u.nickname,region:u.region,demo:u.demo,included:!reasons.length,reasons}});const all=read(RUNS,[]);all.unshift({id:'RUN-'+now,campaignId:selected,at:new Date().toISOString(),filters:f,demo:!!window.needitSampleAudience,results,exposures:[]});if(save(RUNS,all.slice(0,40))){view='all';query='';render();notify('필터링 결과와 제외 사유를 저장했습니다.')}};
+ document.getElementById('audExport').onclick=()=>{if(!run)return notify('먼저 필터링을 실행해 주세요.');const csv=[['고객ID','닉네임','지역','선정여부','제외사유','실제노출'],...run.results.map(r=>[r.id,r.nickname,r.region,r.included?'선정':'제외',r.reasons.join(' / '),exposure.includes(r.id)?'노출':'미노출'])].map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');const url=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='needit-audience-'+day()+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+ if(run){document.getElementById('audImpressionExport').onclick=()=>{const data=[...impressionRows.map(x=>({...x,event:'노출'})),...clickRows.map(x=>({...x,event:'클릭'}))];const csv=[['시각','고객ID','이벤트','캠페인ID','배너ID','위치'],...data.map(x=>[x.at,x.userId,x.event,x.campaignId,x.bannerId,x.slot])].map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');const url=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='needit-ad-events-'+day()+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};document.getElementById('audView').onchange=e=>{view=e.target.value;render()};document.getElementById('audQuery').oninput=e=>{query=e.target.value;render();const inp=document.getElementById('audQuery');inp.focus();inp.setSelectionRange(query.length,query.length)}};
+}
+// Tag new behavior events with signed-in member id, for future analyses.
+const originalCollect=collectBehavior;
+collectBehavior=function(...args){originalCollect(...args);const session=memberSession();if(session&&behaviorLogs.length){behaviorLogs[behaviorLogs.length-1].userId=session.id;saveAdmin()}};
+const originalRender=renderAdmin;
+renderAdmin=function(){addTab();if(adminTab==='audience')render();else originalRender()};
+addTab();
+})();</script><script>
+/* NEED IT: reliable visible-ad tracking, bound after dynamic rendering and login. */
+(function(){
+'use strict';
+const RUNS='needit_audience_runs_v1', IMP='needit_ad_impressions_v1', CLK='needit_ad_clicks_v1';
+const load=k=>{try{const v=JSON.parse(localStorage.getItem(k)||'[]');return Array.isArray(v)?v:[]}catch{return []}};
+const observed=new Map();
+const userNow=()=>typeof memberSession==='function'?memberSession():null;
+function eligibility(bannerId,slot){
+ const user=userNow();
+ if(!user?.id)return {reason:'일반 회원 로그인 필요'};
+ if(typeof isAdmin==='function'&&isAdmin())return {reason:'관리자 로그인 상태'};
+ const matching=campaigns.filter(c=>campaignStatus(c)==='진행 중'&&(c.bannerPlacements||[]).some(p=>p.bannerId===bannerId&&p.slot===slot));
+ if(!matching.length)return {reason:'진행 중인 캠페인과 배너 연결 없음'};
+ const runs=load(RUNS);
+ for(const c of matching){
+  const run=runs.find(x=>x.campaignId===c.id);
+  const result=run?.results?.find(r=>String(r.id)===String(user.id));
+  if(result?.included)return {item:{userId:user.id,campaignId:c.id,runId:run.id,bannerId,slot}};
+ }
+ const run=runs.find(x=>matching.some(c=>c.id===x.campaignId));
+ const result=run?.results?.find(r=>String(r.id)===String(user.id));
+ return {reason:!run?'필터링 실행 결과 없음':!result?'로그인 계정이 필터링 결과에 없음':`필터링 제외: ${(result.reasons||[]).join(', ')}`};
+}
+function store(key,item){
+ try{const rows=load(key);rows.push({...item,at:new Date().toISOString()});localStorage.setItem(key,JSON.stringify(rows.slice(-3000)));window.dispatchEvent(new Event('needit-ad-event'));return true}
+ catch(e){console.error('NEED IT 광고 로그 저장 실패',e);return false}
+}
+window.needitAdClick=(bannerId,slot)=>{const v=eligibility(bannerId,slot);if(v.item)store(CLK,v.item);else console.info('[NEED IT] 클릭 미기록:',v.reason)};
+function visible(el){
+ if(!el?.isConnected||document.visibilityState!=='visible')return false;
+ const r=el.getBoundingClientRect();if(r.width<=0||r.height<=0)return false;
+ const x=Math.max(0,Math.min(r.right,innerWidth)-Math.max(r.left,0));
+ const y=Math.max(0,Math.min(r.bottom,innerHeight)-Math.max(r.top,0));
+ return x*y/(r.width*r.height)>=.5;
+}
+function observe(el,bannerId,slot){
+ if(!el||!bannerId)return;
+ const userId=userNow()?.id||'';
+ const old=observed.get(el);
+ if(old&&old.bannerId===bannerId&&old.slot===slot&&old.userId===userId)return;
+ if(old){clearTimeout(old.timer);old.observer?.disconnect()}
+ const state={el,bannerId,slot,userId,timer:null,observer:null,reason:''};observed.set(el,state);
+ function schedule(){
+  clearTimeout(state.timer);state.timer=null;
+  if(!visible(el))return;
+  const check=eligibility(bannerId,slot);
+  if(!check.item){state.reason=check.reason;return}
+  state.reason='';
+  const item=check.item;
+  const key=['needit_imp_seen',item.runId,item.userId,bannerId,slot].join('_');
+  if(sessionStorage.getItem(key))return;
+  state.timer=setTimeout(()=>{
+   if(!visible(el))return;
+   const current=eligibility(bannerId,slot);
+   if(!current.item||current.item.runId!==item.runId||current.item.userId!==item.userId)return;
+   if(sessionStorage.getItem(key))return;
+   if(store(IMP,current.item)){sessionStorage.setItem(key,'1');console.info('[NEED IT] 광고 노출 저장:',current.item)}
+  },1100);
+ }
+ state.schedule=schedule;
+ if('IntersectionObserver' in window){state.observer=new IntersectionObserver(schedule,{threshold:[0,.5,1]});state.observer.observe(el)}
+ schedule();
+}
+window.needitAdObserve=observe;
+function bind(){
+ // Rendered ads can appear after login, tab changes, or delayed carousel swaps.
+ const main=document.querySelector('#mainAdSlot .hero-ad-creative');
+ const slot=document.getElementById('mainAdSlot');
+ if(main&&slot){
+  const items=[],seen=new Set();
+  campaigns.filter(c=>campaignStatus(c)==='진행 중').forEach(c=>(c.bannerPlacements||[]).filter(p=>p.slot==='MAIN_001').forEach(p=>{
+   const b=banners.find(x=>x.id===p.bannerId&&x.enabled);
+   if(b&&!seen.has(b.id)){seen.add(b.id);items.push(b)}
+  }));
+  const b=items[Number(slot.dataset.slide||0)];if(b)observe(main,b.id,'MAIN_001');
+ }
+ for(const [name,selector] of [['SEARCH_001','#searchAdSlot'],['FEED_001','#feedAdSlot'],['DETAIL_001','#detailAdSlot']]){
+  const el=document.querySelector(selector);if(el?.dataset.currentBanner)observe(el,el.dataset.currentBanner,name);
+ }
+ for(const [el,state] of observed){
+  if(!el.isConnected){clearTimeout(state.timer);state.observer?.disconnect();observed.delete(el);continue}
+  // When an existing ad becomes visible after a tab switch, restart its one-second check.
+  if(visible(el)&&!state.timer)state.schedule();
+ }
+}
+// Polling is intentional: the original prototype replaces ad HTML without emitting a common render event.
+setInterval(bind,900);
+setTimeout(bind,0);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')bind()});
+window.needitAdDebug=()=>{
+ const user=userNow(),rows=[];
+ campaigns.forEach(c=>{const run=load(RUNS).find(x=>x.campaignId===c.id);
+ rows.push({campaign:c.name,status:campaignStatus(c),placements:c.bannerPlacements,filterRun:!!run,selected:!!run?.results?.some(r=>String(r.id)===String(user?.id)&&r.included),reason:run?.results?.find(r=>String(r.id)===String(user?.id))?.reasons||[]})});
+ const elements=[...observed.values()].map(v=>({slot:v.slot,bannerId:v.bannerId,visible:visible(v.el),reason:eligibility(v.bannerId,v.slot).reason||'기록 가능'}));
+ const result={userId:user?.id||null,admin:typeof isAdmin==='function'&&isAdmin(),campaigns:rows,ads:elements,impressions:load(IMP).length,clicks:load(CLK).length};
+ console.table(elements);console.log('[NEED IT] 광고 진단',result);return result;
+};
+})();
+</script></body></html>
