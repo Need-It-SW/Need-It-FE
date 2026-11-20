@@ -35,7 +35,7 @@ export function connectChat(accessToken, chatRoomId) {
       console.log("✅ 읽음 알림 구독 성공!");
 
       // ==========================================
-      // 3. 사용자별 실시간 알림 구독 (추가)
+      // 3. 사용자별 실시간 알림 구독
       // ==========================================
       client.subscribe("/user/queue/notifications", (message) => {
         const notification = JSON.parse(message.body);
@@ -44,6 +44,19 @@ export function connectChat(accessToken, chatRoomId) {
       });
 
       console.log("✅ 실시간 알림 구독 성공!");
+
+      // ==========================================
+      // 4. ⭐ 채팅 오류 메시지 구독 (새로 추가)
+      // ==========================================
+      client.subscribe("/user/queue/errors", (message) => {
+        const error = JSON.parse(message.body);
+
+        console.log("🚫 채팅 오류:", error.message);
+
+        alert(error.message);
+      });
+
+      console.log("✅ 채팅 오류 구독 성공!");
     },
 
     onStompError: (frame) => {
