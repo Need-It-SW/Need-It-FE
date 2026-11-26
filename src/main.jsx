@@ -1,3 +1,4 @@
+import './ad-stats-realtime.js';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import ChatTest from './test/ChatTest';

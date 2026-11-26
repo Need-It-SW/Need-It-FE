@@ -8,14 +8,14 @@ export const authApi = {
   logout: () => tokenStore.clear()
 };
 export const postsApi = {
-  list: (query = '') => request(`/posts${query ? `?${query}` : ''}`),
-  detail: id => request(`/posts/${encodeURIComponent(id)}`),
-  create: data => request('/posts', { method: 'POST', body: data }),
-  update: (id, data) => request(`/posts/${encodeURIComponent(id)}`, { method: 'PATCH', body: data }),
-  remove: id => request(`/posts/${encodeURIComponent(id)}`, { method: 'DELETE' })
+  list: (query = '') => request(`/requests${query ? `?${query}` : ''}`),
+  detail: id => request(`/requests/${encodeURIComponent(id)}`),
+  create: data => request('/requests', { method: 'POST', body: data }),
+  update: (id, data) => request(`/requests/${encodeURIComponent(id)}`, { method: 'PATCH', body: data }),
+  remove: id => request(`/requests/${encodeURIComponent(id)}`, { method: 'DELETE' })
 };
 export const offersApi = {
-  list: () => request('/offers'),
+  list: () => request('/chats'),
   create: data => request('/offers', { method: 'POST', body: data }),
   respond: (id, status) => request(`/offers/${encodeURIComponent(id)}/status`, { method: 'PATCH', body: { status } })
 };
