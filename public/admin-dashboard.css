@@ -1,0 +1,40 @@
+#adminContent .admin-section-title button,#adminContent .aud-actions button,#adminContent .aud-actions input,#adminContent .aud-actions select,#adminContent .live-filters button,#adminContent .live-filters input,#adminContent .live-filters select,#adminContent .dash-controls button,#adminContent .dash-controls input,#adminContent .dash-controls select{box-sizing:border-box;height:40px;min-height:40px;border-radius:10px;padding:0 16px;font-size:13px;line-height:normal;vertical-align:middle}
+.dash-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:20px 0}.dash-controls input,.dash-controls select{border:1px solid #dce8df;background:white;color:#294738}.dash-kpis{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important}.dash-kpis .metric{min-height:116px;display:flex;flex-direction:column;gap:8px}.dash-card{border:1px solid #e1ebe4;border-radius:18px;padding:22px;margin-top:18px;background:white;min-width:0}.dash-card h3{margin:0 0 12px;color:#213a2e;font-size:18px}.dash-card p,.dash-card small,#needitStatStatus{color:#718478;font-size:13px}.dash-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}.dash-row{display:flex;justify-content:space-between;gap:12px;margin:16px 0 8px;color:#294738}.dash-track{height:10px;background:#edf3ef;border-radius:8px;overflow:hidden;margin-bottom:8px}.dash-track i{display:block;height:100%;background:#207a58;border-radius:8px}.dash-card svg text{fill:#718478}.dash-card .admin-table-wrap{margin-top:12px}@media(max-width:850px){.dash-pair{grid-template-columns:1fr}.dash-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+
+/* Dashboard-only alignment */
+#adminContent .dash-panel .admin-section-title{display:flex;align-items:center;justify-content:space-between;gap:16px}
+#adminContent .dash-panel .dash-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) minmax(0,1.65fr) 16px minmax(0,1.65fr) repeat(2,minmax(0,1.45fr));gap:10px;align-items:center}
+#adminContent .dash-panel .dash-controls > :is(button,input,select){width:100%;min-width:0;max-width:100%;height:40px;padding:0 10px;margin:0;font-size:13px;box-sizing:border-box;white-space:nowrap}
+#adminContent .dash-panel .dash-controls > span{text-align:center}
+#adminContent .dash-panel .dash-kpis{align-items:stretch}
+#adminContent .dash-panel .dash-kpis .metric{box-sizing:border-box;min-width:0;min-height:144px;margin:0;display:grid;grid-template-rows:auto 1fr auto;align-items:center;gap:8px}
+#adminContent .dash-panel .dash-kpis .metric strong{margin:0;align-self:center}
+#adminContent .dash-panel .dash-pair{align-items:stretch}
+@media(max-width:1100px){#adminContent .dash-panel .dash-controls{grid-template-columns:repeat(3,minmax(0,1fr))}#adminContent .dash-panel .dash-controls > select{grid-column:auto}}
+@media(max-width:520px){#adminContent .dash-panel .dash-controls{gap:6px}#adminContent .dash-panel .dash-controls > :is(button,input,select){padding:0 5px;font-size:12px}#adminContent .dash-panel .dash-kpis .metric{min-height:128px}}
+
+/* Campaign header and matching analysis controls */
+#adminContent .campaign-table thead th:last-child{background:#f5f9f6!important;color:#617469}
+#adminContent .matching-controls{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+#adminContent .matching-controls select{appearance:none;box-sizing:border-box;width:180px;max-width:100%;height:40px;border:1px solid #dce8df;border-radius:10px;padding:0 36px 0 14px;font:inherit;font-size:13px;color:#294738;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4' fill='none' stroke='%23294738' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 12px center;cursor:pointer}
+#adminContent .matching-controls select:focus-visible{outline:2px solid #8bc4a8;outline-offset:2px}
+#adminContent #maStatus{font-size:13px;color:#718478;margin:12px 0}
+#adminContent .admin-panel:has(#maStatus) .ad-auto-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+#adminContent .admin-panel:has(#maStatus) .ad-auto-summary span{display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid #dce8df;border-radius:14px;padding:18px;color:#718478;font-weight:600;min-width:0}
+#adminContent .admin-panel:has(#maStatus) .ad-auto-summary b{font-size:26px;color:#16754e;line-height:1.2}
+@media(max-width:650px){#adminContent .admin-panel:has(#maStatus) .ad-auto-summary{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* User action log: scoped layout only */
+#adminContent #liveActionLog .live-filters{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px 12px;align-items:end;margin:18px 0 14px}
+#adminContent #liveActionLog .live-filters label{display:flex;flex-direction:column;gap:6px;min-width:0;font-size:12px;font-weight:600;color:#60796c}
+#adminContent #liveActionLog .live-filters :is(input,select,button){box-sizing:border-box;width:100%;min-width:0;height:40px;min-height:40px;margin:0;border-radius:10px;padding:0 12px;font-size:13px}
+#adminContent #liveActionLog .live-filters select{appearance:none;padding-right:32px;color:#294738;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4' fill='none' stroke='%23294738' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 10px center}
+#adminContent #liveActionLog .live-search-field{grid-column:span 2}
+#adminContent #liveActionLog #liveReset{width:100px;justify-self:end}
+#adminContent #liveActionLog .live-stat{box-sizing:border-box;min-height:100px;display:flex;flex-direction:column;justify-content:center;gap:8px}
+#adminContent #liveActionLog .live-stat strong{margin:0;font-variant-numeric:tabular-nums}
+@media(max-width:900px){#adminContent #liveActionLog .live-filters{grid-template-columns:repeat(2,minmax(0,1fr))}#adminContent #liveActionLog .live-search-field{grid-column:span 2}}
+@media(max-width:480px){#adminContent #liveActionLog .live-filters{grid-template-columns:1fr}#adminContent #liveActionLog .live-search-field{grid-column:auto}}
+
+/* Campaign management header only: match the other header cells. */
+#adminContent .campaign-table-wrap .campaign-table thead tr > th:last-child{background:#f5f9f6!important;box-shadow:inset 0 0 0 1000px #f5f9f6!important;background-clip:border-box!important;}

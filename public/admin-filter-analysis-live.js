@@ -1,64 +1,26 @@
-/* Server-backed filter analysis; never replaces admin click handlers. */
 (()=>{
  'use strict';
- const state={timer:null,requestId:0,page:0,size:10,totalPages:0};
- const escape=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- const labels={ACTION:'행동 조건 불일치',FATIGUE:'노출 한도 초과',REGION:'지역 불일치',KEYWORD:'키워드 불일치',CATEGORY:'카테고리 불일치'};
- const label=v=>labels[v]??v;
+ const state={page:0,size:10,period:'7D',campaign:'',seq:0,timer:null,open:false};
+ const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const labels={ACTION:'행동 조건 불일치',FATIGUE:'노출 한도 초과',REGION:'지역 불일치',KEYWORD:'키워드 불일치',CATEGORY:'카테고리 불일치',MEMBER_SUSPENDED:'제재 회원'};
  const token=()=>sessionStorage.getItem('needit_access_token');
- const get=async path=>{
-  const response=await fetch('/api/admin/filter-analysis/'+path,{headers:token()?{Authorization:'Bearer '+token()}: {},cache:'no-store'});
-  const json=await response.json().catch(()=>null);
-  if(!response.ok)throw new Error(path+' HTTP '+response.status+' '+(json?.message||''));
-  return json?.data??json;
- };
- function target(){
-  const root=document.getElementById('adminContent');
-  if(!root||document.getElementById('adminArea')?.classList.contains('hidden'))return null;
-  return [...root.querySelectorAll('.admin-panel')].find(p=>p.querySelector('.ad-auto-summary'))||null;
+ const target=()=>document.getElementById('adminArea')?.classList.contains('hidden')?null:document.querySelector('#adminContent .admin-panel:has(.ad-auto-summary)');
+ const get=async path=>{const r=await fetch('/api/admin/filter-analysis/'+path,{headers:{Authorization:'Bearer '+token()},cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);const j=await r.json();return j.data??j;};
+ const rate=(a,b)=>b?(100*a/b).toFixed(1)+'%':'0.0%';
+ function mount(p){p.innerHTML=`<div class="admin-section-title"><div><h2>개인화 광고 매칭 분석</h2><p>캠페인별 타겟 조건 평가 결과 · 실제 광고 노출과는 별개입니다.</p></div></div><div class="matching-controls"><select id="maCampaign"><option value="">전체 캠페인</option></select><select id="maPeriod"><option value="24H">최근 24시간</option><option value="7D">최근 7일</option><option value="30D">최근 30일</option><option value="ALL">전체 기간</option></select></div><p id="maStatus" role="status"></p><div class="ad-auto-summary"></div><h3 style="margin:24px 0 12px">캠페인별 매칭 현황</h3><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>캠페인</th><th>평가</th><th>통과</th><th>실패</th><th>매칭률</th></tr></thead><tbody id="maCampaignRows"></tbody></table></div><h3 style="margin:24px 0 12px">매칭 실패 원인</h3><p class="mini">실패 평가 기준 · 복수 사유 포함</p><div id="maBars"></div><details id="maDetails" style="margin-top:24px"><summary style="cursor:pointer;font-weight:700">상세 평가 이력 보기</summary><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>평가 시각</th><th>사용자</th><th>캠페인</th><th>결과</th><th>실패 원인</th></tr></thead><tbody id="maRows"></tbody></table></div><div id="maPager" style="display:flex;justify-content:flex-end;gap:12px;align-items:center;margin-top:16px"></div></details>`;
+ p.querySelector('#maPeriod').value=state.period;p.querySelector('#maDetails').open=state.open;
+ p.querySelector('#maDetails').ontoggle=e=>state.open=e.target.open;
+ p.querySelector('#maPeriod').onchange=e=>{state.period=e.target.value;state.campaign='';state.page=0;refresh()};
+ p.querySelector('#maCampaign').onchange=e=>{state.campaign=e.target.value;state.page=0;refresh()};
  }
- function render(summary,reasons,exclusions){
-  const panel=target();if(!panel)return;
-  const total=summary?.totalEvaluations??summary?.totalCount??summary?.total??0;
-  const selected=summary?.selectedCount??summary?.selected??0;
-  const excluded=summary?.excludedCount??summary?.excluded??0;
-  const summaryEl=panel.querySelector('.ad-auto-summary');
-  if(summaryEl)summaryEl.innerHTML=`<span>자동 평가 <b>${Number(total).toLocaleString()}건</b></span><span>선정 <b>${Number(selected).toLocaleString()}건</b></span><span>제외 <b>${Number(excluded).toLocaleString()}건</b></span>`;
-  const chips=panel.querySelector('.ad-reason-chips');
-  if(chips)chips.innerHTML=(Array.isArray(reasons)?reasons:[]).map(r=>`<span>${escape(label(r.reason??r.reasonType??'-'))} <b>${escape(r.count??0)}</b></span>`).join('')||'<span>제외된 기록이 없습니다.</span>';
-  const tbody=panel.querySelector('table tbody');
-  const rows=Array.isArray(exclusions)?exclusions:(exclusions?.content||[]);
-  if(tbody)tbody.innerHTML=rows.slice(0,state.size).map(r=>`<tr><td>${escape(String(r.createdAt??'-').replace('T',' ').slice(0,19))}</td><td>${escape(r.memberId??'-')}</td><td>${escape(r.campaignId??'-')}</td><td>${r.result==='SELECTED'?'선정':'제외'}</td><td>${escape((r.reasons??r.exclusionReasons??[]).map(x=>label(x.reason??x.detail??x)).join(', ')||'-')}</td></tr>`).join('')||'<tr><td colspan="5" class="admin-empty">자동 평가 기록이 없습니다.</td></tr>';
-  state.totalPages=Number(exclusions?.totalPages??(Array.isArray(exclusions)?1:Math.ceil(Number(exclusions?.totalElements??total)/state.size)));
-  let pager=panel.querySelector('#filterAnalysisPager');
-  if(!pager){pager=document.createElement('div');pager.id='filterAnalysisPager';pager.style.cssText='display:flex;justify-content:flex-end;align-items:center;gap:12px;margin-top:16px';panel.querySelector('table')?.after(pager);}
-  pager.innerHTML=`<button class="outline" type="button" data-step="-1" ${state.page===0?'disabled':''}>이전</button><span>${state.page+1} / ${Math.max(1,state.totalPages)} 페이지</span><button class="outline" type="button" data-step="1" ${state.page+1>=state.totalPages?'disabled':''}>다음</button>`;
-  pager.onclick=e=>{const b=e.target.closest('button[data-step]');if(!b||b.disabled||state.busy)return;state.page+=Number(b.dataset.step);refresh();};
-  let status=panel.querySelector('#needitFilterAnalysisStatus');
-  if(!status){status=document.createElement('p');status.id='needitFilterAnalysisStatus';status.style.cssText='font-size:12px;color:#60796c;margin:8px 0';panel.querySelector('.admin-section-title')?.after(status)}
-  status.style.color='#60796c';status.textContent='서버 분석 데이터 조회 완료';
- }
- async function refresh(){
-  if(!target()||!token()||state.busy)return;
-  state.busy=true;
-  const id=++state.requestId;
-  try{
-   const [summary,reasons,exclusions]=await Promise.all([get('summary'),get('reasons'),get('evaluations?size='+state.size+'&page='+state.page)]);
-   if(id===state.requestId)render(summary,reasons,exclusions);
-  }catch(error){
-   if(id!==state.requestId)return;
-   const panel=target();if(!panel)return;
-   let status=panel.querySelector('#needitFilterAnalysisStatus');
-   if(!status){status=document.createElement('p');status.id='needitFilterAnalysisStatus';panel.querySelector('.admin-section-title')?.after(status)}
-   status.style.color='#b42318';status.textContent='분석 API 오류: '+error.message;
-   console.warn('[NEED IT] 필터 분석 조회 실패',error);
-  }finally{state.busy=false;}
- }
- // No wrapping or replacing renderCampaigns: preserve existing admin buttons.
- let lastPanel=null;
- const observer=new MutationObserver(()=>{const panel=target();if(panel!==lastPanel){lastPanel=panel;if(panel){state.page=0;refresh();}}});
- observer.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
- refresh();
- window.NEEDIT_FILTER_ANALYSIS={refresh,active:()=>!!target(),status:()=>{},changed:()=>{if(target()&&!state.timer)state.timer=setTimeout(()=>{state.timer=null;refresh();},1000);}};
- window.addEventListener('pagehide',()=>{clearTimeout(state.timer);observer.disconnect();});
+ async function refresh(){const p=target();if(!p||!token())return;if(!p.querySelector('#maStatus'))mount(p);const seq=++state.seq;const base=new URLSearchParams({period:state.period});const q=new URLSearchParams(base);if(state.campaign)q.set('campaignId',state.campaign);try{const [s,reasons,rows,breakdown]=await Promise.all([get('summary?'+q),get('reasons?'+q),get('evaluations?'+q+'&page='+state.page+'&size='+state.size),get('campaign-breakdown?'+base)]);if(seq!==state.seq||target()!==p)return;
+ const el=id=>p.querySelector('#'+id);const total=s.totalEvaluations,yes=s.selectedCount,no=s.excludedCount;
+ el('maStatus').textContent='서버 분석 데이터 조회 완료';p.querySelector('.ad-auto-summary').innerHTML=[['평가 건수',total],['매칭 통과',yes],['매칭 실패',no],['매칭률',rate(yes,total)]].map(([k,v])=>`<span>${k} <b>${esc(v)}</b></span>`).join('');
+ el('maCampaign').innerHTML='<option value="">전체 캠페인</option>'+breakdown.map(c=>`<option value="${esc(c.campaignId)}">${esc(c.campaignName)}</option>`).join('');el('maCampaign').value=state.campaign;
+ el('maCampaignRows').innerHTML=breakdown.filter(c=>!state.campaign||String(c.campaignId)===state.campaign).map(c=>`<tr><td>${esc(c.campaignName)}</td><td>${c.totalEvaluations}</td><td>${c.selectedCount}</td><td>${c.excludedCount}</td><td>${rate(c.selectedCount,c.totalEvaluations)}</td></tr>`).join('')||'<tr><td colspan="5">평가 기록 없음</td></tr>';
+ el('maBars').innerHTML=reasons.map(r=>`<div style="display:grid;grid-template-columns:160px 1fr 70px;gap:12px;align-items:center;margin:12px 0"><span>${esc(labels[r.reason]??r.reason)}</span><div style="height:12px;background:#f0f4f1;border-radius:8px"><div style="height:100%;background:#bd8a4e;border-radius:8px;width:${no?Math.min(100,r.count/no*100):0}%"></div></div><b>${esc(r.count)}건</b></div>`).join('')||'실패 기록 없음';
+ el('maRows').innerHTML=(rows.content||[]).map(r=>`<tr><td>${esc(String(r.createdAt).replace('T',' ').slice(0,19))}</td><td>${esc(r.memberId)}</td><td>${esc(r.campaignName??r.campaignId)}</td><td>${r.result==='SELECTED'?'매칭 통과':'매칭 실패'}</td><td>${esc((r.reasons||[]).map(x=>labels[x.reason]??x.reason).join(', ')||'-')}</td></tr>`).join('')||'<tr><td colspan="5">평가 기록 없음</td></tr>';
+ el('maPager').innerHTML=`<button class="outline" data-step="-1" ${state.page===0?'disabled':''}>이전</button><span>${state.page+1} / ${Math.max(1,rows.totalPages)} 페이지</span><button class="outline" data-step="1" ${state.page+1>=rows.totalPages?'disabled':''}>다음</button>`;el('maPager').onclick=e=>{const b=e.target.closest('[data-step]');if(b&&!b.disabled){state.page+=Number(b.dataset.step);refresh()}};
+ }catch(e){if(seq===state.seq&&target()===p)p.querySelector('#maStatus').textContent='분석 API 오류: '+e.message;}}
+ let last=null;const observer=new MutationObserver(()=>{const p=target();if(p!==last){last=p;if(p){state.page=0;refresh()}}});observer.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});refresh();window.NEEDIT_FILTER_ANALYSIS={refresh,active:()=>!!target(),status:()=>{},changed:()=>{if(target()&&!state.timer)state.timer=setTimeout(()=>{state.timer=null;refresh()},1000)}};window.addEventListener('pagehide',()=>{clearTimeout(state.timer);observer.disconnect()});
 })();

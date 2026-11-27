@@ -12,7 +12,8 @@ const isDashboard=()=>{
   } catch {return false;}
 };
 const analysis=()=>{try{return !!adminWindow()?.NEEDIT_FILTER_ANALYSIS?.active()}catch{return false}};
-const status=connected=>{try{adminWindow()?.NEEDIT_AD_STATS_REALTIME?.status(connected);adminWindow()?.NEEDIT_FILTER_ANALYSIS?.status(connected)}catch{}};
+const behavior=()=>{try{return !!adminWindow()?.NEEDIT_CUSTOMER_BEHAVIOR?.active()}catch{return false}};
+const status=connected=>{try{adminWindow()?.NEEDIT_AD_STATS_REALTIME?.status(connected);adminWindow()?.NEEDIT_FILTER_ANALYSIS?.status(connected);adminWindow()?.NEEDIT_CUSTOMER_BEHAVIOR?.status(connected)}catch{}};
 const refresh=()=>{
  if(!isDashboard())return;
  clearTimeout(debounce);
@@ -26,7 +27,7 @@ const stop=()=>{
 const check=()=>{
  let token;
  try{token=usableToken()}catch{return}
- if((!isDashboard()&&!analysis())||!token){if(client)stop();status(false);return}
+ if((!isDashboard()&&!analysis()&&!behavior())||!token){if(client)stop();status(false);return}
  if(client && activeToken===token){status(client.connected);return}
  stop();activeToken=token;
  const current=authenticatedClient({
@@ -36,6 +37,8 @@ const check=()=>{
   onConnect:()=>{
    if(client!==current)return;
    status(true);refresh();if(analysis())adminWindow()?.NEEDIT_FILTER_ANALYSIS?.refresh();
+   if(behavior())adminWindow()?.NEEDIT_CUSTOMER_BEHAVIOR?.refresh();
+   current.subscribe('/topic/admin/user-actions',()=>adminWindow()?.NEEDIT_CUSTOMER_BEHAVIOR?.changed());
    current.subscribe('/topic/admin/filter-analysis',()=>adminWindow()?.NEEDIT_FILTER_ANALYSIS?.changed());
    current.subscribe('/topic/admin/ad-statistics',message=>{
     try{if(JSON.parse(message.body).type==='AD_STATISTICS_CHANGED')refresh()}

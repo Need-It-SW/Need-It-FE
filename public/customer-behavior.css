@@ -1,0 +1,22 @@
+.cb-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.cb-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.cb-controls button.active{background:#e4f3e9;color:#237b59;border-color:#237b59}.cb-controls input{padding:8px;border:1px solid #dce5df;border-radius:8px}.cb-donut-wrap{display:flex;align-items:center;gap:24px;flex-wrap:wrap;min-height:220px}.cb-donut{width:154px;height:154px;border-radius:50%;background:#e9efeb;display:grid;place-items:center;flex-shrink:0}.cb-donut b{width:104px;height:104px;border-radius:50%;background:white;display:grid;place-items:center}.cb-legend{display:flex;gap:8px;align-items:center;font-size:13px;margin:9px 0}.cb-legend i{width:10px;height:10px;border-radius:50%}.cb-legend b{margin-left:auto;white-space:nowrap}.cb-bar{display:grid;grid-template-columns:1fr auto;gap:8px;margin:16px 0}.cb-bar>div{grid-column:1/-1;background:#e9efeb;height:10px;border-radius:8px}.cb-bar i{display:block;background:#398d68;height:100%;border-radius:8px}.cb-up{color:#237b59;font-weight:700}#cbDates[hidden]{display:none}@media(max-width:800px){.cb-grid{grid-template-columns:1fr}}
+
+/* Customer behavior: match the existing admin dashboard controls. */
+#customerBehavior .admin-section-title{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px}
+#customerBehavior .admin-section-title h2{margin:0 0 6px}
+#customerBehavior .admin-section-title p{margin:0;color:#718478;font-size:13px}
+#customerBehavior .cb-controls{gap:10px;margin:16px 0 12px}
+#customerBehavior .cb-controls :is(button,input){box-sizing:border-box;height:40px;min-height:40px;margin:0;padding:0 16px;border-radius:10px;font-size:13px;line-height:normal;white-space:nowrap}
+#customerBehavior .cb-controls button[data-period]{min-width:88px}
+#customerBehavior #cbDates:not([hidden]){display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap}
+#customerBehavior #cbLive{display:block;margin:12px 0 8px;font-size:14px;color:#718478;font-weight:600}
+#customerBehavior #cbLive.is-connected{color:#16835a}
+#customerBehavior #cbStatus{font-size:13px;color:#718478;margin:8px 0 16px}
+#customerBehavior .admin-panel > p.mini{font-size:13px;color:#718478;line-height:1.6}
+#customerBehavior .cb-donut-wrap{justify-content:center;gap:20px}
+#customerBehavior #cbLegend{min-width:170px}
+#customerBehavior .cb-legend i{flex-shrink:0}
+#customerBehavior .cb-grid > .metric{min-width:0}
+
+/* Center the donut and legend vertically in the space below the title. */
+#customerBehavior .cb-grid > .admin-panel:has(> .cb-donut-wrap){display:flex;flex-direction:column;}
+#customerBehavior .cb-donut-wrap{flex:1 1 auto;align-content:center;align-items:center;justify-content:center;}
